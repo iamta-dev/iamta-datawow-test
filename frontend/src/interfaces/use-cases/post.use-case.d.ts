@@ -21,4 +21,4 @@ export type updatePost = (
   data: UpdatePostDto,
 ) => Promise<ServiceResponse<PostModel>>;
 
-export type deletePost = (id: number) => Promise<ServiceResponse<void>>;
+export type deletePost = (id: number) => Promise<ServiceResponse<PostModel>>;
