@@ -1,6 +1,7 @@
 export interface JwtPayload {
   id: number;
   username: string;
+  pictureUrl: string;
 }
 
 // Extend the Request interface to include the user property.
