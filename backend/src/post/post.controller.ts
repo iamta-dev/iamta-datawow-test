@@ -118,14 +118,13 @@ export class PostController {
   @ApiResponse(SwaggerBaseResponse[500])
   @UsePipes(new ValidationPipe({ whitelist: true }))
   async updatePost(
-    @Req() req: RequestWithUser,
     @Param('id', ParseIntPipe) id: number,
     @Body() updatePostDto: UpdatePostDto,
   ): Promise<PostModel> {
     try {
       const updatedPost = await this.postService.updatePost({
         where: { id },
-        data: { ...updatePostDto, userId: req.user.id },
+        data: updatePostDto,
       });
       this.logger.log(`Post with ID ${id} updated successfully`);
       return updatedPost;
