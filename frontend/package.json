@@ -4,6 +4,9 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "format": "run-script-os",
+    "format:default": "prettier --write \"**/*.{ts,js,tsx,jsx,json,css,sass,md}\"",
+    "format:win32": "prettier --write \"**/*.{ts,js,tsx,jsx,json,css,sass,md}\"",
     "build": "next build",
     "dev": "next dev -p 8000",
     "lint": "next lint",
