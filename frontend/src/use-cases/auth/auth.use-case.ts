@@ -1,8 +1,7 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { type APIErrorResponse } from "@/interfaces/services/base";
 import { type LoginDto, type LoginResponse } from "@/interfaces/services/auth";
 import { type login } from "@/interfaces/use-cases/auth.use-case.d";
-import { decodeJwt } from "lib/user-jwt";
+import { decodeJwt } from "@/lib/user-jwt";
 
 export async function loginUseCase(params: {
   context: {
