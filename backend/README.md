@@ -52,7 +52,22 @@ npm run db:migrate
 npm run db:seed
 ```
 
-### 1.5 Run API (Development Mode)
+### 1.5 View Database Client
+
+```sh
+npm run db:studio
+
+(prisma studio in running)
+╰─❯ npm run db:studio
+> backend@0.0.1 db:studio
+> prisma studio
+
+Environment variables loaded from .env
+Prisma schema loaded from prisma\schema.prisma
+Prisma Studio is up on http://localhost:5555
+```
+
+### 1.6 Run API (Development Mode)
 
 ```sh
 npm run dev
