@@ -5,7 +5,8 @@
 
 ### 1.1 System Requirements
 
-Setup Node.js 22 LTS with NVM
+#### 1.1.1 Setup Node.js 22 LTS with NVM
+- [Node Version Manager (nvm) install](https://github.com/nvm-sh/nvm)
 - macOS:  
   ```sh
   brew install nvm
@@ -19,8 +20,8 @@ Setup Node.js 22 LTS with NVM
   nvm install 22
   nvm use 22
   ```
-Setup Docker Desktop
-- [docker-desktop install](https://www.docker.com/products/docker-desktop/)
+#### 1.1.2 Setup Docker Desktop
+- [Docker-Desktop install](https://www.docker.com/products/docker-desktop/)
 
 ### 1.2 Setup Dependencies && .env
 
@@ -81,7 +82,7 @@ Allowed origins: [ 'http://localhost:8000', 'http://localhost:8080' ]
 │   ├── schema.prisma                    # Prisma schema file
 │   ├── migrations/*                     # Prisma migrations file
 │   ├── seeds/*                          # Prisma seeds file
-│   ├── dbml/*                           # generator dbdiagram.io
+│   ├── dbml/*                           # generator file dbml and support dbdiagram.io
 ├── public/                              # api public folder
 │   ├── swagger-custom.css               # open api swagger custom css
 │   ├── swagger-custom.js                # open api swagger custom js
