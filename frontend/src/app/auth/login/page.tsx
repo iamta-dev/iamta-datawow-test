@@ -1,8 +1,15 @@
+/* eslint-disable @next/next/no-img-element */
+"use client";
+import { useFormState, useFormStatus } from "react-dom";
+import { loginAction } from "./auth.action";
+
 export default function LoginPage() {
+  const [state, action] = useFormState(loginAction, undefined);
+
   return (
-    <div className="flex h-screen flex-col md:flex-row bg-green-900">
+    <div className="flex h-screen flex-col bg-green-900 md:flex-row">
       {/* Right Side: a Board (Desktop) / Top (Mobile) */}
-      <div className="order-first flex h-2/5 w-full items-center justify-center bg-green-700 md:order-last md:h-auto md:w-2/5 md:rounded-l-[2rem] rounded-b-[2rem]">
+      <div className="order-first flex h-2/5 w-full items-center justify-center rounded-b-[2rem] bg-green-700 md:order-last md:h-auto md:w-2/5 md:rounded-l-[2rem]">
         <div className="flex flex-col items-center">
           <img
             src="/images/board.png"
@@ -17,12 +24,21 @@ export default function LoginPage() {
       <div className="order-last flex h-3/5 w-full items-center justify-center bg-green-900 md:order-first md:h-auto md:w-3/5">
         <div className="w-3/4 max-w-md">
           <h1 className="mb-6 text-3xl text-white">Sign in</h1>
-          <form className="space-y-4">
+          <form className="space-y-4" action={action}>
             <input
               type="text"
               placeholder="Username"
+              name="username"
               className="w-full rounded-md p-3 text-black"
             />
+            {state?.errors?.username && (
+              <p className="mb-2 text-sm text-red-500">
+                {state.errors.username}
+              </p>
+            )}
+            {state?.message && (
+              <p className="mt-5 text-sm text-red-500">{state.message}</p>
+            )}
             <button className="w-full rounded-md bg-green-500 p-3 text-white">
               Sign In
             </button>

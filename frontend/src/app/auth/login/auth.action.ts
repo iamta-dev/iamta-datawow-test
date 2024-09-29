@@ -1,11 +1,15 @@
 "use server";
 
-import { loginUseCase  } from "@/use-cases/auth/auth.use-case";
+import { createSession } from "@/lib/session";
+import { decodeJwt } from "@/lib/user-jwt";
+import { authService } from "@/services/auth.service";
+import { loginUseCase } from "@/use-cases/auth/auth.use-case";
+import { redirect } from "next/navigation";
 import { z } from "zod";
 
-export const LoginFormSchema = z.object({
+const LoginFormSchema = z.object({
   username: z.string().min(1, { message: "Username field must not be empty." }),
-})
+});
 
 type ResultState =
   | {
@@ -29,31 +33,40 @@ export async function loginAction(
     return { errors: validatedFields.error.flatten().fieldErrors };
   }
 
-  const {
-    username,
-  } = validatedFields.data;
+  const { username } = validatedFields.data;
 
-  try {
-    const { data: resp, error } = await loginUseCase({
-      context: {
-        // login: (data) => authService.login(data),
-      },
-      data: {
-        username,
-      
-      },
-    });
-    if (error ?? !resp) {
-      return {
-        status: "error",
-        message:
-          error?.message ?? "An unexpected error occurred. Please try again.",
-      };
-    }
-    // revalidatePath("/attendance");
-    return { status: "success" };
-  } catch (err) {
-    const error = err as Error;
-    return { status: "error", message: error.message };
+  const { data: resp, error } = await loginUseCase({
+    context: {
+      login: (data) => authService.login(data),
+    },
+    data: {
+      username,
+    },
+  });
+  if (error ?? !resp) {
+    return {
+      status: "error",
+      message:
+        error?.message ?? "An unexpected error occurred. Please try again.",
+    };
   }
+
+  const userJwt = decodeJwt(resp.accessToken);
+
+  if (userJwt.error ?? !userJwt.data) {
+    return {
+      status: "error",
+      message:
+        userJwt.error?.message ??
+        "An unexpected error occurred. Please try again.",
+    };
+  }
+
+  await createSession({
+    accessToken: resp.accessToken,
+    user: userJwt.data,
+  });
+
+  // Redirect to the dashboard after successful login
+  redirect("/");
 }
