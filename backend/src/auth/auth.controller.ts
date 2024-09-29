@@ -38,31 +38,4 @@ export class AuthController {
     }
     return this.authService.login(user);
   }
-
-  @Post('mocklogin')
-  @UsePipes(new ValidationPipe({ whitelist: true }))
-  @ApiOperation({
-    summary: 'Bypass user Test User login (not support environment production)',
-  })
-  @ApiResponse({
-    status: 201,
-    description: 'User successfully logged in.',
-    schema: {
-      example: 'eyJhbGciOiJIUzI1NiIsInR5.....',
-    },
-  })
-  async mocklogin() {
-    const nodeEnv = this.configService.get<string>('NODE_ENV');
-    if (nodeEnv == 'production') {
-      throw new UnauthorizedException('Unauthorized');
-    }
-    const mockuser = {
-      username: 'user1',
-    };
-    const user = await this.authService.validateUser(mockuser.username);
-    if (!user) {
-      throw new UnauthorizedException('Invalid credentials');
-    }
-    return (await this.authService.login(user)).accessToken;
-  }
 }
