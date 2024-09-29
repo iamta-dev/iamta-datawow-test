@@ -1,8 +1,6 @@
 import { type APIErrorResponse } from "@/interfaces/services/base";
 import { type getProfile } from "@/interfaces/use-cases/base.use-case.d";
-import {
-  type getCommunities,
-} from "@/interfaces/use-cases/community.use-case.d";
+import { type getCommunities } from "@/interfaces/use-cases/community.use-case.d";
 import { type Community as CommunityModel } from "@/interfaces/services/community";
 import { handleAPIError } from "../base/base.use-case";
 

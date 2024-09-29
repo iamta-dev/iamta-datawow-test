@@ -23,7 +23,7 @@ export async function deletePostUseCase(params: {
       },
     };
   }
-  
+
   const resp = await context.deletePost(id);
   return handleAPIError(resp);
 }

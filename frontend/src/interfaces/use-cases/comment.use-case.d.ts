@@ -6,7 +6,9 @@ import {
   type CommentParamsDto,
 } from "@/interfaces/services/comment";
 
-export type getCommentById = (id: number) => Promise<ServiceResponse<CommentModel>>;
+export type getCommentById = (
+  id: number,
+) => Promise<ServiceResponse<CommentModel>>;
 
 export type getComments = (
   commentParamsDto: CommentParamsDto,

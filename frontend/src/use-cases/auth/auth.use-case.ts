@@ -1,7 +1,6 @@
 import { type APIErrorResponse } from "@/interfaces/services/base";
 import { type LoginDto, type LoginResponse } from "@/interfaces/services/auth";
 import { type login } from "@/interfaces/use-cases/auth.use-case.d";
-import { decodeJwt } from "@/lib/user-jwt";
 
 export async function loginUseCase(params: {
   context: {
@@ -36,20 +35,6 @@ export async function loginUseCase(params: {
           apiError?.message ??
           resp.error?.response?.statusText ??
           resp.error?.message ??
-          "An unexpected error occurred. Please try again.",
-      },
-    };
-  }
-
-  const userJwt = decodeJwt(resp.data.accessToken);
-
-  if (userJwt.error ?? !userJwt.data) {
-    return {
-      error: {
-        statusCode: 500,
-        error: userJwt.error?.message,
-        message:
-          userJwt.error?.message ??
           "An unexpected error occurred. Please try again.",
       },
     };

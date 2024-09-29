@@ -5,7 +5,9 @@ import {
   type UpdateCommunityDto,
 } from "@/interfaces/services/community";
 
-export type getCommunityById = (id: number) => Promise<ServiceResponse<CommunityModel>>;
+export type getCommunityById = (
+  id: number,
+) => Promise<ServiceResponse<CommunityModel>>;
 
 export type getCommunities = () => Promise<ServiceResponse<CommunityModel[]>>;
 
