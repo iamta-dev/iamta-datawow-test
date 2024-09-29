@@ -10,7 +10,10 @@
     "build": "next build",
     "dev": "next dev -p 8000",
     "lint": "next lint",
-    "start": "next start"
+    "start": "next start",
+    "set:local": "run-script-os",
+    "set:local:default": "cp -R .env.example .env",
+    "set:local:win32": "powershell -Command \"Copy-Item -Path .env.example -Destination .env -Recurse\""
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.1.0",
