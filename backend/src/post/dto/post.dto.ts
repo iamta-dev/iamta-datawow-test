@@ -47,4 +47,12 @@ export class PostQueryDto {
   @IsOptional()
   @IsString()
   fsearch?: string;
+
+  @ApiProperty({
+    example: 2,
+    description: 'ID of the community this post belongs to',
+  })
+  @IsOptional()
+  @IsString()
+  communityId?: string;
 }

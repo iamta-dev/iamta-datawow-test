@@ -13,6 +13,7 @@ import {
   UseGuards,
   Req,
   Query,
+  UnauthorizedException,
 } from '@nestjs/common';
 import { PostService } from './post.service';
 import {
@@ -23,7 +24,7 @@ import {
 } from '@nestjs/swagger';
 
 import { PostSwagger } from './dto/post.swagger';
-import { Post as PostModel } from '@prisma/client';
+import { Post as PostModel, Prisma } from '@prisma/client';
 import { CreatePostDto, PostQueryDto, UpdatePostDto } from './dto/post.dto';
 import { SwaggerBaseResponse } from '../../lib/swagger/base-swagger';
 import { AuthGuard } from '@nestjs/passport';
@@ -67,8 +68,18 @@ export class PostController {
         postQueryDto.fsearch,
       );
 
+      let communityIdCondition: Prisma.PostWhereInput | undefined = undefined;
+      if (
+        postQueryDto?.communityId &&
+        !isNaN(Number(postQueryDto.communityId))
+      ) {
+        communityIdCondition = {
+          communityId: Number(postQueryDto.communityId),
+        };
+      }
+
       const posts = await this.postService.getPosts({
-        where: searchCondition,
+        where: { ...searchCondition, ...communityIdCondition },
       });
       this.logger.log('Posts fetched successfully');
       return posts;
@@ -118,10 +129,23 @@ export class PostController {
   @ApiResponse(SwaggerBaseResponse[500])
   @UsePipes(new ValidationPipe({ whitelist: true }))
   async updatePost(
+    @Req() req: RequestWithUser,
     @Param('id', ParseIntPipe) id: number,
     @Body() updatePostDto: UpdatePostDto,
   ): Promise<PostModel> {
     try {
+      const post = await this.postService.findPostOrThrow({ id });
+
+      // Ensure the logged-in user is the owner of the post
+      if (post.userId !== req.user.id) {
+        this.logger.error(
+          `User ${req.user.id} is not authorized to update this post`,
+        );
+        throw new UnauthorizedException(
+          'You are not authorized to update this post',
+        );
+      }
+
       const updatedPost = await this.postService.updatePost({
         where: { id },
         data: updatePostDto,
@@ -144,8 +168,23 @@ export class PostController {
   @ApiResponse(SwaggerBaseResponse[401])
   @ApiResponse(SwaggerBaseResponse[404])
   @ApiResponse(SwaggerBaseResponse[500])
-  async deletePost(@Param('id', ParseIntPipe) id: number): Promise<PostModel> {
+  async deletePost(
+    @Req() req: RequestWithUser,
+    @Param('id', ParseIntPipe) id: number,
+  ): Promise<PostModel> {
     try {
+      const post = await this.postService.findPostOrThrow({ id });
+
+      // Ensure the logged-in user is the owner of the post
+      if (post.userId !== req.user.id) {
+        this.logger.error(
+          `User ${req.user.id} is not authorized to delete this post`,
+        );
+        throw new UnauthorizedException(
+          'You are not authorized to delete this post',
+        );
+      }
+
       const deletedPost = await this.postService.deletePost({ id });
       this.logger.log(`Post with ID ${id} deleted successfully`);
       return deletedPost;
