@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { CreateCommunityDto } from './dto/create-community.dto';
+import { CreateCommunityDto } from './dto/community.dto';
 import { UpdateCommunityDto } from './dto/update-community.dto';
 
 @Injectable()
