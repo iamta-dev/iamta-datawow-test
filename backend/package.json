@@ -17,7 +17,20 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "set:local": "run-script-os",
+    "set:local:default": "cp -R .env.example .env",
+    "set:local:win32": "powershell -Command \"Copy-Item -Path .env.example -Destination .env -Recurse\"",
+    "db:postinstall": "prisma generate",
+    "db:migrate": "prisma migrate dev",
+    "db:migrate:deploy": "npx prisma migrate deploy",
+    "db:push": "prisma db push",
+    "db:studio": "prisma studio",
+    "db:up": "docker compose up -d",
+    "db:down": "docker compose down",
+    "db:remove-data": "run-script-os",
+    "db:remove-data:default": "rm -rf postgres_data",
+    "db:remove-data:win32": "powershell -Command \"Remove-Item -Force postgres_data\""
   },
   "dependencies": {
     "@nestjs/common": "^10.0.0",
