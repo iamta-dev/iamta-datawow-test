@@ -5,8 +5,8 @@ import { CommunitySwagger } from './dto/community.swagger';
 import { Community as CommunityModel } from '@prisma/client';
 import { SwaggerBaseResponse } from '../../lib/swagger/base-swagger';
 
-@ApiTags('Community')
-@Controller('community')
+@ApiTags('Communities')
+@Controller('communities')
 export class CommunityController {
   private readonly logger = new Logger(CommunityController.name);
 
