@@ -1,8 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { PostController } from './post.controller';
 import { PostService } from './post.service';
-import { PrismaService } from '../../lib/prisma/prisma.service';
-import { NotFoundException } from '@nestjs/common';
+import { NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { CreatePostDto, UpdatePostDto, PostQueryDto } from './dto/post.dto';
 
 describe('PostController', () => {
@@ -25,15 +24,13 @@ describe('PostController', () => {
     createPost: jest.fn().mockResolvedValue(mockPost),
     updatePost: jest.fn().mockResolvedValue(mockPost),
     deletePost: jest.fn().mockResolvedValue(mockPost),
+    findPostOrThrow: jest.fn().mockResolvedValue(mockPost),
   };
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       controllers: [PostController],
-      providers: [
-        { provide: PostService, useValue: mockPostService },
-        PrismaService,
-      ],
+      providers: [{ provide: PostService, useValue: mockPostService }],
     }).compile();
 
     controller = module.get<PostController>(PostController);
@@ -45,13 +42,13 @@ describe('PostController', () => {
   });
 
   describe('getPostById', () => {
-    it('should return a single post', async () => {
+    it('should return a post by ID', async () => {
       const result = await controller.getPostById(1);
       expect(result).toEqual(mockPost);
       expect(service.getPost).toHaveBeenCalledWith({ id: 1 });
     });
 
-    it('should throw NotFoundException if post does not exist', async () => {
+    it('should throw NotFoundException if post is not found', async () => {
       jest
         .spyOn(service, 'getPost')
         .mockRejectedValueOnce(new NotFoundException());
@@ -63,7 +60,10 @@ describe('PostController', () => {
 
   describe('getPosts', () => {
     it('should return an array of posts', async () => {
-      const postQueryDto: PostQueryDto = { fsearch: 'sample' };
+      const postQueryDto: PostQueryDto = {
+        fsearch: 'sample',
+        communityId: '1',
+      };
       const result = await controller.getPosts(postQueryDto);
       expect(result).toEqual([mockPost]);
       expect(service.getPosts).toHaveBeenCalled();
@@ -95,46 +95,78 @@ describe('PostController', () => {
   });
 
   describe('updatePost', () => {
-    it('should update and return a post', async () => {
+    it('should update and return a post if user is the owner', async () => {
       const mockReq = { user: { id: 1 } } as any;
-      const updatePostDto: UpdatePostDto = {
-        title: 'Updated Title',
-        detail: 'Updated details',
-      };
+      const updatePostDto: UpdatePostDto = { title: 'Updated Post' };
+
       const result = await controller.updatePost(mockReq, 1, updatePostDto);
       expect(result).toEqual(mockPost);
       expect(service.updatePost).toHaveBeenCalledWith({
         where: { id: 1 },
-        data: { ...updatePostDto, userId: mockReq.user.id },
+        data: updatePostDto,
       });
     });
 
-    it('should throw NotFoundException if post does not exist', async () => {
-      jest
-        .spyOn(service, 'updatePost')
-        .mockRejectedValueOnce(new NotFoundException());
+    it('should throw UnauthorizedException if user is not the owner', async () => {
+      jest.spyOn(service, 'findPostOrThrow').mockResolvedValueOnce({
+        ...mockPost,
+        userId: 2, // Different user
+      });
+
       const mockReq = { user: { id: 1 } } as any;
+      const updatePostDto: UpdatePostDto = { title: 'Updated Post' };
+
       await expect(
-        controller.updatePost(mockReq, 1, {
-          title: 'Updated Title',
-          detail: 'Updated details',
-        }),
+        controller.updatePost(mockReq, 1, updatePostDto),
+      ).rejects.toThrow(UnauthorizedException);
+    });
+
+    it('should throw NotFoundException if post is not found', async () => {
+      jest
+        .spyOn(service, 'findPostOrThrow')
+        .mockRejectedValueOnce(new NotFoundException());
+
+      const mockReq = { user: { id: 1 } } as any;
+      const updatePostDto: UpdatePostDto = { title: 'Updated Post' };
+
+      await expect(
+        controller.updatePost(mockReq, 1, updatePostDto),
       ).rejects.toThrow(NotFoundException);
     });
   });
 
   describe('deletePost', () => {
-    it('should delete and return the deleted post', async () => {
-      const result = await controller.deletePost(1);
+    it('should delete and return the deleted post if user is the owner', async () => {
+      const mockReq = { user: { id: 1 } } as any;
+
+      const result = await controller.deletePost(mockReq, 1);
       expect(result).toEqual(mockPost);
       expect(service.deletePost).toHaveBeenCalledWith({ id: 1 });
     });
 
-    it('should throw NotFoundException if post does not exist', async () => {
+    it('should throw UnauthorizedException if user is not the owner', async () => {
+      jest.spyOn(service, 'findPostOrThrow').mockResolvedValueOnce({
+        ...mockPost,
+        userId: 2, // Different user
+      });
+
+      const mockReq = { user: { id: 1 } } as any;
+
+      await expect(controller.deletePost(mockReq, 1)).rejects.toThrow(
+        UnauthorizedException,
+      );
+    });
+
+    it('should throw NotFoundException if post is not found', async () => {
       jest
-        .spyOn(service, 'deletePost')
+        .spyOn(service, 'findPostOrThrow')
         .mockRejectedValueOnce(new NotFoundException());
-      await expect(controller.deletePost(1)).rejects.toThrow(NotFoundException);
+
+      const mockReq = { user: { id: 1 } } as any;
+
+      await expect(controller.deletePost(mockReq, 1)).rejects.toThrow(
+        NotFoundException,
+      );
     });
   });
 });
