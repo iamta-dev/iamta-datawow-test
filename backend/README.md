@@ -1,4 +1,3 @@
-
 # datawowtest-backend
 
 ## 1. Setup
@@ -6,21 +5,25 @@
 ### 1.1 System Requirements
 
 #### 1.1.1 Setup Node.js 22 LTS with NVM
+
 - [Node Version Manager (nvm) install](https://github.com/nvm-sh/nvm)
-- macOS:  
+- macOS:
+
   ```sh
   brew install nvm
   nvm install 22
   nvm use 22
   ```
 
-- Windows:  
+- Windows:
   ```sh
   winget install --id CoreyButler.NVMforWindows
   nvm install 22
   nvm use 22
   ```
+
 #### 1.1.2 Setup Docker Desktop
+
 - [Docker-Desktop install](https://www.docker.com/products/docker-desktop/)
 
 ### 1.2 Setup Dependencies && .env
@@ -86,8 +89,9 @@ Allowed origins: [ 'http://localhost:8000', 'http://localhost:8080' ]
 ## 2. Folder Structure
 
 - [nestjs modules](https://docs.nestjs.com/modules)
+
 ```txt
-.                   
+.
 ├── config/*                             # Config Nest.js folder
 │   ├── config.validation.ts             # validation Config .env from Joi on start api
 ├── src/*                                # Main source code Nest.js folder
@@ -122,7 +126,7 @@ Allowed origins: [ 'http://localhost:8000', 'http://localhost:8080' ]
 - `swagger-ui-express`: ใช้ในการแสดง Swagger UI ผ่าน Express.js
 - `prisma`: ORM สำหรับการจัดการฐานข้อมูลอย่างสะดวก
 - `@prisma/client`: ใช้ร่วมกับ Prisma เพื่อเข้าถึงและจัดการข้อมูลในฐานข้อมูล
-- `prisma-dbml-generator`: ใช้ในการสร้าง diagram ของฐานข้อมูลจาก Prisma 
+- `prisma-dbml-generator`: ใช้ในการสร้าง diagram ของฐานข้อมูลจาก Prisma
 - `joi`: ใช้สำหรับการ validate schema ของ environment variables และข้อมูลอื่น ๆ
 - `reflect-metadata`: เป็นเมตาดาต้าที่ใช้ร่วมกับ decorators ใน TypeScript
 - `rxjs`: ใช้สำหรับการทำงานแบบ asynchronous ผ่าน Observables
