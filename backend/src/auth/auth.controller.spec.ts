@@ -23,6 +23,7 @@ describe('AuthController', () => {
   const mockUser = {
     id: 1,
     username: 'testuser',
+    pictureUrl: 'https://example.com/user.jpg',
   };
 
   beforeEach(async () => {
@@ -45,7 +46,9 @@ describe('AuthController', () => {
 
   describe('login', () => {
     it('should return access token if credentials are valid', async () => {
-      const loginDto: LoginDto = { username: 'testuser' };
+      const loginDto: LoginDto = {
+        username: 'testuser',
+      };
       mockAuthService.validateUser.mockResolvedValue(mockUser);
       mockAuthService.login.mockResolvedValue({ accessToken: 'mockedToken' });
 

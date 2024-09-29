@@ -65,6 +65,7 @@ describe('AuthService', () => {
       expect(jwtService.sign).toHaveBeenCalledWith({
         id: mockUser.id,
         username: mockUser.username,
+        pictureUrl: mockUser.pictureUrl,
       });
     });
   });
