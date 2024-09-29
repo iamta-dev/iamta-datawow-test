@@ -6,6 +6,7 @@ import { configValidationSchema } from 'config/config.validation';
 import { PrismaModule } from 'lib/prisma/prisma.module';
 import { AuthModule } from './auth/auth.module';
 import { PostModule } from './post/post.module';
+import { CommunityModule } from './community/community.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { PostModule } from './post/post.module';
     PrismaModule,
     AuthModule,
     PostModule,
+    CommunityModule,
   ],
   controllers: [AppController],
   providers: [AppService],
