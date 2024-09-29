@@ -23,44 +23,6 @@ export namespace CommentSwagger {
     },
   };
 
-  export const getComments = {
-    summary: 'Get all comments',
-    200: {
-      status: 200,
-      description: 'Comments fetched successfully',
-      schema: {
-        example: [
-          {
-            id: 1,
-            comment: 'This is a comment',
-            userId: 1,
-            postId: 1,
-            createdAt: '2024-08-14T04:44:34.066Z',
-            updatedAt: '2024-08-14T04:44:34.066Z',
-            user: {
-              id: 1,
-              username: 'testuser',
-              pictureUrl: 'https://example.com/user.jpg',
-            },
-          },
-          {
-            id: 2,
-            comment: 'Another comment',
-            userId: 2,
-            postId: 1,
-            createdAt: '2024-08-15T04:44:34.066Z',
-            updatedAt: '2024-08-15T04:44:34.066Z',
-            user: {
-              id: 2,
-              username: 'anotheruser',
-              pictureUrl: 'https://example.com/user2.jpg',
-            },
-          },
-        ],
-      },
-    },
-  };
-
   export const createComment = {
     summary: 'Create new comment',
     201: {

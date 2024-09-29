@@ -57,14 +57,6 @@ describe('CommentController', () => {
     });
   });
 
-  describe('getComments', () => {
-    it('should return an array of comments', async () => {
-      const result = await controller.getComments();
-      expect(result).toEqual([mockComment]);
-      expect(service.getComments).toHaveBeenCalled();
-    });
-  });
-
   describe('createComment', () => {
     it('should create and return a new comment', async () => {
       const mockReq = { user: { id: 1 } } as any;

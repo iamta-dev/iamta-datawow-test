@@ -53,23 +53,6 @@ export class CommentController {
     }
   }
 
-  @Get()
-  @ApiOperation({
-    summary: CommentSwagger.getComments.summary,
-  })
-  @ApiResponse(CommentSwagger.getComments[200])
-  @ApiResponse(SwaggerBaseResponse[500])
-  async getComments(): Promise<CommentModel[]> {
-    try {
-      const comments = await this.commentService.getComments({});
-      this.logger.log('Comments fetched successfully');
-      return comments;
-    } catch (error) {
-      this.logger.error('Failed to fetch comments', error.stack);
-      throw error;
-    }
-  }
-
   @ApiBearerAuth()
   @Post()
   @UsePipes(new ValidationPipe({ whitelist: true }))
