@@ -12,14 +12,22 @@ import {
   Logger,
   UseGuards,
   Req,
+  Query,
 } from '@nestjs/common';
 import { PostService } from './post.service';
+import {
+  ApiTags,
+  ApiOperation,
+  ApiResponse,
+  ApiBearerAuth,
+} from '@nestjs/swagger';
 
+import { PostSwagger } from './dto/post.swagger';
 import { Post as PostModel } from '@prisma/client';
+import { CreatePostDto, PostQueryDto, UpdatePostDto } from './dto/post.dto';
+import { SwaggerBaseResponse } from '../../lib/swagger/base-swagger';
 import { AuthGuard } from '@nestjs/passport';
 import { RequestWithUser } from 'interface/request.interface';
-import { CreatePostDto, UpdatePostDto } from './dto/post.dto';
-import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Posts')
 @Controller('posts')
@@ -29,6 +37,12 @@ export class PostController {
   constructor(private readonly postService: PostService) {}
 
   @Get(':id')
+  @ApiOperation({
+    summary: PostSwagger.getPostById.summary,
+  })
+  @ApiResponse(PostSwagger.getPostById[200])
+  @ApiResponse(SwaggerBaseResponse[404])
+  @ApiResponse(SwaggerBaseResponse[500])
   async getPostById(@Param('id', ParseIntPipe) id: number): Promise<PostModel> {
     try {
       const post = await this.postService.getPost({ id });
@@ -41,6 +55,11 @@ export class PostController {
   }
 
   @Get()
+  @ApiOperation({
+    summary: PostSwagger.getPosts.summary,
+  })
+  @ApiResponse(PostSwagger.getPosts[200])
+  @ApiResponse(SwaggerBaseResponse[500])
   async getPosts(): Promise<PostModel[]> {
     try {
       const posts = await this.postService.getPosts({});
@@ -55,6 +74,13 @@ export class PostController {
   @ApiBearerAuth()
   @UseGuards(AuthGuard('jwt'))
   @Post()
+  @ApiOperation({
+    summary: PostSwagger.createPost.summary,
+  })
+  @ApiResponse(PostSwagger.createPost[201])
+  @ApiResponse(SwaggerBaseResponse[401])
+  @ApiResponse(SwaggerBaseResponse[400])
+  @ApiResponse(SwaggerBaseResponse[500])
   @UsePipes(new ValidationPipe({ whitelist: true }))
   async createPost(
     @Req() req: RequestWithUser,
@@ -76,6 +102,13 @@ export class PostController {
   @ApiBearerAuth()
   @UseGuards(AuthGuard('jwt'))
   @Put(':id')
+  @ApiOperation({
+    summary: PostSwagger.updatePost.summary,
+  })
+  @ApiResponse(PostSwagger.updatePost[200])
+  @ApiResponse(SwaggerBaseResponse[401])
+  @ApiResponse(SwaggerBaseResponse[404])
+  @ApiResponse(SwaggerBaseResponse[500])
   @UsePipes(new ValidationPipe({ whitelist: true }))
   async updatePost(
     @Req() req: RequestWithUser,
@@ -98,6 +131,13 @@ export class PostController {
   @ApiBearerAuth()
   @UseGuards(AuthGuard('jwt'))
   @Delete(':id')
+  @ApiOperation({
+    summary: PostSwagger.deletePost.summary,
+  })
+  @ApiResponse(PostSwagger.deletePost[200])
+  @ApiResponse(SwaggerBaseResponse[401])
+  @ApiResponse(SwaggerBaseResponse[404])
+  @ApiResponse(SwaggerBaseResponse[500])
   async deletePost(@Param('id', ParseIntPipe) id: number): Promise<PostModel> {
     try {
       const deletedPost = await this.postService.deletePost({ id });
