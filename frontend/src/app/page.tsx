@@ -10,7 +10,7 @@ export default function HomePage() {
         <Button variant={"outline"}>Click me</Button>
       </div>
 
-      <div className="flex gap-2 m-10">
+      <div className="m-10 flex gap-2">
         Chuck Norris’ tears cure cancer. Too bad he has never cried. Chuck
         Norris can sit in the corner of a round room. Chuck Norris is the reason
         why Waldo is hiding. Chuck Norris once ate at Taco Bell and didn’t get
