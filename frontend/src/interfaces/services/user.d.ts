@@ -5,8 +5,8 @@ export interface User {
   id: number;
   username: string;
   pictureUrl: string;
-  posts: Post[];
-  comments: Comment[];
+  posts?: Post[];
+  comments?: Comment[];
   createdAt: string;
   updatedAt: string;
 }

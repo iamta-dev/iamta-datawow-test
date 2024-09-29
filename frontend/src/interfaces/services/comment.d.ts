@@ -4,7 +4,7 @@ export interface Comment {
   id: number;
   comment: string;
   postId: number;
-  user: User;
+  user?: User;
   createdAt: string;
   updatedAt: string;
 }
@@ -15,3 +15,7 @@ export interface CreateCommentDto {
 }
 
 export type UpdateCommentDto = Partial<CreateCommentDto>;
+
+export interface CommentParamsDto {
+  postId?: number;
+}
