@@ -1,0 +1,19 @@
+import { type APIErrorResponse } from "@/interfaces/services/base";
+import { type getProfile } from "@/interfaces/use-cases/base.use-case.d";
+import {
+  type getCommunities,
+} from "@/interfaces/use-cases/community.use-case.d";
+import { type Community as CommunityModel } from "@/interfaces/services/community";
+import { handleAPIError } from "../base/base.use-case";
+
+export async function getCommunitiesUseCase(params: {
+  context: {
+    getProfile: getProfile;
+    getCommunities: getCommunities;
+  };
+}): Promise<{ data?: CommunityModel[]; error?: APIErrorResponse }> {
+  const { context } = params;
+
+  const resp = await context.getCommunities();
+  return handleAPIError(resp);
+}
