@@ -11,6 +11,7 @@ import {
   ParseIntPipe,
   Logger,
   Req,
+  UnauthorizedException,
 } from '@nestjs/common';
 import { CommentService } from './comment.service';
 import {
@@ -83,6 +84,7 @@ export class CommentController {
     @Body() createCommentDto: CreateCommentDto,
   ): Promise<CommentModel> {
     try {
+      // Include userId from the logged-in user in the request data
       const newComment = await this.commentService.createComment({
         ...createCommentDto,
         userId: req.user.id,
@@ -106,10 +108,25 @@ export class CommentController {
   @ApiResponse(SwaggerBaseResponse[404])
   @ApiResponse(SwaggerBaseResponse[500])
   async updateComment(
+    @Req() req: RequestWithUser,
     @Param('id', ParseIntPipe) id: number,
     @Body() updateCommentDto: UpdateCommentDto,
   ): Promise<CommentModel> {
     try {
+      // Fetch the comment by ID
+      const comment = await this.commentService.findCommentOrThrow({ id });
+
+      // Ensure the logged-in user is the owner of the comment
+      if (comment.userId !== req.user.id) {
+        this.logger.error(
+          `User ${req.user.id} is not authorized to update this comment`,
+        );
+        throw new UnauthorizedException(
+          'You are not authorized to update this comment',
+        );
+      }
+
+      // Proceed with updating the comment
       const updatedComment = await this.commentService.updateComment({
         where: { id },
         data: updateCommentDto,
@@ -131,9 +148,24 @@ export class CommentController {
   @ApiResponse(SwaggerBaseResponse[404])
   @ApiResponse(SwaggerBaseResponse[500])
   async deleteComment(
+    @Req() req: RequestWithUser,
     @Param('id', ParseIntPipe) id: number,
   ): Promise<CommentModel> {
     try {
+      // Fetch the comment by ID
+      const comment = await this.commentService.findCommentOrThrow({ id });
+
+      // Ensure the logged-in user is the owner of the comment
+      if (comment.userId !== req.user.id) {
+        this.logger.error(
+          `User ${req.user.id} is not authorized to delete this comment`,
+        );
+        throw new UnauthorizedException(
+          'You are not authorized to delete this comment',
+        );
+      }
+
+      // Proceed with deleting the comment
       const deletedComment = await this.commentService.deleteComment({ id });
       this.logger.log(`Comment with ID ${id} deleted successfully`);
       return deletedComment;
