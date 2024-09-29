@@ -28,6 +28,7 @@ import { CreatePostDto, PostQueryDto, UpdatePostDto } from './dto/post.dto';
 import { SwaggerBaseResponse } from '../../lib/swagger/base-swagger';
 import { AuthGuard } from '@nestjs/passport';
 import { RequestWithUser } from 'interface/request.interface';
+import { createPostSearchCondition } from './dto/post.search';
 
 @ApiTags('Posts')
 @Controller('posts')
@@ -60,9 +61,15 @@ export class PostController {
   })
   @ApiResponse(PostSwagger.getPosts[200])
   @ApiResponse(SwaggerBaseResponse[500])
-  async getPosts(): Promise<PostModel[]> {
+  async getPosts(@Query() postQueryDto: PostQueryDto): Promise<PostModel[]> {
     try {
-      const posts = await this.postService.getPosts({});
+      const { searchCondition } = createPostSearchCondition(
+        postQueryDto.fsearch,
+      );
+
+      const posts = await this.postService.getPosts({
+        where: searchCondition,
+      });
       this.logger.log('Posts fetched successfully');
       return posts;
     } catch (error) {
