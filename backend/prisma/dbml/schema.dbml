@@ -6,6 +6,48 @@ Table User {
   id Int [pk, increment]
   username String [unique, not null]
   pictureUrl String [not null]
+  posts Post [not null]
+  comments Comment [not null]
   createdAt DateTime [default: `now()`, not null]
   updatedAt DateTime [default: `now()`, not null]
 }
+
+Table Community {
+  id Int [pk, increment]
+  name String [unique, not null]
+  posts Post [not null]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [default: `now()`, not null]
+}
+
+Table Post {
+  id Int [pk, increment]
+  title String [not null]
+  detail String [not null]
+  user User [not null]
+  userId Int [not null]
+  community Community [not null]
+  communityId Int [not null]
+  comments Comment [not null]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [default: `now()`, not null]
+}
+
+Table Comment {
+  id Int [pk, increment]
+  comment String [not null]
+  post Post [not null]
+  postId Int [not null]
+  user User [not null]
+  userId Int [not null]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [default: `now()`, not null]
+}
+
+Ref: Post.userId > User.id
+
+Ref: Post.communityId > Community.id
+
+Ref: Comment.postId > Post.id
+
+Ref: Comment.userId > User.id
