@@ -1,0 +1,24 @@
+version: '3.8'
+
+networks:
+  app_network:
+    name: app_network
+    driver: bridge
+    external: true
+
+services:
+  datawowtest_db:
+    container_name: datawowtest_db
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: datawowtest
+    restart: always
+    command: ['postgres', '-c', 'log_statement=all', '-c', 'timezone=UTC']
+    ports:
+      - '5442:5432'
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data
+    networks:
+      - app_network
