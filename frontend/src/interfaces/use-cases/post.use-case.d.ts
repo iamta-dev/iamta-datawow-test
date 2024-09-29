@@ -1,24 +1,24 @@
 import { type ServiceResponse } from "@/interfaces/services/base";
 import {
-  type Post,
+  type Post as PostModel,
   type CreatePostDto,
   type UpdatePostDto,
   type PostParamsDto,
 } from "@/interfaces/services/post";
 
-export type getPostById = (id: number) => Promise<ServiceResponse<Post>>;
+export type getPostById = (id: number) => Promise<ServiceResponse<PostModel>>;
 
 export type getPosts = (
-  postParamsDto: PostParamsDto,
-) => Promise<ServiceResponse<Post[]>>;
+  postParamsDto?: PostParamsDto,
+) => Promise<ServiceResponse<PostModel[]>>;
 
 export type createPost = (
   data: CreatePostDto,
-) => Promise<ServiceResponse<Post>>;
+) => Promise<ServiceResponse<PostModel>>;
 
 export type updatePost = (
   id: number,
   data: UpdatePostDto,
-) => Promise<ServiceResponse<Post>>;
+) => Promise<ServiceResponse<PostModel>>;
 
 export type deletePost = (id: number) => Promise<ServiceResponse<void>>;
