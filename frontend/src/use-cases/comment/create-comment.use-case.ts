@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { type APIErrorResponse } from "@/interfaces/services/base";
 import {
   type Comment as CommentModel,

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { type APIErrorResponse } from "@/interfaces/services/base";
 import { type getProfile } from "@/interfaces/use-cases/base.use-case.d";
 import { type updatePost } from "@/interfaces/use-cases/post.use-case.d";
