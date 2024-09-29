@@ -6,8 +6,10 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
+    "format": "run-script-os",
+    "format:default": "prettier --write \"**/*.{ts,js,tsx,jsx,json,css,sass,md}\"",
+    "format:win32": "prettier --write \"**/*.{ts,js,tsx,jsx,json,css,sass,md}\"",
     "build": "nest build",
-    "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "dev": "nest start",
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
