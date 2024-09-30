@@ -1,13 +1,14 @@
-// app/page.tsx
 'use client';
 
 import React, { useState } from "react";
 import { Plus, Search, ArrowRight } from "lucide-react";
 import PostCard from "@/components/blog/post-card";
+import { useSidebarState } from "@/components/blog/useSidebarState"; // Assuming we store sidebar state globally
 
 export default function HomePage() {
   const [searchQuery, setSearchQuery] = useState<string>(""); // For handling search input
   const [isSearchActive, setIsSearchActive] = useState<boolean>(false); // For toggling search bar
+  const { isSidebarOpen } = useSidebarState(); // Get the sidebar state (true/false)
 
   // Sample posts data
   const posts = [
@@ -45,7 +46,11 @@ export default function HomePage() {
   return (
     <div>
       {/* Toolbar (Fixed below the Header, specific to this page) */}
-      <div className="fixed left-0 right-0 top-16 z-30 bg-white shadow-md">
+      <div
+        className={`fixed left-0 right-0 top-16 z-30 bg-white shadow-md transition-all ${
+          isSidebarOpen ? "md:ml-64" : "md:ml-0"
+        }`}
+      >
         <div className="flex items-center p-4">
           {isSearchActive ? (
             <div className="flex w-full items-center justify-between">
@@ -77,7 +82,11 @@ export default function HomePage() {
       </div>
 
       {/* Main Content */}
-      <section className="space-y-6 p-6 pt-32">
+      <section
+        className={`space-y-6 p-6 pt-32 transition-all ${
+          isSidebarOpen ? "md:ml-64" : "md:ml-0"
+        }`}
+      >
         {filteredPosts.map((post) => (
           <PostCard key={post.id} post={post} handleSearch={handleSearch} />
         ))}
