@@ -7,29 +7,26 @@ import {
 } from "@/interfaces/services/comment.service";
 import { createCommentUseCase } from "@/use-cases/comment/create-comment.use-case";
 import { getProfileAction } from "@/actions/profile";
-import { type ActionResultState } from "@/interfaces/actions/base.action";
+import {
+  baseActionHandleResponse,
+  type ActionResultState,
+} from "@/interfaces/actions/base.action";
 
 export async function createCommentAction(
   createCommentDto: CreateCommentDto,
 ): Promise<ActionResultState<Comment>> {
   try {
-    const { data: result, error } = await createCommentUseCase({
+    const { result, error } = await createCommentUseCase({
       context: {
         getProfile: getProfileAction,
         createComment: (data) => commentService.createComment(data),
       },
       data: createCommentDto,
     });
-    if (error ?? !result) {
-      return {
-        status: "error",
-        message:
-          error?.message ?? "An unexpected error occurred. Please try again.",
-      };
-    }
-    return { status: "success", result };
+
+    return baseActionHandleResponse(result, error);
   } catch (err) {
     const error = err as Error;
-    return { status: "error", message: error.message };
+    return baseActionHandleResponse(undefined, error);
   }
 }

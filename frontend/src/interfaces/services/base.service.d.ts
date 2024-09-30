@@ -6,7 +6,7 @@ export interface ServiceResponse<T> {
 }
 
 export interface APIErrorResponse {
-  message: string;
+  message?: string;
   error?: string;
-  statusCode: number;
+  statusCode?: number;
 }

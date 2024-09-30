@@ -1,11 +1,13 @@
-import { type APIErrorResponse } from "@/interfaces/services/base.service";
-import { type getProfile } from "@/interfaces/use-cases/base.use-case.d";
+import {
+  type UseCaseResponse,
+  type getProfile,
+} from "@/interfaces/use-cases/base.use-case.d";
 import { type updatePost } from "@/interfaces/use-cases/post.use-case.d";
 import {
   type UpdatePostDto,
   type Post,
 } from "@/interfaces/services/post.service";
-import { handleAPIError } from "../base/base.use-case";
+import { baseUseCaseHandleResponse } from "../base/base.use-case";
 
 export async function updatePostUseCase(params: {
   context: {
@@ -14,7 +16,7 @@ export async function updatePostUseCase(params: {
   };
   id: number;
   data: UpdatePostDto;
-}): Promise<{ data?: Post; error?: APIErrorResponse }> {
+}): Promise<UseCaseResponse<Post>> {
   const { context, id, data } = params;
 
   const user = await context.getProfile();
@@ -29,5 +31,5 @@ export async function updatePostUseCase(params: {
   }
 
   const resp = await context.updatePost(id, data);
-  return handleAPIError(resp);
+  return baseUseCaseHandleResponse<Post>(resp);
 }

@@ -1,8 +1,10 @@
-import { type APIErrorResponse } from "@/interfaces/services/base.service";
-import { type getProfile } from "@/interfaces/use-cases/base.use-case.d";
+import {
+  type UseCaseResponse,
+  type getProfile,
+} from "@/interfaces/use-cases/base.use-case.d";
 import { type deletePost } from "@/interfaces/use-cases/post.use-case.d";
 import { type Post } from "@/interfaces/services/post.service";
-import { handleAPIError } from "../base/base.use-case";
+import { baseUseCaseHandleResponse } from "../base/base.use-case";
 
 export async function deletePostUseCase(params: {
   context: {
@@ -10,7 +12,7 @@ export async function deletePostUseCase(params: {
     deletePost: deletePost;
   };
   id: number;
-}): Promise<{ data?: Post; error?: APIErrorResponse }> {
+}): Promise<UseCaseResponse<Post>> {
   const { context, id } = params;
 
   const user = await context.getProfile();
@@ -25,5 +27,5 @@ export async function deletePostUseCase(params: {
   }
 
   const resp = await context.deletePost(id);
-  return handleAPIError(resp);
+  return baseUseCaseHandleResponse<Post>(resp);
 }

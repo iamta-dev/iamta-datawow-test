@@ -4,28 +4,25 @@ import { communityService } from "@/services/community.service";
 import { type Community } from "@/interfaces/services/community.service";
 import { getCommunitiesUseCase } from "@/use-cases/community/get-community.use-case";
 import { getProfileAction } from "@/actions/profile";
-import { type ActionResultState } from "@/interfaces/actions/base.action";
+import {
+  baseActionHandleResponse,
+  type ActionResultState,
+} from "@/interfaces/actions/base.action";
 
 export async function getCommunitiesAction(): Promise<
   ActionResultState<Community[]>
 > {
   try {
-    const { data: result, error } = await getCommunitiesUseCase({
+    const { result, error } = await getCommunitiesUseCase({
       context: {
         getProfile: getProfileAction,
         getCommunities: () => communityService.getCommunities(),
       },
     });
-    if (error ?? !result) {
-      return {
-        status: "error",
-        message:
-          error?.message ?? "An unexpected error occurred. Please try again.",
-      };
-    }
-    return { status: "success", result };
+
+    return baseActionHandleResponse(result, error);
   } catch (err) {
     const error = err as Error;
-    return { status: "error", message: error.message };
+    return baseActionHandleResponse(undefined, error);
   }
 }

@@ -5,7 +5,10 @@ import { type Comment } from "@/interfaces/services/comment.service";
 import { createCommentUseCase } from "@/use-cases/comment/create-comment.use-case";
 import { getProfileAction } from "@/actions/profile";
 import { z } from "zod";
-import { type ActionStatus } from "@/interfaces/actions/base.action";
+import {
+  baseActionHandleResponse,
+  type ActionStatus,
+} from "@/interfaces/actions/base.action";
 
 export type commentFormState =
   | {
@@ -29,8 +32,7 @@ export async function createCommentAction(
   formData: FormData,
 ): Promise<commentFormState> {
   const validatedFields = createCommentFormSchema.safeParse({
-    comment: formData.get("comment"),
-    postId: formData.get("postId"),
+    ...Object.fromEntries(formData.entries()),
   });
 
   if (!validatedFields.success) {
@@ -40,23 +42,17 @@ export async function createCommentAction(
   const { ...data } = validatedFields.data;
 
   try {
-    const { data: result, error } = await createCommentUseCase({
+    const { result, error } = await createCommentUseCase({
       context: {
         getProfile: getProfileAction,
-        createComment: (v) => commentService.createComment(v),
+        createComment: (data) => commentService.createComment(data),
       },
       data,
     });
-    if (error ?? !result) {
-      return {
-        status: "error",
-        message:
-          error?.message ?? "An unexpected error occurred. Please try again.",
-      };
-    }
-    return { status: "success", result };
+
+    return baseActionHandleResponse(result, error);
   } catch (err) {
     const error = err as Error;
-    return { status: "error", message: error.message };
+    return baseActionHandleResponse(undefined, error);
   }
 }

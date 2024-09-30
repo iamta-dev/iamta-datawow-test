@@ -4,7 +4,7 @@
 import { type APIErrorResponse } from "@/interfaces/services/base.service";
 import { type UseCaseResponse } from "@/interfaces/use-cases/base.use-case.d";
 
-export function handleAPIError<T>(resp: {
+export function baseUseCaseHandleResponse<T>(resp: {
   error?: any;
   data?: T;
 }): UseCaseResponse<T> {
@@ -23,5 +23,5 @@ export function handleAPIError<T>(resp: {
     };
   }
 
-  return { data: resp.data };
+  return { result: resp.data };
 }

@@ -1,5 +1,8 @@
 import { type APIErrorResponse } from "@/interfaces/services/base.service";
-import { type getProfile } from "@/interfaces/use-cases/base.use-case.d";
+import {
+  type UseCaseResponse,
+  type getProfile,
+} from "@/interfaces/use-cases/base.use-case.d";
 import {
   type getPostById,
   type getPosts,
@@ -8,7 +11,7 @@ import {
   type PostParamsDto,
   type Post,
 } from "@/interfaces/services/post.service";
-import { handleAPIError } from "../base/base.use-case";
+import { baseUseCaseHandleResponse } from "../base/base.use-case";
 
 export async function getPostIdUseCase(params: {
   context: {
@@ -16,11 +19,11 @@ export async function getPostIdUseCase(params: {
     getPostById: getPostById;
   };
   id: number;
-}): Promise<{ data?: Post; error?: APIErrorResponse }> {
+}): Promise<UseCaseResponse<Post>> {
   const { context, id } = params;
 
   const resp = await context.getPostById(id);
-  return handleAPIError(resp);
+  return baseUseCaseHandleResponse<Post>(resp);
 }
 
 export async function getPostsUseCase(params: {
@@ -29,9 +32,9 @@ export async function getPostsUseCase(params: {
     getPosts: getPosts;
   };
   postParamsDto?: PostParamsDto;
-}): Promise<{ data?: Post[]; error?: APIErrorResponse }> {
+}): Promise<{ result?: Post[]; error?: APIErrorResponse }> {
   const { context, postParamsDto } = params;
 
   const resp = await context.getPosts(postParamsDto);
-  return handleAPIError(resp);
+  return baseUseCaseHandleResponse<Post[]>(resp);
 }

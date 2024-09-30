@@ -7,7 +7,10 @@ import { getProfileAction } from "@/actions/profile";
 import { createPostUseCase } from "@/use-cases/post/create-post.use-case";
 import { updatePostUseCase } from "@/use-cases/post/update-post.use-case";
 import { deletePostUseCase } from "@/use-cases/post/delete-post.use-case";
-import { type ActionStatus } from "@/interfaces/actions/base.action";
+import {
+  baseActionHandleResponse,
+  type ActionStatus,
+} from "@/interfaces/actions/base.action";
 import { z } from "zod";
 
 export type postFormState =
@@ -38,9 +41,7 @@ export async function createPostAction(
   formData: FormData,
 ): Promise<postFormState> {
   const validatedFields = createPostFormSchema.safeParse({
-    title: formData.get("title"),
-    detail: formData.get("detail"),
-    communityId: formData.get("communityId"),
+    ...Object.fromEntries(formData.entries()),
   });
 
   if (!validatedFields.success) {
@@ -50,24 +51,18 @@ export async function createPostAction(
   const { ...data } = validatedFields.data;
 
   try {
-    const { data: result, error } = await createPostUseCase({
+    const { result, error } = await createPostUseCase({
       context: {
         getProfile: getProfileAction,
-        createPost: (v) => postService.createPost(v),
+        createPost: (data) => postService.createPost(data),
       },
       data,
     });
-    if (error ?? !result) {
-      return {
-        status: "error",
-        message:
-          error?.message ?? "An unexpected error occurred. Please try again.",
-      };
-    }
-    return { status: "success", result };
+
+    return baseActionHandleResponse(result, error);
   } catch (err) {
     const error = err as Error;
-    return { status: "error", message: error.message };
+    return baseActionHandleResponse(undefined, error);
   }
 }
 
@@ -82,10 +77,7 @@ export async function updatePostAction(
   formData: FormData,
 ): Promise<postFormState> {
   const validatedFields = updatePostFormSchema.safeParse({
-    udpateId: formData.get("udpateId"),
-    title: formData.get("title"),
-    detail: formData.get("detail"),
-    communityId: formData.get("communityId"),
+    ...Object.fromEntries(formData.entries()),
   });
 
   if (!validatedFields.success) {
@@ -95,25 +87,19 @@ export async function updatePostAction(
   const { updateId, ...data } = validatedFields.data;
 
   try {
-    const { data: result, error } = await updatePostUseCase({
+    const { result, error } = await updatePostUseCase({
       context: {
         getProfile: getProfileAction,
-        updatePost: (...v) => postService.updatePost(...v),
+        updatePost: (id, data) => postService.updatePost(id, data),
       },
       id: updateId,
       data,
     });
-    if (error ?? !result) {
-      return {
-        status: "error",
-        message:
-          error?.message ?? "An unexpected error occurred. Please try again.",
-      };
-    }
-    return { status: "success", result };
+
+    return baseActionHandleResponse(result, error);
   } catch (err) {
     const error = err as Error;
-    return { status: "error", message: error.message };
+    return baseActionHandleResponse(undefined, error);
   }
 }
 
@@ -126,7 +112,7 @@ export async function deletePostAction(
   formData: FormData,
 ): Promise<postFormState> {
   const validatedFields = deletePostFormSchema.safeParse({
-    deleteId: formData.get("deleteId"),
+    ...Object.fromEntries(formData.entries()),
   });
 
   if (!validatedFields.success) {
@@ -136,23 +122,17 @@ export async function deletePostAction(
   const { deleteId } = validatedFields.data;
 
   try {
-    const { data: result, error } = await deletePostUseCase({
+    const { result, error } = await deletePostUseCase({
       context: {
         getProfile: getProfileAction,
-        deletePost: (v) => postService.deletePost(v),
+        deletePost: (id) => postService.deletePost(id),
       },
       id: deleteId,
     });
-    if (error ?? !result) {
-      return {
-        status: "error",
-        message:
-          error?.message ?? "An unexpected error occurred. Please try again.",
-      };
-    }
-    return { status: "success", result };
+
+    return baseActionHandleResponse(result, error);
   } catch (err) {
     const error = err as Error;
-    return { status: "error", message: error.message };
+    return baseActionHandleResponse(undefined, error);
   }
 }

@@ -1,8 +1,8 @@
-/* eslint-disable @typescript-eslint/no-redundant-type-constituents */
+import { type APIErrorResponse } from "@/interfaces/services/base.service";
 import { type UserJwtPayload } from "@/lib/user-jwt";
 
 export interface UseCaseResponse<T> {
-  data?: T;
+  result?: T;
   error?: APIErrorResponse;
 }
 

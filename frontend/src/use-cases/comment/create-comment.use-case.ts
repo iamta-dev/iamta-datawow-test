@@ -4,8 +4,11 @@ import {
   type CreateCommentDto,
 } from "@/interfaces/services/comment.service";
 import { type createComment } from "@/interfaces/use-cases/comment.use-case.d";
-import { handleAPIError } from "../base/base.use-case";
-import { type getProfile } from "@/interfaces/use-cases/base.use-case";
+import { baseUseCaseHandleResponse } from "../base/base.use-case";
+import {
+  type UseCaseResponse,
+  type getProfile,
+} from "@/interfaces/use-cases/base.use-case";
 
 export async function createCommentUseCase(params: {
   context: {
@@ -13,7 +16,7 @@ export async function createCommentUseCase(params: {
     createComment: createComment;
   };
   data: CreateCommentDto;
-}): Promise<{ data?: Comment; error?: APIErrorResponse }> {
+}): Promise<UseCaseResponse<Comment>> {
   const { context, data } = params;
 
   const user = await context.getProfile();
@@ -28,5 +31,5 @@ export async function createCommentUseCase(params: {
   }
 
   const resp = await context.createComment(data);
-  return handleAPIError(resp);
+  return baseUseCaseHandleResponse<Comment>(resp);
 }
