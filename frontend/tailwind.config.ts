@@ -20,6 +20,7 @@ export default {
         success: "hsl(var(--success))",
         grey: {
           DEFAULT: "hsl(var(--grey-300))",
+          50: "hsl(var(--grey-50))",
           100: "hsl(var(--grey-100))",
           300: "hsl(var(--grey-300))",
           400: "hsl(var(--grey-400))",
