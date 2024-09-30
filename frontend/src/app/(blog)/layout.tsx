@@ -1,15 +1,11 @@
-// app/layout.tsx
 "use client";
+
 import Header from "@/components/blog/header";
 import Sidebar from "@/components/blog/sidebar";
-import React from "react";
+import React, { type PropsWithChildren } from "react";
 import { SidebarProvider } from "@/components/blog/useSidebarState"; // Import SidebarProvider
 
-interface LayoutProps {
-  children: React.ReactNode; // The content of the page will be passed as children
-}
-
-export default function Layout({ children }: LayoutProps) {
+export default function Layout({ children }: PropsWithChildren) {
   return (
     <SidebarProvider>
       <div className="relative min-h-screen bg-gray-100">
