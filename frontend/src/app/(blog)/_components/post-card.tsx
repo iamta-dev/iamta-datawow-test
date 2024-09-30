@@ -4,18 +4,10 @@ import { MessageCircle } from "lucide-react";
 import { DeletePostForm } from "./delete-post-form";
 import { EditPostForm } from "./edit-post-form";
 import { useRouter } from "next/navigation";
-
-interface Post {
-  id: number;
-  author: string;
-  category: string;
-  title: string;
-  description: string;
-  comments: number;
-}
+import { type Post as PostModel } from "@/interfaces/services/post";
 
 interface PostCardProps {
-  post: Post; // Post object passed to the component
+  post: PostModel; // Post object passed to the component
   searchQuery: string;
 }
 
@@ -48,9 +40,9 @@ export default function PostCard({ post, searchQuery }: PostCardProps) {
             <div className="h-10 w-10 rounded-full bg-gray-300"></div>
           </div>
           <div>
-            <div className="cursor-text font-bold">{post.author}</div>
+            <div className="cursor-text font-bold">{post.user?.fullName}</div>
             <div className="cursor-text text-sm text-gray-500">
-              {post.category}
+              {post.community?.name}
             </div>
           </div>
         </div>
@@ -76,7 +68,7 @@ export default function PostCard({ post, searchQuery }: PostCardProps) {
         className="line-clamp-2 cursor-pointer text-gray-700"
         onClick={() => router.push(`/blog/${post.id}`)}
       >
-        {post.description}
+        {post.detail}
       </p>
 
       {/* Comments section */}
@@ -85,7 +77,7 @@ export default function PostCard({ post, searchQuery }: PostCardProps) {
         onClick={() => router.push(`/blog/${post.id}`)}
       >
         <MessageCircle className="mr-2 h-5 w-5" />
-        <div>{post.comments} Comments</div>
+        <div>{post.comments?.length ?? 0} Comments</div>
       </div>
     </article>
   );

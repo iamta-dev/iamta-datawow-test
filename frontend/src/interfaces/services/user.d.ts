@@ -3,6 +3,7 @@ import { type Comment } from "./comment.d";
 
 export interface User {
   id: number;
+  fullName: string;
   username: string;
   pictureUrl: string;
   posts?: Post[];
