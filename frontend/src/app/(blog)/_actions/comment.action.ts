@@ -7,7 +7,7 @@ import {
 } from "@/interfaces/services/comment";
 import { createCommentUseCase } from "@/use-cases/comment/create-comment.use-case";
 import { getProfileAction } from "@/app/_action/profile";
-import { type ActionResultState } from "@/interfaces/actions/base-action.interface";
+import { ActionStatusEnum, type ActionResultState } from "@/interfaces/actions/base-action.interface";
 
 export async function createCommentAction(
   createCommentDto: CreateCommentDto,
@@ -22,14 +22,14 @@ export async function createCommentAction(
     });
     if (error ?? !result) {
       return {
-        status: "error",
+        status: ActionStatusEnum.error,
         message:
           error?.message ?? "An unexpected error occurred. Please try again.",
       };
     }
-    return { status: "success", result };
+    return { status: ActionStatusEnum.success, result };
   } catch (err) {
     const error = err as Error;
-    return { status: "error", message: error.message };
+    return { status: ActionStatusEnum.error, message: error.message };
   }
 }
