@@ -16,6 +16,23 @@ export default {
         sm: "calc(var(--radius) - 4px)",
       },
       colors: {
+        /* base color */
+        success: "hsl(var(--success))",
+        grey: {
+          DEFAULT: "hsl(var(--grey-300))",
+          100: "hsl(var(--grey-100))",
+          300: "hsl(var(--grey-300))",
+          400: "hsl(var(--grey-400))",
+        },
+        green: {
+          DEFAULT: "hsl(var(--green-300))",
+          100: "hsl(var(--green-100))",
+          300: "hsl(var(--green-300))",
+          500: "hsl(var(--green-500))",
+        },
+        golden: "hsl(var(--golden))",
+
+        /* shadcn/ui themes */
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         card: {
