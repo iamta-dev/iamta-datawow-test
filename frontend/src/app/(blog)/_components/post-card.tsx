@@ -43,7 +43,9 @@ export default function PostCard({ post, searchQuery }: PostCardProps) {
               <AvatarImage src={post.user?.pictureUrl} alt="Post Profile" />
               <AvatarFallback>CN</AvatarFallback>
             </Avatar>
-            <div className="cursor-text font-semibold text-grey-300">{post.user?.fullName}</div>
+            <div className="cursor-text font-semibold text-grey-300">
+              {post.user?.fullName}
+            </div>
           </div>
           <Badge variant={"grey"}>{post.community?.name}</Badge>
         </div>
