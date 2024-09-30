@@ -45,7 +45,12 @@ export class PostService {
         include: {
           user: true,
           community: true,
-          comments: { orderBy: { createdAt: 'desc' } },
+          comments: {
+            include: {
+              user: true,
+            },
+            orderBy: { createdAt: 'desc' },
+          },
         },
       });
     } catch (error) {

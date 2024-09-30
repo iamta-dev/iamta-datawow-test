@@ -30,6 +30,13 @@ export namespace PostSwagger {
               id: 1,
               comment: 'This is a sample comment',
               userId: 1,
+              user: {
+                id: 1,
+                username: 'sampleuser',
+                pictureUrl: 'https://example.com/user.jpg',
+                createdAt: '2024-08-14T04:44:34.066Z',
+                updatedAt: '2024-08-14T04:44:34.066Z',
+              },
               postId: 1,
               createdAt: '2024-08-14T05:00:00.000Z',
               updatedAt: '2024-08-14T05:00:00.000Z',
