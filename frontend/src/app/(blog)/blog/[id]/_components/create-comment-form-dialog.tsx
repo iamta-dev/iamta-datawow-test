@@ -84,7 +84,7 @@ export const CreateCommentFormDialog = () => {
                   <FormItem>
                     <FormControl>
                       <Textarea
-                        className="md:w-[350px] max-sm:w-[calc(100vw-3rem)]"
+                        className="max-sm:w-[calc(100vw-3rem)] md:w-[350px]"
                         disabled={isSubmitting}
                         placeholder="What's on your mind..."
                         {...field}

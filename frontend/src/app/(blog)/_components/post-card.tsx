@@ -42,9 +42,7 @@ export default function PostCard({ post, searchQuery }: PostCardProps) {
       className="relative rounded-md bg-white p-4 shadow-md"
     >
       <div className="mb-2 flex items-center justify-between">
-        <div
-          className="flex items-center"
-        >
+        <div className="flex items-center">
           <div className="mr-2">
             {/* Avatar Placeholder */}
             <div className="h-10 w-10 rounded-full bg-gray-300"></div>
@@ -83,7 +81,7 @@ export default function PostCard({ post, searchQuery }: PostCardProps) {
 
       {/* Comments section */}
       <div
-        className="mt-6 flex items-center text-gray-500 cursor-pointer"
+        className="mt-6 flex cursor-pointer items-center text-gray-500"
         onClick={() => router.push(`/blog/${post.id}`)}
       >
         <MessageCircle className="mr-2 h-5 w-5" />
