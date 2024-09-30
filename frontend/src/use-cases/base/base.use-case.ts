@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import { type APIErrorResponse } from "@/interfaces/services/base";
+import { type APIErrorResponse } from "@/interfaces/services/base.service";
 import { type UseCaseResponse } from "@/interfaces/use-cases/base.use-case.d";
 
 export function handleAPIError<T>(resp: {

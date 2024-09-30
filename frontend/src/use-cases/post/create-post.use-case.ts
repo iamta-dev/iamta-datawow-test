@@ -1,8 +1,8 @@
-import { type APIErrorResponse } from "@/interfaces/services/base";
+import { type APIErrorResponse } from "@/interfaces/services/base.service";
 import {
   type Post as PostModel,
   type CreatePostDto,
-} from "@/interfaces/services/post";
+} from "@/interfaces/services/post.service";
 import { type createPost } from "@/interfaces/use-cases/post.use-case.d";
 import { handleAPIError } from "../base/base.use-case";
 import { type getProfile } from "@/interfaces/use-cases/base.use-case";

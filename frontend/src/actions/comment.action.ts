@@ -4,10 +4,10 @@ import { commentService } from "@/services/comment.service";
 import {
   type Comment as CommentModel,
   type CreateCommentDto,
-} from "@/interfaces/services/comment";
+} from "@/interfaces/services/comment.service";
 import { createCommentUseCase } from "@/use-cases/comment/create-comment.use-case";
 import { getProfileAction } from "@/actions/profile";
-import { type ActionResultState } from "@/interfaces/actions/base-action.interface";
+import { type ActionResultState } from "@/interfaces/actions/base.action";
 
 export async function createCommentAction(
   createCommentDto: CreateCommentDto,

@@ -1,10 +1,10 @@
-import { type ServiceResponse } from "@/interfaces/services/base";
+import { type ServiceResponse } from "@/interfaces/services/base.service";
 import {
   type Post as PostModel,
   type CreatePostDto,
   type UpdatePostDto,
   type PostParamsDto,
-} from "@/interfaces/services/post";
+} from "@/interfaces/services/post.service";
 
 export type getPostById = (id: number) => Promise<ServiceResponse<PostModel>>;
 

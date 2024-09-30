@@ -12,7 +12,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Button } from "../ui/button";
-import { type Community as CommunityModel } from "@/interfaces/services/community";
+import { type Community as CommunityModel } from "@/interfaces/services/community.service";
 import { useState } from "react";
 import { CreatePostForm } from "../blog/create-post-form";
 

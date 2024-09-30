@@ -1,13 +1,13 @@
 "use server";
 
 import { postService } from "@/services/post.service";
-import { type Post as PostModel } from "@/interfaces/services/post";
+import { type Post as PostModel } from "@/interfaces/services/post.service";
 
 import { getProfileAction } from "@/actions/profile";
 import { createPostUseCase } from "@/use-cases/post/create-post.use-case";
 import { updatePostUseCase } from "@/use-cases/post/update-post.use-case";
 import { deletePostUseCase } from "@/use-cases/post/delete-post.use-case";
-import { type ActionStatus } from "@/interfaces/actions/base-action.interface";
+import { type ActionStatus } from "@/interfaces/actions/base.action";
 import { z } from "zod";
 
 export type postFormState =

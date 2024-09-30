@@ -1,4 +1,4 @@
-import { type APIErrorResponse } from "@/interfaces/services/base";
+import { type APIErrorResponse } from "@/interfaces/services/base.service";
 import { type getProfile } from "@/interfaces/use-cases/base.use-case.d";
 import {
   type getPostById,
@@ -7,7 +7,7 @@ import {
 import {
   type PostParamsDto,
   type Post as PostModel,
-} from "@/interfaces/services/post";
+} from "@/interfaces/services/post.service";
 import { handleAPIError } from "../base/base.use-case";
 
 export async function getPostIdUseCase(params: {

@@ -1,5 +1,5 @@
-import { type APIErrorResponse } from "@/interfaces/services/base";
-import { type LoginDto, type LoginResponse } from "@/interfaces/services/auth";
+import { type APIErrorResponse } from "@/interfaces/services/base.service";
+import { type LoginDto, type LoginResponse } from "@/interfaces/services/auth.service";
 import { type login } from "@/interfaces/use-cases/auth.use-case.d";
 
 export async function loginUseCase(params: {

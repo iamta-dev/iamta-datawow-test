@@ -1,5 +1,5 @@
-import { type Post } from "./post.d";
-import { type Comment } from "./comment.d";
+import { type Post } from "./post.service";
+import { type Comment } from "./comment.service";
 
 export interface User {
   id: number;

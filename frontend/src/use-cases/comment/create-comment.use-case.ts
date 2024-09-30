@@ -1,8 +1,8 @@
-import { type APIErrorResponse } from "@/interfaces/services/base";
+import { type APIErrorResponse } from "@/interfaces/services/base.service";
 import {
   type Comment as CommentModel,
   type CreateCommentDto,
-} from "@/interfaces/services/comment";
+} from "@/interfaces/services/comment.service";
 import { type createComment } from "@/interfaces/use-cases/comment.use-case.d";
 import { handleAPIError } from "../base/base.use-case";
 import { type getProfile } from "@/interfaces/use-cases/base.use-case";

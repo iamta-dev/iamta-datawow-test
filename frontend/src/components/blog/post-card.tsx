@@ -5,7 +5,7 @@ import { MessageCircle } from "lucide-react";
 import { DeletePostForm } from "./delete-post-form";
 import { EditPostForm } from "./edit-post-form";
 import { useRouter } from "next/navigation";
-import { type Post as PostModel } from "@/interfaces/services/post";
+import { type Post as PostModel } from "@/interfaces/services/post.service";
 import { Badge } from "@/components/ui/badge";
 
 interface PostCardProps {
