@@ -1,4 +1,6 @@
 import { MessageCircle } from "lucide-react";
+import { DeletePostForm } from "./delete-post-form";
+import { EditPostForm } from "./edit-post-form";
 
 interface Post {
   id: number;
@@ -30,7 +32,10 @@ export default function PostCard({ post, searchQuery }: PostCardProps) {
   };
 
   return (
-    <article key={post.id} className="rounded-md bg-white p-4 shadow-md">
+    <article
+      key={post.id}
+      className="relative rounded-md bg-white p-4 shadow-md"
+    >
       <div className="mb-2 flex items-center justify-between">
         <div className="flex items-center">
           <div className="mr-2">
@@ -41,6 +46,12 @@ export default function PostCard({ post, searchQuery }: PostCardProps) {
             <div className="font-bold">{post.author}</div>
             <div className="text-sm text-gray-500">{post.category}</div>
           </div>
+        </div>
+
+        {/* Edit and Trash Icons */}
+        <div className="absolute right-2 top-2 space-x-2">
+          <EditPostForm />
+          <DeletePostForm />
         </div>
       </div>
       {/* Post title with search highlighting */}

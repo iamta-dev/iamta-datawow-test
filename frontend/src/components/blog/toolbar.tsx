@@ -12,6 +12,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Button } from "../ui/button";
+import { CreatePostForm } from "./create-post-form";
 
 interface ToolbarProps {
   isSidebarOpen: boolean; // Sidebar state
@@ -69,9 +70,7 @@ export default function Toolbar({
                 </SelectContent>
               </Select>
 
-              <Button>
-                <span>Create</span> <Plus className="ml-1 h-4 w-4" />
-              </Button>
+              <CreatePostForm />
             </div>
           )}
         </div>
@@ -100,9 +99,7 @@ export default function Toolbar({
               </SelectContent>
             </Select>
 
-            <Button>
-              <span>Create</span> <Plus className="ml-1 h-4 w-4" />
-            </Button>
+            <CreatePostForm />
           </div>
         </div>
       </div>
