@@ -1,4 +1,5 @@
 import "@/styles/globals.css";
+import { Toaster } from "@/components/ui/sonner";
 
 import { Inter } from "next/font/google";
 const inter = Inter({
@@ -20,7 +21,10 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={`${inter.variable} font-sans`}>
-      <body>{children}</body>
+      <body>
+        {children}
+        <Toaster richColors theme="light" />
+      </body>
     </html>
   );
 }
