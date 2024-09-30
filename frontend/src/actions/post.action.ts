@@ -11,14 +11,11 @@ import {
   getPostsUseCase,
   getPostIdUseCase,
 } from "@/use-cases/post/get-post.use-case";
-import { getProfileAction } from "@/app/_action/profile";
+import { getProfileAction } from "@/actions/profile";
 import { createPostUseCase } from "@/use-cases/post/create-post.use-case";
 import { updatePostUseCase } from "@/use-cases/post/update-post.use-case";
 import { deletePostUseCase } from "@/use-cases/post/delete-post.use-case";
-import {
-  ActionStatusEnum,
-  type ActionResultState,
-} from "@/interfaces/actions/base-action.interface";
+import { type ActionResultState } from "@/interfaces/actions/base-action.interface";
 
 export async function getPostsAction(
   postParamsDto?: PostParamsDto,
@@ -33,15 +30,15 @@ export async function getPostsAction(
     });
     if (error ?? !result) {
       return {
-        status: ActionStatusEnum.error,
+        status: "error",
         message:
           error?.message ?? "An unexpected error occurred. Please try again.",
       };
     }
-    return { status: ActionStatusEnum.success, result };
+    return { status: "success", result };
   } catch (err) {
     const error = err as Error;
-    return { status: ActionStatusEnum.error, message: error.message };
+    return { status: "error", message: error.message };
   }
 }
 
@@ -58,15 +55,15 @@ export async function getPostByIdAction(
     });
     if (error ?? !result) {
       return {
-        status: ActionStatusEnum.error,
+        status: "error",
         message:
           error?.message ?? "An unexpected error occurred. Please try again.",
       };
     }
-    return { status: ActionStatusEnum.success, result };
+    return { status: "success", result };
   } catch (err) {
     const error = err as Error;
-    return { status: ActionStatusEnum.error, message: error.message };
+    return { status: "error", message: error.message };
   }
 }
 
@@ -83,15 +80,15 @@ export async function createPostAction(
     });
     if (error ?? !result) {
       return {
-        status: ActionStatusEnum.error,
+        status: "error",
         message:
           error?.message ?? "An unexpected error occurred. Please try again.",
       };
     }
-    return { status: ActionStatusEnum.success, result };
+    return { status: "success", result };
   } catch (err) {
     const error = err as Error;
-    return { status: ActionStatusEnum.error, message: error.message };
+    return { status: "error", message: error.message };
   }
 }
 
@@ -110,15 +107,15 @@ export async function updatePostAction(
     });
     if (error ?? !result) {
       return {
-        status: ActionStatusEnum.error,
+        status: "error",
         message:
           error?.message ?? "An unexpected error occurred. Please try again.",
       };
     }
-    return { status: ActionStatusEnum.success, result };
+    return { status: "success", result };
   } catch (err) {
     const error = err as Error;
-    return { status: ActionStatusEnum.error, message: error.message };
+    return { status: "error", message: error.message };
   }
 }
 
@@ -135,14 +132,14 @@ export async function deletePostAction(
     });
     if (error ?? !result) {
       return {
-        status: ActionStatusEnum.error,
+        status: "error",
         message:
           error?.message ?? "An unexpected error occurred. Please try again.",
       };
     }
-    return { status: ActionStatusEnum.success, result };
+    return { status: "success", result };
   } catch (err) {
     const error = err as Error;
-    return { status: ActionStatusEnum.error, message: error.message };
+    return { status: "error", message: error.message };
   }
 }

@@ -1,14 +1,9 @@
-export enum ActionStatusEnum {
-  default,
-  loading,
-  error,
-  success,
-}
+export type ActionStatus = "default" | "loading" | "error" | "success";
 
 export type ActionResultState<T> =
   | {
       result?: T;
       message?: string;
-      status?: ActionStatusEnum;
+      status?: ActionStatus;
     }
   | undefined;

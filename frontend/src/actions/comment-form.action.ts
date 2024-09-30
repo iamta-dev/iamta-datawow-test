@@ -3,9 +3,9 @@
 import { commentService } from "@/services/comment.service";
 import { type Comment as CommentModel } from "@/interfaces/services/comment";
 import { createCommentUseCase } from "@/use-cases/comment/create-comment.use-case";
-import { getProfileAction } from "@/app/_action/profile";
+import { getProfileAction } from "@/actions/profile";
 import { z } from "zod";
-import { ActionStatusEnum } from "@/interfaces/actions/base-action.interface";
+import { type ActionStatus } from "@/interfaces/actions/base-action.interface";
 
 export type commentFormState =
   | {
@@ -15,7 +15,7 @@ export type commentFormState =
         postId?: string[];
       };
       message?: string;
-      status?: ActionStatusEnum;
+      status?: ActionStatus;
     }
   | undefined;
 
@@ -49,14 +49,14 @@ export async function createCommentAction(
     });
     if (error ?? !result) {
       return {
-        status: ActionStatusEnum.error,
+        status: "error",
         message:
           error?.message ?? "An unexpected error occurred. Please try again.",
       };
     }
-    return { status: ActionStatusEnum.success, result };
+    return { status: "success", result };
   } catch (err) {
     const error = err as Error;
-    return { status: ActionStatusEnum.error, message: error.message };
+    return { status: "error", message: error.message };
   }
 }

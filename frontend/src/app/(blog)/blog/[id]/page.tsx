@@ -8,13 +8,12 @@ import { CreateCommentFormDialog } from "./_components/create-comment-form-dialo
 import { CreateCommentForm } from "./_components/create-comment-form";
 import { Button } from "@/components/ui/button";
 import { type Post as PostModel } from "@/interfaces/services/post";
-import { getPostByIdAction } from "../../_actions/post.action";
+import { getPostByIdAction } from "../../../../actions/post.action";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 
 import { toast } from "sonner";
 import { formatTimeAgo } from "@/lib/date-format";
-import { ActionStatusEnum } from "@/interfaces/actions/base-action.interface";
 
 export default function BlogIdPage({ params }: { params: { id: string } }) {
   const router = useRouter();
@@ -29,7 +28,7 @@ export default function BlogIdPage({ params }: { params: { id: string } }) {
       setPost(resp.result);
     }
 
-    if (resp?.status == ActionStatusEnum.error) {
+    if (resp?.status == "error") {
       toast.error(resp.message);
     }
     return resp;

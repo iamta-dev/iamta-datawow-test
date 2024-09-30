@@ -3,11 +3,11 @@
 import { postService } from "@/services/post.service";
 import { type Post as PostModel } from "@/interfaces/services/post";
 
-import { getProfileAction } from "@/app/_action/profile";
+import { getProfileAction } from "@/actions/profile";
 import { createPostUseCase } from "@/use-cases/post/create-post.use-case";
 import { updatePostUseCase } from "@/use-cases/post/update-post.use-case";
 import { deletePostUseCase } from "@/use-cases/post/delete-post.use-case";
-import { ActionStatusEnum } from "@/interfaces/actions/base-action.interface";
+import { type ActionStatus } from "@/interfaces/actions/base-action.interface";
 import { z } from "zod";
 
 export type postFormState =
@@ -21,7 +21,7 @@ export type postFormState =
         communityId?: string[];
       };
       message?: string;
-      status?: ActionStatusEnum;
+      status?: ActionStatus;
     }
   | undefined;
 
@@ -59,15 +59,15 @@ export async function createPostAction(
     });
     if (error ?? !result) {
       return {
-        status: ActionStatusEnum.error,
+        status: "error",
         message:
           error?.message ?? "An unexpected error occurred. Please try again.",
       };
     }
-    return { status: ActionStatusEnum.success, result };
+    return { status: "success", result };
   } catch (err) {
     const error = err as Error;
-    return { status: ActionStatusEnum.error, message: error.message };
+    return { status: "error", message: error.message };
   }
 }
 
@@ -105,15 +105,15 @@ export async function updatePostAction(
     });
     if (error ?? !result) {
       return {
-        status: ActionStatusEnum.error,
+        status: "error",
         message:
           error?.message ?? "An unexpected error occurred. Please try again.",
       };
     }
-    return { status: ActionStatusEnum.success, result };
+    return { status: "success", result };
   } catch (err) {
     const error = err as Error;
-    return { status: ActionStatusEnum.error, message: error.message };
+    return { status: "error", message: error.message };
   }
 }
 
@@ -145,14 +145,14 @@ export async function deletePostAction(
     });
     if (error ?? !result) {
       return {
-        status: ActionStatusEnum.error,
+        status: "error",
         message:
           error?.message ?? "An unexpected error occurred. Please try again.",
       };
     }
-    return { status: ActionStatusEnum.success, result };
+    return { status: "success", result };
   } catch (err) {
     const error = err as Error;
-    return { status: ActionStatusEnum.error, message: error.message };
+    return { status: "error", message: error.message };
   }
 }
