@@ -14,10 +14,6 @@ import { getProfileAction } from "@/app/_action/profile";
 export type PostsResultState =
   | {
       result?: PostModel[];
-      errors?: {
-        fsearch?: string[];
-        communityId?: string[];
-      };
       message?: string;
       status?: "default" | "loading" | "error" | "success";
     }
@@ -51,10 +47,6 @@ export async function getPostsAction(
 export type PostResultState =
   | {
       result?: PostModel;
-      errors?: {
-        fsearch?: string[];
-        communityId?: string[];
-      };
       message?: string;
       status?: "default" | "loading" | "error" | "success";
     }

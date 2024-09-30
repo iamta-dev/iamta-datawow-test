@@ -11,7 +11,7 @@ import {
 import {
   getPostsAction,
   type PostsResultState,
-} from "./_actions/get-post.action";
+} from "./_actions/post.action";
 import { toast } from "sonner";
 
 export default function BlogPage() {

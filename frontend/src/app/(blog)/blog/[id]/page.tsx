@@ -10,8 +10,8 @@ import { Button } from "@/components/ui/button";
 import { type Post as PostModel } from "@/interfaces/services/post";
 import {
   getPostByIdAction,
-  PostResultState,
-} from "../../_actions/get-post.action";
+  type PostResultState,
+} from "../../_actions/post.action";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 
