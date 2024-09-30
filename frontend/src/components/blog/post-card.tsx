@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { MessageCircle } from "lucide-react";
 import { DeletePostForm } from "./delete-post-form";
@@ -39,7 +39,7 @@ export default function PostCard({ post, searchQuery }: PostCardProps) {
   return (
     <article
       key={post.id}
-      className="relative rounded-md bg-white p-4 shadow-md cursor-pointer"
+      className="relative cursor-pointer rounded-md bg-white p-4 shadow-md"
       onClick={() => router.push(`/blog/${post.id}`)}
     >
       <div className="mb-2 flex items-center justify-between">
@@ -49,25 +49,32 @@ export default function PostCard({ post, searchQuery }: PostCardProps) {
             <div className="h-10 w-10 rounded-full bg-gray-300"></div>
           </div>
           <div>
-            <div className="font-bold cursor-text">{post.author}</div>
-            <div className="text-sm text-gray-500 cursor-text">{post.category}</div>
+            <div className="cursor-text font-bold">{post.author}</div>
+            <div className="cursor-text text-sm text-gray-500">
+              {post.category}
+            </div>
           </div>
         </div>
 
         {/* Edit and Trash Icons */}
-        <div className="absolute right-2 top-2 space-x-2">
+        <div
+          className="absolute right-2 top-2 space-x-2"
+          onClick={(e) => e.stopPropagation()}
+        >
           <EditPostForm />
           <DeletePostForm />
         </div>
       </div>
       {/* Post title with search highlighting */}
       <h2
-        className="text-lg font-bold cursor-text"
+        className="cursor-text text-lg font-bold"
         dangerouslySetInnerHTML={{
           __html: handleSearch(post.title, searchQuery),
         }}
       ></h2>
-      <p className="line-clamp-2 text-gray-700 cursor-text">{post.description}</p>
+      <p className="line-clamp-2 cursor-text text-gray-700">
+        {post.description}
+      </p>
 
       {/* Comments section */}
       <div className="mt-6 flex items-center text-gray-500">
