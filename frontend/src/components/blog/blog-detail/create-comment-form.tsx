@@ -32,7 +32,7 @@ interface Props {
 }
 
 export const CreateCommentForm = ({ hideCommentForm }: Props) => {
-  const { isSidebarOpen, toggleSidebar } = useSidebarState();
+  const { isSidebarOpen } = useSidebarState();
 
   // 1. Define your form.
   const form = useForm({
