@@ -1,4 +1,7 @@
-import { type LoginResponse, type LoginDto } from "@/interfaces/services/auth.service";
+import {
+  type LoginResponse,
+  type LoginDto,
+} from "@/interfaces/services/auth.service";
 import { BaseService } from "./base.service";
 import { type ServiceResponse } from "@/interfaces/services/base.service";
 
