@@ -2,6 +2,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { Plus } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 
@@ -34,8 +35,8 @@ import {
 
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
-import { Edit, X } from "lucide-react";
-import { Textarea } from "../ui/textarea";
+import { X } from "lucide-react";
+import { Textarea } from "../../../components/ui/textarea";
 
 const formSchema = z.object({
   title: z.string().min(3, { message: "Title must be at least 3 characters" }),
@@ -47,7 +48,7 @@ const formSchema = z.object({
     .min(3, { message: "Detail must be at least 3 characters" }),
 });
 
-export const EditPostForm = () => {
+export const CreatePostForm = () => {
   // 1. Define your form.
   const form = useForm({
     resolver: zodResolver(formSchema),
@@ -71,14 +72,14 @@ export const EditPostForm = () => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <button className="rounded-full p-2 hover:bg-gray-200">
-          <Edit className="h-5 w-5 text-gray-600" />
-        </button>
+        <Button>
+          <span>Create</span> <Plus className="ml-1 h-4 w-4" />
+        </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <form onSubmit={form.handleSubmit(onSubmit)}>
           <DialogHeader>
-            <DialogTitle>Edit Post</DialogTitle>
+            <DialogTitle>Create Post</DialogTitle>
             <DialogDescription></DialogDescription>
             <DialogClose asChild>
               <button>

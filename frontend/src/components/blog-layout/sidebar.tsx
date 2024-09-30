@@ -1,7 +1,7 @@
 "use client";
 
 import { ArrowRight, Home, FileText } from "lucide-react";
-import { useSidebarState } from "@/components/blog/useSidebarState";
+import { useSidebarState } from "@/hooks/use-sidebar";
 import React from "react";
 import { usePathname } from "next/navigation";
 import { twMerge } from "tailwind-merge";

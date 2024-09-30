@@ -12,7 +12,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Button } from "../ui/button";
-import { CreatePostForm } from "./create-post-form";
+import { CreatePostForm } from "../../app/(blog)/_components/create-post-form";
 
 interface ToolbarProps {
   isSidebarOpen: boolean; // Sidebar state

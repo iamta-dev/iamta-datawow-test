@@ -1,6 +1,6 @@
 "use client";
 
-import { useSidebarState } from "@/components/blog/useSidebarState";
+import { useSidebarState } from "@/hooks/use-sidebar";
 import { ArrowLeft, MessageCircle } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";

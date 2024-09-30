@@ -1,7 +1,7 @@
 "use client";
 
 import { Menu } from "lucide-react";
-import { useSidebarState } from "@/components/blog/useSidebarState";
+import { useSidebarState } from "@/hooks/use-sidebar";
 import { useEffect, useState } from "react";
 import { type UserJwtPayload } from "@/lib/user-jwt";
 import { getProfileAction } from "@/app/_action/profile";

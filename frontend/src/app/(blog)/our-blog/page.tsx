@@ -1,9 +1,9 @@
 "use client";
 
 import React, { useState } from "react";
-import PostCard from "@/components/blog/post-card";
-import Toolbar from "@/components/blog/toolbar"; // Import the Toolbar component
-import { useSidebarState } from "@/components/blog/useSidebarState"; // Assuming we store sidebar state globally
+import PostCard from "@/app/(blog)/_components/post-card";
+import Toolbar from "@/components/blog-layout/toolbar"; // Import the Toolbar component
+import { useSidebarState } from "@/hooks/use-sidebar"; // Assuming we store sidebar state globally
 
 export default function OurBlogPage() {
   const [searchQuery, setSearchQuery] = useState<string>(""); // For handling search input

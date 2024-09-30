@@ -15,7 +15,7 @@ import {
 
 import { toast } from "sonner";
 import { Textarea } from "@/components/ui/textarea";
-import { useSidebarState } from "@/components/blog/useSidebarState";
+import { useSidebarState } from "@/hooks/use-sidebar";
 
 const formSchema = z.object({
   title: z.string().min(3, { message: "Title must be at least 3 characters" }),
