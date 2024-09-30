@@ -18,7 +18,6 @@ export interface Post {
 export interface CreatePostDto {
   title: string;
   detail: string;
-  userId: number;
   communityId: number;
 }
 
