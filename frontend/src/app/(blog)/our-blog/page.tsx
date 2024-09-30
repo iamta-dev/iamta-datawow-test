@@ -24,23 +24,9 @@ export default function OurBlogPage() {
     // Other sample posts...
   ];
 
-  // Function to handle search and highlight matching text
-  const handleSearch = (postTitle: string, searchQuery: string): string => {
-    if (!searchQuery) return postTitle; // If no search query, return the original title
-
-    // Regular expression to match the search query (case insensitive)
-    const regex = new RegExp(`(${searchQuery})`, "gi");
-
-    // Replace matched query with highlighted text
-    return postTitle.replace(
-      regex,
-      (match) => `<span class="bg-yellow-300">${match}</span>`
-    );
-  };
-
   // Filter posts based on search query
   const filteredPosts = posts.filter((post) =>
-    post.title.toLowerCase().includes(searchQuery.toLowerCase())
+    post.title.toLowerCase().includes(searchQuery.toLowerCase()),
   );
 
   return (
@@ -61,7 +47,7 @@ export default function OurBlogPage() {
         }`}
       >
         {filteredPosts.map((post) => (
-          <PostCard key={post.id} post={post} handleSearch={handleSearch} />
+          <PostCard key={post.id} post={post} searchQuery={searchQuery} />
         ))}
       </section>
     </div>

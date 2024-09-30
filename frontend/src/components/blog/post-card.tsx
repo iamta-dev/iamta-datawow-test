@@ -11,10 +11,24 @@ interface Post {
 
 interface PostCardProps {
   post: Post; // Post object passed to the component
-  handleSearch: (postTitle: string, searchQuery: string) => string; // Search handler function
+  searchQuery: string;
 }
 
-export default function PostCard({ post, handleSearch }: PostCardProps) {
+export default function PostCard({ post, searchQuery }: PostCardProps) {
+  // Function to handle search and highlight matching text
+  const handleSearch = (postTitle: string, searchQuery: string): string => {
+    if (!searchQuery) return postTitle; // If no search query, return the original title
+
+    // Regular expression to match the search query (case insensitive)
+    const regex = new RegExp(`(${searchQuery})`, "gi");
+
+    // Replace matched query with highlighted text
+    return postTitle.replace(
+      regex,
+      (match) => `<span class="bg-yellow-300">${match}</span>`,
+    );
+  };
+
   return (
     <article key={post.id} className="rounded-md bg-white p-4 shadow-md">
       <div className="mb-2 flex items-center justify-between">
@@ -33,7 +47,7 @@ export default function PostCard({ post, handleSearch }: PostCardProps) {
       <h2
         className="text-lg font-bold"
         dangerouslySetInnerHTML={{
-          __html: handleSearch(post.title, ""),
+          __html: handleSearch(post.title, searchQuery),
         }}
       ></h2>
       <p className="line-clamp-2 text-gray-700">{post.description}</p>
