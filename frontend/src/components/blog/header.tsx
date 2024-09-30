@@ -1,8 +1,8 @@
-import { Menu, X } from "lucide-react";
+import { Menu } from "lucide-react";
 import { useSidebarState } from "@/components/blog/useSidebarState";
 
 export default function Header() {
-  const { isSidebarOpen, toggleSidebar } = useSidebarState(); // Access sidebar state and toggle function
+  const { toggleSidebar } = useSidebarState(); // Access sidebar state and toggle function
 
   return (
     <header className="fixed left-0 right-0 top-0 z-30 flex items-center justify-between bg-green-800 p-4 text-white md:px-6">

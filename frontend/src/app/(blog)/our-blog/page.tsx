@@ -5,7 +5,7 @@ import { Plus, Search, ArrowRight } from "lucide-react";
 import PostCard from "@/components/blog/post-card";
 import { useSidebarState } from "@/components/blog/useSidebarState"; // Assuming we store sidebar state globally
 
-export default function BlogPage() {
+export default function OurBlogPage() {
   const [searchQuery, setSearchQuery] = useState<string>(""); // For handling search input
   const [isSearchActive, setIsSearchActive] = useState<boolean>(false); // For toggling search bar
   const { isSidebarOpen } = useSidebarState(); // Get the sidebar state (true/false)

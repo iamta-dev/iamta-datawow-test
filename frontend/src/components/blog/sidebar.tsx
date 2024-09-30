@@ -1,9 +1,27 @@
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Home, FileText } from "lucide-react";
 import { useSidebarState } from "@/components/blog/useSidebarState";
 import React from "react";
+import { usePathname } from "next/navigation";
+import { twMerge } from "tailwind-merge";
+import Link from "next/link"; // Import Link from Next.js
+
+// Define the menu as an object with path, label, and icon
+const menuItems = [
+  {
+    path: "/",
+    label: "Home",
+    icon: <Home className="mr-2 inline-block h-5 w-5" />,
+  },
+  {
+    path: "/our-blog",
+    label: "Our Blog",
+    icon: <FileText className="mr-2 inline-block h-5 w-5" />,
+  },
+];
 
 export default function Sidebar() {
   const { isSidebarOpen, toggleSidebar } = useSidebarState(); // Access sidebar state and toggle function
+  const pathname = usePathname();
 
   return (
     <>
@@ -26,21 +44,20 @@ export default function Sidebar() {
         </div>
         <nav className="flex-grow">
           <ul className="space-y-4 p-4">
-            <li>
-              <a href="#" className="block rounded-md p-2 hover:bg-green-700">
-                🏠 Home
-              </a>
-            </li>
-            <li>
-              <a href="#" className="block rounded-md p-2 hover:bg-green-700">
-                📝 Our Blog
-              </a>
-            </li>
-            <li>
-              <a href="#" className="block rounded-md p-2 hover:bg-green-700">
-                👤 Profile
-              </a>
-            </li>
+            {menuItems.map((item) => (
+              <li key={item.path}>
+                <Link
+                  href={item.path}
+                  className={twMerge(
+                    "block rounded-md p-2 hover:bg-green-400", // Change hover color to bg-green-400
+                    pathname === item.path && "bg-green-400 hover:bg-green-400", // Active menu style
+                  )}
+                >
+                  {item.icon}
+                  {item.label}
+                </Link>
+              </li>
+            ))}
           </ul>
         </nav>
       </div>
@@ -51,24 +68,22 @@ export default function Sidebar() {
           isSidebarOpen ? "translate-x-0" : "-translate-x-full"
         } hidden md:block`}
       >
-        {/* Adjusted the top position to account for the header */}
         <nav className="flex-grow">
           <ul className="space-y-4 p-4">
-            <li>
-              <a href="#" className="block rounded-md p-2 hover:bg-green-700">
-                🏠 Home
-              </a>
-            </li>
-            <li>
-              <a href="#" className="block rounded-md p-2 hover:bg-green-700">
-                📝 Our Blog
-              </a>
-            </li>
-            <li>
-              <a href="#" className="block rounded-md p-2 hover:bg-green-700">
-                👤 Profile
-              </a>
-            </li>
+            {menuItems.map((item) => (
+              <li key={item.path}>
+                <Link
+                  href={item.path}
+                  className={twMerge(
+                    "block rounded-md p-2 hover:bg-green-400", // Change hover color to bg-green-400
+                    pathname === item.path && "bg-green-400 hover:bg-green-400", // Active menu style
+                  )}
+                >
+                  {item.icon}
+                  {item.label}
+                </Link>
+              </li>
+            ))}
           </ul>
         </nav>
       </aside>
