@@ -21,14 +21,14 @@ const InputWithIcon = React.forwardRef<HTMLInputElement, InputProps>(
           className={cn(
             "flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm placeholder:text-muted-foreground focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50",
             Icon ? "pl-10" : "px-3", // Adjust padding if icon is present
-            className
+            className,
           )}
           ref={ref}
           {...props}
         />
       </div>
     );
-  }
+  },
 );
 
 InputWithIcon.displayName = "Input";
