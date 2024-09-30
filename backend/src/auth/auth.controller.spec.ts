@@ -22,6 +22,7 @@ describe('AuthController', () => {
 
   const mockUser = {
     id: 1,
+    fullName: 'TestUser',
     username: 'testuser',
     pictureUrl: 'https://example.com/user.jpg',
   };

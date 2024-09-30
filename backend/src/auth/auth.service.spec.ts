@@ -12,6 +12,7 @@ describe('AuthService', () => {
 
   const mockUser: UserModel = {
     id: 1,
+    fullName: 'TestUser',
     username: 'testuser',
     pictureUrl: 'https://example.com/user.jpg',
     createdAt: new Date(),
@@ -64,6 +65,7 @@ describe('AuthService', () => {
       expect(result).toEqual({ accessToken: 'mockedAccessToken' });
       expect(jwtService.sign).toHaveBeenCalledWith({
         id: mockUser.id,
+        fullName: mockUser.fullName,
         username: mockUser.username,
         pictureUrl: mockUser.pictureUrl,
       });

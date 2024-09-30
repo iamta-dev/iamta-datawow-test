@@ -1,5 +1,6 @@
 export interface JwtPayload {
   id: number;
+  fullName: string;
   username: string;
   pictureUrl: string;
 }

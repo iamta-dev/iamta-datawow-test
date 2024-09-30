@@ -11,6 +11,7 @@ async function main() {
   // Create Users
   const user1 = await prisma.user.create({
     data: {
+      fullName: 'User1',
       username: 'user1',
       pictureUrl: 'https://i.pravatar.cc/150?u=user1',
     },
@@ -18,6 +19,7 @@ async function main() {
 
   const user2 = await prisma.user.create({
     data: {
+      fullName: 'User2',
       username: 'user2',
       pictureUrl: 'https://i.pravatar.cc/150?u=user2',
     },
@@ -25,6 +27,7 @@ async function main() {
 
   await prisma.user.create({
     data: {
+      fullName: 'UserTest',
       username: 'usertest',
       pictureUrl: 'https://i.pravatar.cc/150?u=usertest',
     },
