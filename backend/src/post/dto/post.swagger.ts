@@ -125,6 +125,50 @@ export namespace PostSwagger {
     },
   };
 
+  export const getOwerPosts = {
+    summary: "Get owner's posts",
+    200: {
+      status: 200,
+      description: 'Posts fetched successfully',
+      schema: {
+        example: [
+          {
+            id: 1,
+            title: 'Sample Post Title',
+            detail: 'Details of the sample post',
+            userId: 1,
+            communityId: 1,
+            user: {
+              id: 1,
+              username: 'sampleuser',
+              pictureUrl: 'https://example.com/user.jpg',
+              createdAt: '2024-08-14T04:44:34.066Z',
+              updatedAt: '2024-08-14T04:44:34.066Z',
+            },
+            community: {
+              id: 1,
+              name: 'Sample Community',
+              createdAt: '2024-08-14T04:44:34.066Z',
+              updatedAt: '2024-08-14T04:44:34.066Z',
+            },
+            comments: [
+              {
+                id: 1,
+                comment: 'This is a sample comment',
+                userId: 1,
+                postId: 1,
+                createdAt: '2024-08-14T05:00:00.000Z',
+                updatedAt: '2024-08-14T05:00:00.000Z',
+              },
+            ],
+            createdAt: '2024-08-14T04:44:34.066Z',
+            updatedAt: '2024-08-14T04:44:34.066Z',
+          },
+        ],
+      },
+    },
+  };
+
   export const createPost = {
     summary: 'Create new post',
     201: {

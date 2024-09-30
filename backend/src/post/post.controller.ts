@@ -79,7 +79,53 @@ export class PostController {
       }
 
       const posts = await this.postService.getPosts({
-        where: { ...searchCondition, ...communityIdCondition },
+        where: {
+          ...communityIdCondition,
+          ...searchCondition,
+        },
+      });
+      this.logger.log('Posts fetched successfully');
+      return posts;
+    } catch (error) {
+      this.logger.error('Failed to fetch posts', error.stack);
+      throw error;
+    }
+  }
+
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard('jwt'))
+  @Get('owner')
+  @ApiOperation({
+    summary: PostSwagger.getOwerPosts.summary,
+  })
+  @ApiResponse(PostSwagger.getOwerPosts[200])
+  @ApiResponse(SwaggerBaseResponse[401])
+  @ApiResponse(SwaggerBaseResponse[500])
+  async getOwnerPosts(
+    @Req() req: RequestWithUser,
+    @Query() postQueryDto: PostQueryDto,
+  ): Promise<PostModel[]> {
+    try {
+      const { searchCondition } = createPostSearchCondition(
+        postQueryDto.fsearch,
+      );
+
+      let communityIdCondition: Prisma.PostWhereInput | undefined = undefined;
+      if (
+        !!postQueryDto?.communityId &&
+        !isNaN(Number(postQueryDto.communityId))
+      ) {
+        communityIdCondition = {
+          communityId: Number(postQueryDto.communityId),
+        };
+      }
+
+      const posts = await this.postService.getPosts({
+        where: {
+          userId: req.user.id,
+          ...communityIdCondition,
+          ...searchCondition,
+        },
       });
       this.logger.log('Posts fetched successfully');
       return posts;
