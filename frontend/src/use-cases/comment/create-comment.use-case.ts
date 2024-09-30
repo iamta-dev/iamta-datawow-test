@@ -1,6 +1,6 @@
 import { type APIErrorResponse } from "@/interfaces/services/base.service";
 import {
-  type Comment as CommentModel,
+  type Comment,
   type CreateCommentDto,
 } from "@/interfaces/services/comment.service";
 import { type createComment } from "@/interfaces/use-cases/comment.use-case.d";
@@ -13,7 +13,7 @@ export async function createCommentUseCase(params: {
     createComment: createComment;
   };
   data: CreateCommentDto;
-}): Promise<{ data?: CommentModel; error?: APIErrorResponse }> {
+}): Promise<{ data?: Comment; error?: APIErrorResponse }> {
   const { context, data } = params;
 
   const user = await context.getProfile();

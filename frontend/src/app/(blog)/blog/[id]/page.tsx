@@ -7,7 +7,7 @@ import { useEffect, useState, useTransition } from "react";
 import { CreateCommentFormDialog } from "../../../../components/blog/blog-detail/create-comment-form-dialog";
 import { CreateCommentForm } from "../../../../components/blog/blog-detail/create-comment-form";
 import { Button } from "@/components/ui/button";
-import { type Post as PostModel } from "@/interfaces/services/post.service";
+import { type Post } from "@/interfaces/services/post.service";
 import { getPostByIdAction } from "../../../../actions/post.action";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
@@ -20,7 +20,7 @@ export default function BlogDetailPage({ params }: { params: { id: string } }) {
 
   const [isPending, startTransition] = useTransition();
 
-  const [post, setPost] = useState<PostModel | undefined>(undefined);
+  const [post, setPost] = useState<Post | undefined>(undefined);
 
   const fetchData = async (id: number) => {
     const resp = await getPostByIdAction(id);

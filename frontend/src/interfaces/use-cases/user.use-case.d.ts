@@ -1,21 +1,21 @@
 import { type ServiceResponse } from "@/interfaces/services/base.service";
 import {
-  type User as UserModel,
+  type User,
   type CreateUserDto,
   type UpdateUserDto,
 } from "@/interfaces/services/user.service";
 
-export type getUserById = (id: number) => Promise<ServiceResponse<UserModel>>;
+export type getUserById = (id: number) => Promise<ServiceResponse<User>>;
 
-export type getUsers = () => Promise<ServiceResponse<UserModel[]>>;
+export type getUsers = () => Promise<ServiceResponse<User[]>>;
 
 export type createUser = (
   data: CreateUserDto,
-) => Promise<ServiceResponse<UserModel>>;
+) => Promise<ServiceResponse<User>>;
 
 export type updateUser = (
   id: number,
   data: UpdateUserDto,
-) => Promise<ServiceResponse<UserModel>>;
+) => Promise<ServiceResponse<User>>;
 
 export type deleteUser = (id: number) => Promise<ServiceResponse<void>>;

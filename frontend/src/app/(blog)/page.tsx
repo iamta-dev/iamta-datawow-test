@@ -5,7 +5,7 @@ import Toolbar from "@/components/blog-layout/toolbar"; // Import the Toolbar co
 import { useSidebarState } from "@/hooks/use-sidebar"; // Assuming we store sidebar state globally
 import {
   type PostParamsDto,
-  type Post as PostModel,
+  type Post,
 } from "@/interfaces/services/post.service";
 import { getPostsAction } from "../../actions/post.action";
 import { toast } from "sonner";
@@ -19,7 +19,7 @@ export default function BlogPage() {
     communityId: undefined,
   });
 
-  const [postList, setPostList] = useState<PostModel[]>([]);
+  const [postList, setPostList] = useState<Post[]>([]);
 
   const fetchData = async (p: PostParamsDto) => {
     const resp = await getPostsAction(p);

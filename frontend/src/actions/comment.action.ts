@@ -2,7 +2,7 @@
 
 import { commentService } from "@/services/comment.service";
 import {
-  type Comment as CommentModel,
+  type Comment,
   type CreateCommentDto,
 } from "@/interfaces/services/comment.service";
 import { createCommentUseCase } from "@/use-cases/comment/create-comment.use-case";
@@ -11,7 +11,7 @@ import { type ActionResultState } from "@/interfaces/actions/base.action";
 
 export async function createCommentAction(
   createCommentDto: CreateCommentDto,
-): Promise<ActionResultState<CommentModel>> {
+): Promise<ActionResultState<Comment>> {
   try {
     const { data: result, error } = await createCommentUseCase({
       context: {

@@ -6,7 +6,7 @@ import {
 } from "@/interfaces/use-cases/post.use-case.d";
 import {
   type PostParamsDto,
-  type Post as PostModel,
+  type Post,
 } from "@/interfaces/services/post.service";
 import { handleAPIError } from "../base/base.use-case";
 
@@ -16,7 +16,7 @@ export async function getPostIdUseCase(params: {
     getPostById: getPostById;
   };
   id: number;
-}): Promise<{ data?: PostModel; error?: APIErrorResponse }> {
+}): Promise<{ data?: Post; error?: APIErrorResponse }> {
   const { context, id } = params;
 
   const resp = await context.getPostById(id);
@@ -29,7 +29,7 @@ export async function getPostsUseCase(params: {
     getPosts: getPosts;
   };
   postParamsDto?: PostParamsDto;
-}): Promise<{ data?: PostModel[]; error?: APIErrorResponse }> {
+}): Promise<{ data?: Post[]; error?: APIErrorResponse }> {
   const { context, postParamsDto } = params;
 
   const resp = await context.getPosts(postParamsDto);

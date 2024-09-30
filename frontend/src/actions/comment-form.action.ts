@@ -1,7 +1,7 @@
 "use server";
 
 import { commentService } from "@/services/comment.service";
-import { type Comment as CommentModel } from "@/interfaces/services/comment.service";
+import { type Comment } from "@/interfaces/services/comment.service";
 import { createCommentUseCase } from "@/use-cases/comment/create-comment.use-case";
 import { getProfileAction } from "@/actions/profile";
 import { z } from "zod";
@@ -9,7 +9,7 @@ import { type ActionStatus } from "@/interfaces/actions/base.action";
 
 export type commentFormState =
   | {
-      result?: CommentModel;
+      result?: Comment;
       errors?: {
         comment?: string[];
         postId?: string[];

@@ -12,7 +12,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Button } from "../ui/button";
-import { type Community as CommunityModel } from "@/interfaces/services/community.service";
+import { type Community } from "@/interfaces/services/community.service";
 import { useState } from "react";
 import { CreatePostForm } from "../blog/create-post-form";
 
@@ -31,7 +31,7 @@ export default function Toolbar({
   setSearchQuery,
   setIsSearchActive,
 }: ToolbarProps) {
-  const [communityList, setCommunityList] = useState<CommunityModel[]>([]);
+  const [communityList, setCommunityList] = useState<Community[]>([]);
 
   // const fetchData = async (): Promise<PostsResultState> => {
   //   const resp = await getPostsAction(p);

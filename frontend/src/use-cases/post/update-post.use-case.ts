@@ -3,7 +3,7 @@ import { type getProfile } from "@/interfaces/use-cases/base.use-case.d";
 import { type updatePost } from "@/interfaces/use-cases/post.use-case.d";
 import {
   type UpdatePostDto,
-  type Post as PostModel,
+  type Post,
 } from "@/interfaces/services/post.service";
 import { handleAPIError } from "../base/base.use-case";
 
@@ -14,7 +14,7 @@ export async function updatePostUseCase(params: {
   };
   id: number;
   data: UpdatePostDto;
-}): Promise<{ data?: PostModel; error?: APIErrorResponse }> {
+}): Promise<{ data?: Post; error?: APIErrorResponse }> {
   const { context, id, data } = params;
 
   const user = await context.getProfile();

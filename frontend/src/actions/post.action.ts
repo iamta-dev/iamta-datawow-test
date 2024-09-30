@@ -2,7 +2,7 @@
 
 import { postService } from "@/services/post.service";
 import {
-  type Post as PostModel,
+  type Post,
   type PostParamsDto,
   type CreatePostDto,
   type UpdatePostDto,
@@ -19,7 +19,7 @@ import { type ActionResultState } from "@/interfaces/actions/base.action";
 
 export async function getPostsAction(
   postParamsDto?: PostParamsDto,
-): Promise<ActionResultState<PostModel[]>> {
+): Promise<ActionResultState<Post[]>> {
   try {
     const { data: result, error } = await getPostsUseCase({
       context: {
@@ -44,7 +44,7 @@ export async function getPostsAction(
 
 export async function getPostByIdAction(
   id: number,
-): Promise<ActionResultState<PostModel>> {
+): Promise<ActionResultState<Post>> {
   try {
     const { data: result, error } = await getPostIdUseCase({
       context: {
@@ -69,7 +69,7 @@ export async function getPostByIdAction(
 
 export async function createPostAction(
   createPostDto: CreatePostDto,
-): Promise<ActionResultState<PostModel>> {
+): Promise<ActionResultState<Post>> {
   try {
     const { data: result, error } = await createPostUseCase({
       context: {
@@ -95,7 +95,7 @@ export async function createPostAction(
 export async function updatePostAction(
   id: number,
   updatePostDto: UpdatePostDto,
-): Promise<ActionResultState<PostModel>> {
+): Promise<ActionResultState<Post>> {
   try {
     const { data: result, error } = await updatePostUseCase({
       context: {
@@ -121,7 +121,7 @@ export async function updatePostAction(
 
 export async function deletePostAction(
   id: number,
-): Promise<ActionResultState<PostModel>> {
+): Promise<ActionResultState<Post>> {
   try {
     const { data: result, error } = await deletePostUseCase({
       context: {

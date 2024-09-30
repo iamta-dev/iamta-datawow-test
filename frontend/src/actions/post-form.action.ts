@@ -1,7 +1,7 @@
 "use server";
 
 import { postService } from "@/services/post.service";
-import { type Post as PostModel } from "@/interfaces/services/post.service";
+import { type Post } from "@/interfaces/services/post.service";
 
 import { getProfileAction } from "@/actions/profile";
 import { createPostUseCase } from "@/use-cases/post/create-post.use-case";
@@ -12,7 +12,7 @@ import { z } from "zod";
 
 export type postFormState =
   | {
-      result?: PostModel;
+      result?: Post;
       errors?: {
         updateId?: string[];
         deleteId?: string[];

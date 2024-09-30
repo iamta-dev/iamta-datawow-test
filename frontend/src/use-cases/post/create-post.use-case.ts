@@ -1,6 +1,6 @@
 import { type APIErrorResponse } from "@/interfaces/services/base.service";
 import {
-  type Post as PostModel,
+  type Post,
   type CreatePostDto,
 } from "@/interfaces/services/post.service";
 import { type createPost } from "@/interfaces/use-cases/post.use-case.d";
@@ -13,7 +13,7 @@ export async function createPostUseCase(params: {
     createPost: createPost;
   };
   data: CreatePostDto;
-}): Promise<{ data?: PostModel; error?: APIErrorResponse }> {
+}): Promise<{ data?: Post; error?: APIErrorResponse }> {
   const { context, data } = params;
 
   const user = await context.getProfile();
