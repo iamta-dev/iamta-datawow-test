@@ -1,15 +1,19 @@
 "use client";
+
 import { Menu } from "lucide-react";
 import { useSidebarState } from "@/components/blog/useSidebarState";
 import { useEffect, useState } from "react";
 import { type UserJwtPayload } from "@/lib/user-jwt";
 import { getProfileAction } from "@/app/_action/profile";
-import Link from "next/link";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { deleteSession } from "@/lib/session";
+import { Button } from "../ui/button";
+import { useRouter } from "next/navigation";
 
 export default function Header() {
+  const router = useRouter();
+
   const { toggleSidebar } = useSidebarState(); // Access sidebar state and toggle function
   const [profile, setProfile] = useState<UserJwtPayload | null>(null);
   useEffect(() => {
@@ -53,12 +57,7 @@ export default function Header() {
             </Avatar>
           </div>
         ) : (
-          <Link
-            href={"/auth/login"}
-            className="rounded bg-green-500 px-4 py-2 text-white hover:bg-green-600"
-          >
-            Sign In
-          </Link>
+          <Button onClick={() => router.push("/auth/login")}>Sign In</Button>
         )}
       </div>
     </header>
