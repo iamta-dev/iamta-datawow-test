@@ -2,7 +2,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { Plus } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 
@@ -16,6 +15,7 @@ import {
 
 import { toast } from "sonner";
 import { Textarea } from "@/components/ui/textarea";
+import { useSidebarState } from "@/components/blog/useSidebarState";
 
 const formSchema = z.object({
   title: z.string().min(3, { message: "Title must be at least 3 characters" }),
@@ -32,6 +32,8 @@ interface Props {
 }
 
 export const CreateCommentForm = ({ hideCommentForm }: Props) => {
+  const { isSidebarOpen, toggleSidebar } = useSidebarState();
+
   // 1. Define your form.
   const form = useForm({
     resolver: zodResolver(formSchema),
@@ -53,7 +55,7 @@ export const CreateCommentForm = ({ hideCommentForm }: Props) => {
   const { isSubmitting, isValid } = form.formState;
 
   return (
-    <form onSubmit={form.handleSubmit(onSubmit)}>
+    <form onSubmit={form.handleSubmit(onSubmit)} className="w-full">
       <Form {...form}>
         <div className="my-4 flex w-full flex-col items-center space-y-4">
           <FormField
@@ -63,7 +65,11 @@ export const CreateCommentForm = ({ hideCommentForm }: Props) => {
               <FormItem>
                 <FormControl>
                   <Textarea
-                    className="w-full"
+                    className={
+                      isSidebarOpen
+                        ? "w-[calc(100vw-22rem)]"
+                        : "w-[calc(100vw-6rem)]"
+                    }
                     disabled={isSubmitting}
                     placeholder="What's on your mind..."
                     {...field}

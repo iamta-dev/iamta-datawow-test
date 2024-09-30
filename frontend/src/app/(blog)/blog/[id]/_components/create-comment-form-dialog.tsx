@@ -2,7 +2,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { Plus } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 
@@ -13,14 +12,6 @@ import {
   FormItem,
   FormMessage,
 } from "@/components/ui/form";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 
 import {
   Dialog,
@@ -33,7 +24,6 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 
-import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import { X } from "lucide-react";
 import { Textarea } from "@/components/ui/textarea";
@@ -94,7 +84,7 @@ export const CreateCommentFormDialog = () => {
                   <FormItem>
                     <FormControl>
                       <Textarea
-                        className="w-[350px]"
+                        className="md:w-[350px] max-sm:w-[calc(100vw-3rem)]"
                         disabled={isSubmitting}
                         placeholder="What's on your mind..."
                         {...field}
