@@ -47,11 +47,7 @@ export default function BlogPage() {
         }`}
       >
         {filteredPosts.map((post) => (
-          <PostCard
-            key={post.id}
-            post={post}
-            searchQuery={searchQuery}
-          />
+          <PostCard key={post.id} post={post} searchQuery={searchQuery} />
         ))}
       </section>
     </div>
