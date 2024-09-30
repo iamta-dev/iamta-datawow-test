@@ -40,7 +40,7 @@ export default function Header() {
           <div className="flex flex-row items-center justify-center gap-2">
             <label htmlFor="Profile Name" className="text-white">{profile.username}</label>
             <Avatar className={"h-10 w-10"}>
-              <AvatarImage src={profile.pictureUrl} alt={profile.username} />
+              <AvatarImage src={profile.pictureUrl} alt={profile.fullName} />
               <AvatarFallback>CN</AvatarFallback>
             </Avatar>
           </div>

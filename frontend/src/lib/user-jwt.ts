@@ -5,6 +5,7 @@ import { z } from "zod";
 
 export interface UserJwtPayload extends JwtPayload {
   id: number;
+  fullName: string;
   username: string;
   pictureUrl: string;
   iat: number;
@@ -14,6 +15,7 @@ export interface UserJwtPayload extends JwtPayload {
 // Define the Zod schema for UserJwt validation
 export const UserJwtSchema = z.object({
   id: z.number(),
+  fullName: z.string(),
   username: z.string(),
   pictureUrl: z.string().url(),
   // JWT standard claims
