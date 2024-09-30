@@ -70,7 +70,7 @@ export class PostController {
 
       let communityIdCondition: Prisma.PostWhereInput | undefined = undefined;
       if (
-        postQueryDto?.communityId &&
+        !!postQueryDto?.communityId &&
         !isNaN(Number(postQueryDto.communityId))
       ) {
         communityIdCondition = {
