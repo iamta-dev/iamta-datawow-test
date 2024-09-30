@@ -12,9 +12,9 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Button } from "../ui/button";
-import { CreatePostForm } from "../../app/(blog)/_components/create-post-form";
 import { type Community as CommunityModel } from "@/interfaces/services/community";
 import { useState } from "react";
+import { CreatePostForm } from "../blog/create-post-form";
 
 interface ToolbarProps {
   isSidebarOpen: boolean; // Sidebar state

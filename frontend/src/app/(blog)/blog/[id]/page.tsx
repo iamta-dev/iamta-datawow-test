@@ -4,8 +4,8 @@ import { useSidebarState } from "@/hooks/use-sidebar";
 import { ArrowLeft, MessageCircle } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState, useTransition } from "react";
-import { CreateCommentFormDialog } from "./_components/create-comment-form-dialog";
-import { CreateCommentForm } from "./_components/create-comment-form";
+import { CreateCommentFormDialog } from "../../../../components/blog/blog-detail/create-comment-form-dialog";
+import { CreateCommentForm } from "../../../../components/blog/blog-detail/create-comment-form";
 import { Button } from "@/components/ui/button";
 import { type Post as PostModel } from "@/interfaces/services/post";
 import { getPostByIdAction } from "../../../../actions/post.action";
@@ -15,7 +15,7 @@ import { Badge } from "@/components/ui/badge";
 import { toast } from "sonner";
 import { formatTimeAgo } from "@/lib/date-format";
 
-export default function BlogIdPage({ params }: { params: { id: string } }) {
+export default function BlogDetailPage({ params }: { params: { id: string } }) {
   const router = useRouter();
 
   const [isPending, startTransition] = useTransition();

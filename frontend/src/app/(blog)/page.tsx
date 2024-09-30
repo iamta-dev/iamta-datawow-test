@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useEffect, useState, useTransition } from "react";
-import PostCard from "@/app/(blog)/_components/post-card";
 import Toolbar from "@/components/blog-layout/toolbar"; // Import the Toolbar component
 import { useSidebarState } from "@/hooks/use-sidebar"; // Assuming we store sidebar state globally
 import {
@@ -10,6 +9,7 @@ import {
 } from "@/interfaces/services/post";
 import { getPostsAction } from "../../actions/post.action";
 import { toast } from "sonner";
+import PostCard from "@/components/blog/post-card";
 
 export default function BlogPage() {
   const [isPending, startTransition] = useTransition();
