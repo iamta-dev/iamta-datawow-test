@@ -1,14 +1,17 @@
 "use server";
 
 import { communityService } from "@/services/community.service";
-import {
-  type Community as CommunityModel,
-} from "@/interfaces/services/community";
+import { type Community as CommunityModel } from "@/interfaces/services/community";
 import { getCommunitiesUseCase } from "@/use-cases/community/get-community.use-case";
 import { getProfileAction } from "@/app/_action/profile";
-import { ActionStatusEnum, type ActionResultState } from "@/interfaces/actions/base-action.interface";
+import {
+  ActionStatusEnum,
+  type ActionResultState,
+} from "@/interfaces/actions/base-action.interface";
 
-export async function getCommunitiesAction(): Promise<ActionResultState<CommunityModel[]>> {
+export async function getCommunitiesAction(): Promise<
+  ActionResultState<CommunityModel[]>
+> {
   try {
     const { data: result, error } = await getCommunitiesUseCase({
       context: {

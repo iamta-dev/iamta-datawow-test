@@ -1,9 +1,7 @@
 "use server";
 
 import { postService } from "@/services/post.service";
-import {
-  type Post as PostModel,
-} from "@/interfaces/services/post";
+import { type Post as PostModel } from "@/interfaces/services/post";
 
 import { getProfileAction } from "@/app/_action/profile";
 import { createPostUseCase } from "@/use-cases/post/create-post.use-case";

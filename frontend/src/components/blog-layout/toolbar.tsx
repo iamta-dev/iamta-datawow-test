@@ -31,7 +31,6 @@ export default function Toolbar({
   setSearchQuery,
   setIsSearchActive,
 }: ToolbarProps) {
-
   const [communityList, setCommunityList] = useState<CommunityModel[]>([]);
 
   // const fetchData = async (): Promise<PostsResultState> => {

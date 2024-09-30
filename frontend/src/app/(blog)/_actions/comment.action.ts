@@ -7,7 +7,10 @@ import {
 } from "@/interfaces/services/comment";
 import { createCommentUseCase } from "@/use-cases/comment/create-comment.use-case";
 import { getProfileAction } from "@/app/_action/profile";
-import { ActionStatusEnum, type ActionResultState } from "@/interfaces/actions/base-action.interface";
+import {
+  ActionStatusEnum,
+  type ActionResultState,
+} from "@/interfaces/actions/base-action.interface";
 
 export async function createCommentAction(
   createCommentDto: CreateCommentDto,
