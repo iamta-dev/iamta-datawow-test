@@ -8,10 +8,7 @@ import { CreateCommentFormDialog } from "./_components/create-comment-form-dialo
 import { CreateCommentForm } from "./_components/create-comment-form";
 import { Button } from "@/components/ui/button";
 import { type Post as PostModel } from "@/interfaces/services/post";
-import {
-  getPostByIdAction,
-  type PostResultState,
-} from "../../_actions/post.action";
+import { getPostByIdAction } from "../../_actions/post.action";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 
@@ -25,7 +22,7 @@ export default function BlogIdPage({ params }: { params: { id: string } }) {
 
   const [post, setPost] = useState<PostModel | undefined>(undefined);
 
-  const fetchData = async (id: number): Promise<PostResultState> => {
+  const fetchData = async (id: number) => {
     const resp = await getPostByIdAction(id);
     if (resp?.result) {
       setPost(resp.result);
@@ -37,32 +34,12 @@ export default function BlogIdPage({ params }: { params: { id: string } }) {
     return resp;
   };
 
-  const { isSidebarOpen, toggleSidebar } = useSidebarState(); // Get the sidebar state (true/false)
+  const { isSidebarOpen } = useSidebarState(); // Get the sidebar state (true/false)
 
-  const [isMenuOpen, setIsMenuOpen] = useState(false); // สำหรับ mobile menu toggle
   const [isCommentFormVisible, setIsCommentFormVisible] = useState(false); // For desktop comment form toggle
-  const [isModalOpen, setIsModalOpen] = useState(false); // For mobile modal toggle
-
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
-
-  // Function to toggle the form for desktop
-  const showCommentForm = () => {
-    setIsCommentFormVisible(true);
-  };
 
   const hideCommentForm = () => {
     setIsCommentFormVisible(false);
-  };
-
-  // Function to toggle the modal for mobile
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
   };
 
   useEffect(() => {
@@ -184,30 +161,6 @@ export default function BlogIdPage({ params }: { params: { id: string } }) {
           </div>
         </article>
       </section>
-
-      {/* Modal for Mobile */}
-      {isModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="w-11/12 max-w-lg rounded-lg bg-white p-6">
-            <h3 className="mb-4 text-lg font-bold">Add Comments</h3>
-            <textarea
-              className="mb-4 w-full rounded border border-gray-300 p-2"
-              placeholder="Write your comment..."
-            />
-            <div className="flex justify-end space-x-4">
-              <button
-                className="rounded bg-red-500 px-4 py-2 text-white hover:bg-red-600"
-                onClick={closeModal}
-              >
-                Cancel
-              </button>
-              <button className="rounded bg-green-500 px-4 py-2 text-white hover:bg-green-600">
-                Post
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 }

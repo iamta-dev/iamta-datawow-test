@@ -8,10 +8,7 @@ import {
   type PostParamsDto,
   type Post as PostModel,
 } from "@/interfaces/services/post";
-import {
-  getPostsAction,
-  type PostsResultState,
-} from "./_actions/post.action";
+import { getPostsAction } from "./_actions/post.action";
 import { toast } from "sonner";
 
 export default function BlogPage() {
@@ -24,7 +21,7 @@ export default function BlogPage() {
 
   const [postList, setPostList] = useState<PostModel[]>([]);
 
-  const fetchData = async (p: PostParamsDto): Promise<PostsResultState> => {
+  const fetchData = async (p: PostParamsDto) => {
     const resp = await getPostsAction(p);
     if (resp?.result) {
       setPostList(resp.result);
@@ -33,7 +30,6 @@ export default function BlogPage() {
     if (resp?.status == "error") {
       toast.error(resp.message);
     }
-    return resp;
   };
 
   const [searchQuery, setSearchQuery] = useState<string>(""); // For handling search input
