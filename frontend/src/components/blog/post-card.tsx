@@ -39,11 +39,12 @@ export default function PostCard({ post, searchQuery }: PostCardProps) {
   return (
     <article
       key={post.id}
-      className="relative cursor-pointer rounded-md bg-white p-4 shadow-md"
-      onClick={() => router.push(`/blog/${post.id}`)}
+      className="relative rounded-md bg-white p-4 shadow-md"
     >
       <div className="mb-2 flex items-center justify-between">
-        <div className="flex items-center">
+        <div
+          className="flex items-center"
+        >
           <div className="mr-2">
             {/* Avatar Placeholder */}
             <div className="h-10 w-10 rounded-full bg-gray-300"></div>
@@ -67,17 +68,24 @@ export default function PostCard({ post, searchQuery }: PostCardProps) {
       </div>
       {/* Post title with search highlighting */}
       <h2
-        className="cursor-text text-lg font-bold"
+        className="cursor-pointer text-lg font-bold"
+        onClick={() => router.push(`/blog/${post.id}`)}
         dangerouslySetInnerHTML={{
           __html: handleSearch(post.title, searchQuery),
         }}
       ></h2>
-      <p className="line-clamp-2 cursor-text text-gray-700">
+      <p
+        className="line-clamp-2 cursor-pointer text-gray-700"
+        onClick={() => router.push(`/blog/${post.id}`)}
+      >
         {post.description}
       </p>
 
       {/* Comments section */}
-      <div className="mt-6 flex items-center text-gray-500">
+      <div
+        className="mt-6 flex items-center text-gray-500 cursor-pointer"
+        onClick={() => router.push(`/blog/${post.id}`)}
+      >
         <MessageCircle className="mr-2 h-5 w-5" />
         <div>{post.comments} Comments</div>
       </div>
