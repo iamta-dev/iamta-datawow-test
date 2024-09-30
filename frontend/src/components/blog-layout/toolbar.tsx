@@ -13,6 +13,8 @@ import {
 } from "@/components/ui/select";
 import { Button } from "../ui/button";
 import { CreatePostForm } from "../../app/(blog)/_components/create-post-form";
+import { type Community as CommunityModel } from "@/interfaces/services/community";
+import { useState } from "react";
 
 interface ToolbarProps {
   isSidebarOpen: boolean; // Sidebar state
@@ -29,6 +31,21 @@ export default function Toolbar({
   setSearchQuery,
   setIsSearchActive,
 }: ToolbarProps) {
+
+  const [communityList, setCommunityList] = useState<CommunityModel[]>([]);
+
+  // const fetchData = async (): Promise<PostsResultState> => {
+  //   const resp = await getPostsAction(p);
+  //   if (resp?.result) {
+  //     setPostList(resp.result);
+  //   }
+
+  //   if (resp?.status == "error") {
+  //     toast.error(resp.message);
+  //   }
+  //   return resp;
+  // };
+
   return (
     <div
       className={`fixed left-0 right-0 top-16 z-10 bg-white shadow-md transition-all ${
