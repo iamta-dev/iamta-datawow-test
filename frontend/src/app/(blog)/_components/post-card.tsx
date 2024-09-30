@@ -1,10 +1,12 @@
 "use client";
 
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { MessageCircle } from "lucide-react";
 import { DeletePostForm } from "./delete-post-form";
 import { EditPostForm } from "./edit-post-form";
 import { useRouter } from "next/navigation";
 import { type Post as PostModel } from "@/interfaces/services/post";
+import { Badge } from "@/components/ui/badge";
 
 interface PostCardProps {
   post: PostModel; // Post object passed to the component
@@ -16,7 +18,7 @@ export default function PostCard({ post, searchQuery }: PostCardProps) {
 
   // Function to handle search and highlight matching text
   const handleSearch = (postTitle: string, searchQuery: string): string => {
-    if (!searchQuery) return postTitle; // If no search query, return the original title
+    if (!searchQuery || searchQuery.length < 2) return postTitle; // If no search query, return the original title
 
     // Regular expression to match the search query (case insensitive)
     const regex = new RegExp(`(${searchQuery})`, "gi");
@@ -34,17 +36,16 @@ export default function PostCard({ post, searchQuery }: PostCardProps) {
       className="relative rounded-md bg-white p-4 shadow-md"
     >
       <div className="mb-2 flex items-center justify-between">
-        <div className="flex items-center">
-          <div className="mr-2">
+        <div className="flex flex-col items-start gap-2">
+          <div className="flex items-center justify-start gap-2">
             {/* Avatar Placeholder */}
-            <div className="h-10 w-10 rounded-full bg-gray-300"></div>
+            <Avatar>
+              <AvatarImage src={post.user?.pictureUrl} alt="Post Profile" />
+              <AvatarFallback>CN</AvatarFallback>
+            </Avatar>
+            <div className="cursor-text font-semibold text-grey-300">{post.user?.fullName}</div>
           </div>
-          <div>
-            <div className="cursor-text font-bold">{post.user?.fullName}</div>
-            <div className="cursor-text text-sm text-gray-500">
-              {post.community?.name}
-            </div>
-          </div>
+          <Badge variant={"grey"}>{post.community?.name}</Badge>
         </div>
 
         {/* Edit and Trash Icons */}
@@ -58,7 +59,7 @@ export default function PostCard({ post, searchQuery }: PostCardProps) {
       </div>
       {/* Post title with search highlighting */}
       <h2
-        className="cursor-pointer text-lg font-bold"
+        className="cursor-pointer text-lg font-semibold"
         onClick={() => router.push(`/blog/${post.id}`)}
         dangerouslySetInnerHTML={{
           __html: handleSearch(post.title, searchQuery),
