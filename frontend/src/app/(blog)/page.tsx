@@ -47,7 +47,7 @@ export default function HomePage() {
     <div>
       {/* Toolbar (Fixed below the Header, specific to this page) */}
       <div
-        className={`fixed left-0 right-0 top-16 z-30 bg-white shadow-md transition-all ${
+        className={`fixed left-0 right-0 top-16 z-10 bg-white shadow-md transition-all ${
           isSidebarOpen ? "md:ml-64" : "md:ml-0"
         }`}
       >
