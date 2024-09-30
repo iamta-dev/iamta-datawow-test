@@ -5,6 +5,7 @@ import {
   UsePipes,
   ValidationPipe,
   UnauthorizedException,
+  Logger,
 } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { ConfigService } from '@nestjs/config';
@@ -14,6 +15,8 @@ import { LoginDto } from './dto/auth.dto';
 @ApiTags('Auth')
 @Controller('auth')
 export class AuthController {
+  private readonly logger = new Logger(AuthController.name);
+
   constructor(
     private readonly authService: AuthService,
     private readonly configService: ConfigService,
