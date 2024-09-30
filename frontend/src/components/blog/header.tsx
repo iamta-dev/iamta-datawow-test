@@ -17,7 +17,7 @@ export default function Header() {
       {/* Mobile Menu Button */}
       <div className="md:hidden">
         <button className="text-white" onClick={toggleSidebar}>
-          {isSidebarOpen ? <X /> : <Menu />} {/* X for close, Menu for open */}
+          <Menu />
         </button>
       </div>
 
