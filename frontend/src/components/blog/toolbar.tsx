@@ -85,12 +85,12 @@ export default function Toolbar({
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
-          <div className="ml-4 flex items-center space-x-4">
+          <div className="ml-2 flex items-center space-x-2">
             <Select name={"communityId"}>
-              <SelectTrigger className="flex items-center justify-center border-none border-primary text-black">
+              <SelectTrigger className="flex w-[9rem] items-center justify-center border-none border-primary text-black">
                 <SelectValue placeholder="Community" />
               </SelectTrigger>
-              <SelectContent className="">
+              <SelectContent className="w-[10rem]">
                 <SelectGroup>
                   <SelectItem value="community1">Community 1</SelectItem>
                   <SelectItem value="community2">Community 2</SelectItem>
