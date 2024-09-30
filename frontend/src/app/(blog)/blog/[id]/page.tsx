@@ -14,6 +14,7 @@ import { Badge } from "@/components/ui/badge";
 
 import { toast } from "sonner";
 import { formatTimeAgo } from "@/lib/date-format";
+import { ActionStatusEnum } from "@/interfaces/actions/base-action.interface";
 
 export default function BlogIdPage({ params }: { params: { id: string } }) {
   const router = useRouter();
@@ -28,7 +29,7 @@ export default function BlogIdPage({ params }: { params: { id: string } }) {
       setPost(resp.result);
     }
 
-    if (resp?.status == "error") {
+    if (resp?.status == ActionStatusEnum.error) {
       toast.error(resp.message);
     }
     return resp;

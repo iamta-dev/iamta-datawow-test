@@ -10,6 +10,7 @@ import {
 } from "@/interfaces/services/post";
 import { getPostsAction } from "./_actions/post.action";
 import { toast } from "sonner";
+import { ActionStatusEnum } from "@/interfaces/actions/base-action.interface";
 
 export default function BlogPage() {
   const [isPending, startTransition] = useTransition();
@@ -27,7 +28,7 @@ export default function BlogPage() {
       setPostList(resp.result);
     }
 
-    if (resp?.status == "error") {
+    if (resp?.status == ActionStatusEnum.error) {
       toast.error(resp.message);
     }
   };
