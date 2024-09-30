@@ -1,3 +1,5 @@
+"use client";
+
 import { ArrowRight, Home, FileText } from "lucide-react";
 import { useSidebarState } from "@/components/blog/useSidebarState";
 import React from "react";

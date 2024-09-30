@@ -1,5 +1,3 @@
-"use client";
-
 import Header from "@/components/blog/header";
 import Sidebar from "@/components/blog/sidebar";
 import React, { type PropsWithChildren } from "react";
