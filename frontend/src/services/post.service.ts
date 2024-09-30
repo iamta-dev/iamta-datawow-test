@@ -15,10 +15,20 @@ export class PostService extends BaseService {
   }
 
   public async getPosts(
-    postParams: PostParamsDto = { fsearch: undefined, communityId: undefined },
+    postParams: PostParamsDto = {},
   ): Promise<ServiceResponse<Post[]>> {
     return this.handleRequest(() =>
       this.backendApi.get<Post[]>(`/api/v1/posts`, {
+        params: postParams,
+      }),
+    );
+  }
+
+  public async getOwnerPosts(
+    postParams: PostParamsDto = {},
+  ): Promise<ServiceResponse<Post[]>> {
+    return this.handleRequest(() =>
+      this.backendApi.get<Post[]>(`/api/v1/posts/owner`, {
         params: postParams,
       }),
     );

@@ -12,6 +12,10 @@ export type getPosts = (
   postParamsDto?: PostParamsDto,
 ) => Promise<ServiceResponse<Post[]>>;
 
+export type getOwnerPosts = (
+  postParamsDto?: PostParamsDto,
+) => Promise<ServiceResponse<Post[]>>;
+
 export type createPost = (
   data: CreatePostDto,
 ) => Promise<ServiceResponse<Post>>;

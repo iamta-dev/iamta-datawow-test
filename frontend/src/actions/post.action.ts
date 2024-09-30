@@ -10,6 +10,7 @@ import {
 import {
   getPostsUseCase,
   getPostIdUseCase,
+  getOwnerPostsUseCase,
 } from "@/use-cases/post/get-post.use-case";
 import { getProfileAction } from "@/actions/profile";
 import { createPostUseCase } from "@/use-cases/post/create-post.use-case";
@@ -19,6 +20,25 @@ import {
   baseActionHandleResponse,
   type ActionResultState,
 } from "@/interfaces/actions/base.action";
+
+export async function getPostByIdAction(
+  id: number,
+): Promise<ActionResultState<Post>> {
+  try {
+    const { result, error } = await getPostIdUseCase({
+      context: {
+        getProfile: getProfileAction,
+        getPostById: (data) => postService.getPostById(data),
+      },
+      id,
+    });
+
+    return baseActionHandleResponse(result, error);
+  } catch (err) {
+    const error = err as Error;
+    return baseActionHandleResponse(undefined, error);
+  }
+}
 
 export async function getPostsAction(
   postParamsDto?: PostParamsDto,
@@ -39,16 +59,16 @@ export async function getPostsAction(
   }
 }
 
-export async function getPostByIdAction(
-  id: number,
-): Promise<ActionResultState<Post>> {
+export async function getOwnerPostsAction(
+  postParamsDto?: PostParamsDto,
+): Promise<ActionResultState<Post[]>> {
   try {
-    const { result, error } = await getPostIdUseCase({
+    const { result, error } = await getOwnerPostsUseCase({
       context: {
         getProfile: getProfileAction,
-        getPostById: (data) => postService.getPostById(data),
+        getOwnerPosts: (data) => postService.getOwnerPosts(data),
       },
-      id,
+      postParamsDto,
     });
 
     return baseActionHandleResponse(result, error);

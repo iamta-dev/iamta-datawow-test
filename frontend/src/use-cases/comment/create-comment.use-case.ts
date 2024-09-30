@@ -1,4 +1,3 @@
-import { type APIErrorResponse } from "@/interfaces/services/base.service";
 import {
   type Comment,
   type CreateCommentDto,
