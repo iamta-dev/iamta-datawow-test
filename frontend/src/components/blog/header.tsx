@@ -7,6 +7,7 @@ import { getProfileAction } from "@/app/_action/profile";
 import Link from "next/link";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { deleteSession } from "@/lib/session";
 
 export default function Header() {
   const { toggleSidebar } = useSidebarState(); // Access sidebar state and toggle function
@@ -37,8 +38,15 @@ export default function Header() {
       <div className="hidden md:block">
         {/* Desktop Sign In Button */}
         {profile ? (
-          <div className="flex flex-row items-center justify-center gap-2">
-            <label htmlFor="Profile Name" className="text-white">{profile.username}</label>
+          <div
+            onClick={() => {
+              void deleteSession();
+            }}
+            className="flex cursor-pointer flex-row items-center justify-center gap-2"
+          >
+            <label htmlFor="Profile Name" className="text-white">
+              {profile.username}
+            </label>
             <Avatar className={"h-10 w-10"}>
               <AvatarImage src={profile.pictureUrl} alt={profile.fullName} />
               <AvatarFallback>CN</AvatarFallback>

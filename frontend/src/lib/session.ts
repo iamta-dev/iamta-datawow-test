@@ -40,12 +40,12 @@ export async function verifySession() {
   const accessToken = cookies().get("session")?.value;
 
   if (!accessToken) {
-    redirect("/auth/sign-in");
+    redirect("/auth/login");
   }
 
   const { data: user, error } = decodeJwt(accessToken);
   if (error ?? !user) {
-    redirect("/auth/sign-in");
+    redirect("/auth/login");
   }
 
   return {
@@ -57,5 +57,5 @@ export async function verifySession() {
 
 export async function deleteSession() {
   cookies().delete("session");
-  redirect("/auth/sign-in");
+  redirect("/auth/login");
 }
