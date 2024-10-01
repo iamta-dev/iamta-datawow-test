@@ -10,6 +10,12 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { deleteSession } from "@/actions/session.action";
 import { Button } from "../ui/button";
 import { useRouter } from "next/navigation";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 export default function Header() {
   const router = useRouter();
@@ -42,20 +48,32 @@ export default function Header() {
       <div className="hidden md:block">
         {/* Desktop Sign In Button */}
         {profile ? (
-          <div
-            onClick={() => {
-              void deleteSession();
-            }}
-            className="flex cursor-pointer flex-row items-center justify-center gap-2"
-          >
-            <label htmlFor="Profile Name" className="text-white">
-              {profile.username}
-            </label>
-            <Avatar className={"h-10 w-10"}>
-              <AvatarImage src={profile.pictureUrl} alt={profile.fullName} />
-              <AvatarFallback>CN</AvatarFallback>
-            </Avatar>
-          </div>
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <div
+                  onClick={() => {
+                    void deleteSession();
+                  }}
+                  className="flex cursor-pointer flex-row items-center justify-center gap-2"
+                >
+                  <label htmlFor="Profile Name" className="text-white">
+                    {profile.username}
+                  </label>
+                  <Avatar className={"h-10 w-10"}>
+                    <AvatarImage
+                      src={profile.pictureUrl}
+                      alt={profile.fullName}
+                    />
+                    <AvatarFallback>CN</AvatarFallback>
+                  </Avatar>
+                </div>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>click logout</p>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
         ) : (
           <Button onClick={() => router.push("/auth/login")}>Sign In</Button>
         )}
