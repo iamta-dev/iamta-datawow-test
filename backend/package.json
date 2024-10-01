@@ -31,8 +31,8 @@
     "db:up": "docker compose up -d",
     "db:down": "docker compose down",
     "db:seed": "run-script-os",
-    "db:seed:default": "npx ts-node ./prisma/seeds/initDataTest.ts",
-    "db:seed:win32": "npx ts-node .\\prisma\\seeds\\initDataTest.ts",
+    "db:seed:default": "ts-node ./prisma/seeds/initDataTest.ts",
+    "db:seed:win32": "ts-node .\\prisma\\seeds\\initDataTest.ts",
     "db:remove-data": "run-script-os",
     "db:remove-data:default": "rm -rf postgres_data",
     "db:remove-data:win32": "powershell -Command \"Remove-Item -Force postgres_data\""
@@ -55,7 +55,8 @@
     "reflect-metadata": "^0.2.0",
     "run-script-os": "^1.1.6",
     "rxjs": "^7.8.1",
-    "swagger-ui-express": "^5.0.1"
+    "swagger-ui-express": "^5.0.1",
+    "ts-node": "^10.9.2"
   },
   "devDependencies": {
     "@nestjs/cli": "^10.0.0",
@@ -78,7 +79,6 @@
     "supertest": "^7.0.0",
     "ts-jest": "^29.1.0",
     "ts-loader": "^9.4.3",
-    "ts-node": "^10.9.1",
     "tsconfig-paths": "^4.2.0",
     "typescript": "^5.1.3"
   },
