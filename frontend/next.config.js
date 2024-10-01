@@ -5,6 +5,13 @@
 await import("./src/env.js");
 
 /** @type {import("next").NextConfig} */
-const config = {};
+const config = {
+    output: "standalone",
+    reactStrictMode: true,
+    swcMinify: true,
+    eslint: {
+        ignoreDuringBuilds: true,
+    },
+};
 
 export default config;
