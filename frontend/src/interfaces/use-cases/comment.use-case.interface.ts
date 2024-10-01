@@ -21,4 +21,4 @@ export type updateComment = (
   data: UpdateCommentDto,
 ) => Promise<ServiceResponse<Comment>>;
 
-export type deleteComment = (id: number) => Promise<ServiceResponse<void>>;
+export type deleteComment = (id: number) => Promise<ServiceResponse<Comment>>;

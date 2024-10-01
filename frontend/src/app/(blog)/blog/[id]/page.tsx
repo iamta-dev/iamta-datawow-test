@@ -14,10 +14,14 @@ import { Badge } from "@/components/ui/badge";
 
 import { toast } from "sonner";
 import { formatTimeAgo } from "@/lib/date-format";
+import { DeleteCommentFormDialog } from "@/components/blog/blog-detail/delete-comment-form-dialog";
+import { UserJwtPayload } from "@/lib/user-jwt";
+import { getProfileAction } from "@/actions/profile.action";
 
 export default function BlogDetailPage({ params }: { params: { id: string } }) {
   const router = useRouter();
 
+  const [profile, setProfile] = useState<UserJwtPayload | null>(null);
   const [post, setPost] = useState<Post | undefined>(undefined);
 
   const fetchData = async (id: number) => {
@@ -41,6 +45,10 @@ export default function BlogDetailPage({ params }: { params: { id: string } }) {
   };
 
   useEffect(() => {
+    // high priority not use startTransition
+    void getProfileAction().then((res) => {
+      setProfile(res);
+    });
     startTransition(async () => {
       const postId = Number(params.id);
       if (!isNaN(postId)) {
@@ -96,7 +104,9 @@ export default function BlogDetailPage({ params }: { params: { id: string } }) {
 
           {/* Post Content */}
           <h2 className="text-3xl font-bold md:text-4xl">{post?.title}</h2>
-          <p className="mt-4 text-gray-700">{post?.detail}</p>
+          <p className="mt-4 text-sm text-gray-700 sm:text-base">
+            {post?.detail}
+          </p>
 
           {/* Total Comments Section */}
           <div className="mt-6 flex items-center text-gray-500">
@@ -148,7 +158,7 @@ export default function BlogDetailPage({ params }: { params: { id: string } }) {
           )}
 
           {/* Comments */}
-          <div className="p-6">
+          <div className="pt-6 sm:p-6">
             {post?.comments?.map((comment, idx) => (
               <div key={idx} className="mb-4 flex items-start">
                 <div className="mr-4">
@@ -169,8 +179,23 @@ export default function BlogDetailPage({ params }: { params: { id: string } }) {
                         ? formatTimeAgo(comment.createdAt)
                         : ""}
                     </span>
+                    {profile && profile?.id == comment.user?.id && (
+                      <div className="ml-2">
+                        <DeleteCommentFormDialog
+                          commentId={comment.id}
+                          onCommentDeleted={() => {
+                            // TODO: fix to fetch comments only
+                            startTransition(async () => {
+                              await fetchData(Number(params.id));
+                            });
+                          }}
+                        />
+                      </div>
+                    )}
                   </div>
-                  <p className="text-gray-700">{comment.comment}</p>
+                  <p className="text-sm text-gray-700 sm:text-base">
+                    {comment.comment}
+                  </p>
                 </div>
               </div>
             ))}

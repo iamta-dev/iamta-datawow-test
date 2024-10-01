@@ -49,6 +49,8 @@ export class PostController {
     try {
       const post = await this.postService.getPost({ id });
       this.logger.log(`Post with ID ${id} found`);
+
+      // TODO: return field canDelete in comment
       return post;
     } catch (error) {
       this.logger.error(`Failed to find post with ID ${id}`, error.stack);

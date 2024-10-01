@@ -36,9 +36,7 @@ export class PostService {
     }
   }
 
-  async getPost(
-    postWhereUniqueInput: Prisma.PostWhereUniqueInput,
-  ): Promise<PostModel> {
+  async getPost(postWhereUniqueInput: Prisma.PostWhereUniqueInput) {
     try {
       return await this.prisma.post.findUnique({
         where: postWhereUniqueInput,
