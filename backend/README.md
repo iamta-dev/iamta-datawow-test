@@ -98,7 +98,7 @@ Allowed origins: [ 'http://localhost:8000', 'http://localhost:8080' ]
 ├── .env                                 # Environment variables for project 
 ├── .env.example                         # Example file Environment variables 
 ├── config/*                             # Config Nest.js folder
-│   ├── config.validation.ts             # validation Config .env from Joi on start api
+│   ├── config.validation.ts             # Validation Config .env from Joi on start api
 ├── src/*                                # Main source code Nest.js folder
 ├── lib/*                                # Utilities code for project
 ├── interface/*                          # base interface
@@ -110,7 +110,7 @@ Allowed origins: [ 'http://localhost:8000', 'http://localhost:8080' ]
 ├── public/                              # api public folder
 │   ├── swagger-custom.css               # open api swagger custom css
 │   ├── swagger-custom.js                # open api swagger custom js
-│   └── swagger.json                     # open api swagger.json ไฟล์
+│   └── swagger.json                     # open api swagger.json
 ├── docker-compose.yml                   # Docker Compose database configuration
 ├── .eslintrc.cjs                        # lint code config
 ├── Dockerfile.backend                   # Docker deployment file
@@ -146,4 +146,48 @@ Allowed origins: [ 'http://localhost:8000', 'http://localhost:8080' ]
 
 ```sh
 npm run test:cov
+
+╰─❯ npm run test:cov
+
+> backend@0.0.1 test:cov
+> jest --coverage
+
+ PASS  src/post/post.controller.spec.ts
+ PASS  src/comment/comment.controller.spec.ts
+ PASS  src/auth/auth.controller.spec.ts
+ PASS  src/community/community.controller.spec.ts
+ PASS  src/auth/auth.service.spec.ts
+ PASS  src/post/post.service.spec.ts
+ PASS  src/community/community.service.spec.ts
+ PASS  src/comment/comment.service.spec.ts
+ PASS  src/app.controller.spec.ts
+
+-------------------------|---------|----------|---------|---------|-------------------
+File                     | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s 
+-------------------------|---------|----------|---------|---------|-------------------
+All files                |   76.23 |    78.57 |    90.9 |   76.94 |                   
+ src                     |    22.8 |        0 |      50 |   17.64 |                   
+  app.controller.ts      |     100 |      100 |     100 |     100 |                   
+  app.module.ts          |       0 |      100 |     100 |       0 | 1-27              
+  app.service.ts         |     100 |      100 |     100 |     100 |                   
+  ...unity.controller.ts |   88.23 |      100 |     100 |   86.66 | 27-28
+  community.module.ts    |       0 |      100 |     100 |       0 | 1-9
+  community.service.ts   |     100 |      100 |     100 |     100 | 
+ src/community/dto       |   28.57 |      100 |     100 |   28.57 | 
+  community.dto.ts       |       0 |      100 |     100 |       0 | 1-14
+  community.swagger.ts   |     100 |      100 |     100 |     100 | 
+ src/post                |   82.45 |    76.92 |   93.75 |   83.33 | 
+  post.controller.ts     |   80.28 |     62.5 |   85.71 |   79.71 | ...10-136,163-164
+  post.module.ts         |       0 |      100 |     100 |       0 | 1-9
+  post.service.ts        |     100 |      100 |     100 |     100 | 
+ src/post/dto            |     100 |      100 |     100 |     100 | 
+  post.dto.ts            |     100 |      100 |     100 |     100 | 
+  post.search.ts         |     100 |      100 |     100 |     100 | 
+  post.swagger.ts        |     100 |      100 |     100 |     100 | 
+-------------------------|---------|----------|---------|---------|-------------------
+Test Suites: 9 passed, 9 total
+Tests:       79 passed, 79 total
+Snapshots:   0 total
+Time:        29.649 s
+Ran all test suites.
 ```
