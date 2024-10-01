@@ -3,7 +3,7 @@
 import { useSidebarState } from "@/hooks/use-sidebar";
 import { ArrowLeft, MessageCircle } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { useEffect, useState, useTransition } from "react";
+import { startTransition, useEffect, useState, useTransition } from "react";
 import { CreateCommentFormDialog } from "../../../../components/blog/blog-detail/create-comment-form-dialog";
 import { CreateCommentForm } from "../../../../components/blog/blog-detail/create-comment-form";
 import { Button } from "@/components/ui/button";
@@ -17,8 +17,6 @@ import { formatTimeAgo } from "@/lib/date-format";
 
 export default function BlogDetailPage({ params }: { params: { id: string } }) {
   const router = useRouter();
-
-  const [isPending, startTransition] = useTransition();
 
   const [post, setPost] = useState<Post | undefined>(undefined);
 
@@ -121,14 +119,30 @@ export default function BlogDetailPage({ params }: { params: { id: string } }) {
 
               {/* Mobile button (shows modal) */}
               <div className="md:hidden">
-                <CreateCommentFormDialog />
+                <CreateCommentFormDialog
+                  postId={Number(params.id)}
+                  onCommentCreated={() => {
+                    startTransition(async () => {
+                      await fetchData(Number(params.id));
+                    });
+                  }}
+                />
               </div>
             </div>
           )}
 
           {/* Desktop Comment Form */}
           {isCommentFormVisible && (
-            <CreateCommentForm hideCommentForm={hideCommentForm} />
+            <CreateCommentForm
+              hideCommentForm={hideCommentForm}
+              postId={Number(params.id)}
+              onCommentCreated={() => {
+                hideCommentForm();
+                startTransition(async () => {
+                  await fetchData(Number(params.id));
+                });
+              }}
+            />
           )}
 
           {/* Comments */}

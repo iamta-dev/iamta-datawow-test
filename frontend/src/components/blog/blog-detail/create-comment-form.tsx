@@ -4,7 +4,6 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 
 import { Button } from "@/components/ui/button";
-
 import {
   Form,
   FormControl,
@@ -12,46 +11,45 @@ import {
   FormItem,
   FormMessage,
 } from "@/components/ui/form";
-
 import { toast } from "sonner";
 import { Textarea } from "@/components/ui/textarea";
+import { createCommentAction } from "@/actions/comment.action"; 
 import { useSidebarState } from "@/hooks/use-sidebar";
+import { BaseErrorEnum } from "@/interfaces/errors/base.error.interface";
 
 const formSchema = z.object({
-  title: z.string().min(3, { message: "Title must be at least 3 characters" }),
-  communityId: z
+  comment: z
     .string()
-    .min(3, { message: "Community ID must be at least 3 characters" }),
-  detail: z
-    .string()
-    .min(3, { message: "Detail must be at least 3 characters" }),
+    .min(3, { message: "Comment must be at least 3 characters" }), 
 });
 
 interface Props {
+  postId: number; 
   hideCommentForm: () => void;
+  onCommentCreated: () => void;
 }
 
-export const CreateCommentForm = ({ hideCommentForm }: Props) => {
+export const CreateCommentForm = ({ postId, hideCommentForm, onCommentCreated }: Props) => {
   const { isSidebarOpen } = useSidebarState();
 
-  // 1. Define your form.
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      communityId: "",
-      title: "",
-      detail: "",
+      comment: "",
     },
   });
 
-  // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
-    toast.success(`${values.title} has been posted successfully`);
-    // toast.error(`${values.title} has been posted successfully`);
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    const resp = await createCommentAction({ postId, ...values }); 
+    if (resp?.status === "success") {
+      form.reset();
+      toast.success("Comment has been posted successfully");
+      onCommentCreated();
+    } else {
+      toast.error(`${resp?.message ?? BaseErrorEnum.UNEXPECTED}`);
+    }
   }
 
-  // 3. Get the status
   const { isSubmitting, isValid } = form.formState;
 
   return (
@@ -60,7 +58,7 @@ export const CreateCommentForm = ({ hideCommentForm }: Props) => {
         <div className="my-4 flex w-full flex-col items-center space-y-4">
           <FormField
             control={form.control}
-            name="detail"
+            name="comment" 
             render={({ field }) => (
               <FormItem>
                 <FormControl>
@@ -87,7 +85,7 @@ export const CreateCommentForm = ({ hideCommentForm }: Props) => {
         </Button>
 
         <Button disabled={!isValid || isSubmitting} type="submit">
-          Post
+          {isSubmitting ? "Posting..." : "Post"}
         </Button>
       </div>
     </form>
