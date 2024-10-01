@@ -12,6 +12,7 @@ import {
   Logger,
   Req,
   UnauthorizedException,
+  UseGuards,
 } from '@nestjs/common';
 import { CommentService } from './comment.service';
 import {
@@ -25,6 +26,7 @@ import { CommentSwagger } from './dto/comment.swagger';
 import { Comment as CommentModel } from '@prisma/client';
 import { SwaggerBaseResponse } from '../../lib/swagger/base-swagger';
 import { RequestWithUser } from 'interface/request.interface';
+import { AuthGuard } from '@nestjs/passport';
 
 @ApiTags('Comments')
 @Controller('comments')
@@ -33,6 +35,8 @@ export class CommentController {
 
   constructor(private readonly commentService: CommentService) {}
 
+  @ApiBearerAuth()
+  @UseGuards(AuthGuard('jwt'))
   @Get(':id')
   @ApiOperation({
     summary: CommentSwagger.getCommentById.summary,
@@ -54,6 +58,7 @@ export class CommentController {
   }
 
   @ApiBearerAuth()
+  @UseGuards(AuthGuard('jwt'))
   @Post()
   @UsePipes(new ValidationPipe({ whitelist: true }))
   @ApiOperation({
@@ -81,6 +86,7 @@ export class CommentController {
   }
 
   @ApiBearerAuth()
+  @UseGuards(AuthGuard('jwt'))
   @Put(':id')
   @UsePipes(new ValidationPipe({ whitelist: true }))
   @ApiOperation({
@@ -123,6 +129,7 @@ export class CommentController {
   }
 
   @ApiBearerAuth()
+  @UseGuards(AuthGuard('jwt'))
   @Delete(':id')
   @ApiOperation({
     summary: CommentSwagger.deleteComment.summary,
