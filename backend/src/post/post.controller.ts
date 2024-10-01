@@ -38,7 +38,7 @@ export class PostController {
 
   constructor(private readonly postService: PostService) {}
 
-  @Get('posts:id')
+  @Get('posts/:id')
   @ApiOperation({
     summary: PostSwagger.getPostById.summary,
   })
@@ -165,7 +165,7 @@ export class PostController {
 
   @ApiBearerAuth()
   @UseGuards(AuthGuard('jwt'))
-  @Put('posts:id')
+  @Put('posts/:id')
   @ApiOperation({
     summary: PostSwagger.updatePost.summary,
   })
@@ -206,7 +206,7 @@ export class PostController {
 
   @ApiBearerAuth()
   @UseGuards(AuthGuard('jwt'))
-  @Delete('posts:id')
+  @Delete('posts/:id')
   @ApiOperation({
     summary: PostSwagger.deletePost.summary,
   })
