@@ -49,6 +49,11 @@ export default function BlogPage() {
     <div>
       {/* Toolbar Component */}
       <Toolbar
+        onFetchPostsData={() => {
+          startTransition(async () => {
+            await fetchData(searchQueryParams);
+          });
+        }}
         isSidebarOpen={isSidebarOpen}
         isSearchActive={isSearchActive}
         setIsSearchActive={setIsSearchActive}

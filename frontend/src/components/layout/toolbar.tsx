@@ -19,7 +19,8 @@ import { getCommunitiesAction } from "@/actions/community.action";
 import { toast } from "sonner";
 import { type PostParamsDto } from "@/interfaces/services/post.service.interface";
 
-interface ToolbarProps {
+interface IToolbar {
+  onFetchPostsData: () => void;
   isSidebarOpen: boolean; // Sidebar state
   isSearchActive: boolean; // Search bar state for mobile
   searchQueryParams: PostParamsDto;
@@ -28,12 +29,13 @@ interface ToolbarProps {
 }
 
 export default function Toolbar({
+  onFetchPostsData,
   isSidebarOpen,
   isSearchActive,
   searchQueryParams,
   setSearchQueryParams,
   setIsSearchActive,
-}: ToolbarProps) {
+}: IToolbar) {
   const [communityList, setCommunityList] = useState<Community[]>([]);
 
   const fetchData = async () => {
@@ -114,7 +116,7 @@ export default function Toolbar({
                 </SelectContent>
               </Select>
 
-              <CreatePostForm />
+              <CreatePostForm onFetchPostsData={onFetchPostsData} />
             </div>
           )}
         </div>
@@ -162,7 +164,7 @@ export default function Toolbar({
               </SelectContent>
             </Select>
 
-            <CreatePostForm />
+            <CreatePostForm onFetchPostsData={onFetchPostsData} />
           </div>
         </div>
       </div>

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState, useTransition } from "react";
+import React, { startTransition, useEffect, useState } from "react";
 import Toolbar from "@/components/layout/toolbar"; // Import the Toolbar component
 import { useSidebarState } from "@/hooks/use-sidebar"; // Assuming we store sidebar state globally
 import {
@@ -10,12 +10,8 @@ import {
 import { toast } from "sonner";
 import PostCard from "@/components/blog/post-card";
 import { getMyPostsAction } from "@/actions/post.action";
-import { useRouter } from "next/navigation";
 
 export default function OurBlogPage() {
-  const router = useRouter();
-  const [isPending, startTransition] = useTransition();
-
   const [searchQueryParams, setSearchQueryParams] = useState<PostParamsDto>({
     fsearch: undefined,
     communityId: undefined,
@@ -51,6 +47,11 @@ export default function OurBlogPage() {
     <div>
       {/* Toolbar Component */}
       <Toolbar
+        onFetchPostsData={() => {
+          startTransition(async () => {
+            await fetchData(searchQueryParams);
+          });
+        }}
         isSidebarOpen={isSidebarOpen}
         isSearchActive={isSearchActive}
         setIsSearchActive={setIsSearchActive}

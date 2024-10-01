@@ -40,18 +40,28 @@ import { Textarea } from "@/components/ui/textarea";
 import { startTransition, useEffect, useState } from "react";
 import { type Community } from "@/interfaces/services/community.service.interface";
 import { getCommunitiesAction } from "@/actions/community.action";
+import { createPostAction } from "@/actions/post.action";
+import { BaseErrorEnum } from "@/interfaces/errors/base.error.interface";
 
 const formSchema = z.object({
   title: z.string().min(3, { message: "Title must be at least 3 characters" }),
   communityId: z
     .string()
-    .min(3, { message: "Community ID must be at least 3 characters" }),
+    .regex(/^\d+$/, { message: "Community ID must be a number." })
+    .refine((val) => val !== "0", { message: "Choose a community" })
+    .transform((val) => Number(val)),
   detail: z
     .string()
     .min(3, { message: "Detail must be at least 3 characters" }),
 });
 
-export const CreatePostForm = () => {
+interface ICreatePostFormDialog {
+  onFetchPostsData: () => void;
+}
+
+export const CreatePostForm = ({ onFetchPostsData }: ICreatePostFormDialog) => {
+  const [openDialog, setOpenDialog] = useState(false);
+
   const [communityList, setCommunityList] = useState<Community[]>([]);
 
   const fetchData = async () => {
@@ -76,24 +86,33 @@ export const CreatePostForm = () => {
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      communityId: "",
+      communityId: 0,
       title: "",
       detail: "",
     },
   });
 
   // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
-    toast.success(`${values.title} has been posted successfully`);
-    // toast.error(`${values.title} has been posted successfully`);
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    const resp = await createPostAction(values);
+
+    if (resp?.status == "error") {
+      toast.error(`${resp?.message}`);
+    } else if (resp?.status == "success" && !!resp.result) {
+      form.reset();
+      toast.success(`${resp.result.title} has been posted successfully`);
+      setOpenDialog(false);
+      onFetchPostsData();
+    } else {
+      toast.error(`${BaseErrorEnum.UNEXPECTED}`);
+    }
   }
 
   // 3. Get the status
   const { isSubmitting, isValid } = form.formState;
 
   return (
-    <Dialog>
+    <Dialog open={openDialog} onOpenChange={setOpenDialog}>
       <DialogTrigger asChild>
         <Button>
           <span>Create</span> <Plus className="ml-1 h-4 w-4" />
@@ -119,7 +138,7 @@ export const CreatePostForm = () => {
                   <FormItem>
                     <Select
                       disabled={isSubmitting}
-                      value={field.value}
+                      value={`${field.value}`}
                       name={field.name}
                       onValueChange={field.onChange}
                     >
@@ -129,11 +148,14 @@ export const CreatePostForm = () => {
                           onBlur={field.onBlur}
                           ref={field.ref}
                         >
-                          <SelectValue placeholder="Select a community" />
+                          <SelectValue placeholder="Choose a community" />
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent className="w-[350px]">
                         <SelectGroup>
+                          <SelectItem value={`0`}>
+                            {"Choose a community"}
+                          </SelectItem>
                           {communityList.map((v, index) => (
                             <SelectItem key={index} value={`${v.id}`}>
                               {v.name}
@@ -190,8 +212,10 @@ export const CreatePostForm = () => {
                 </Button>
               </DialogClose>
 
-              <Button disabled={!isValid || isSubmitting} type="submit">
-                Post
+              {/* Change UX submit form */}
+              {/* disabled={!isValid || isSubmitting} */}
+              <Button type="submit">
+                {isSubmitting ? "Submitting..." : "Post"}
               </Button>
             </div>
           </DialogFooter>
