@@ -11,6 +11,9 @@
     "dev": "next dev -p 8000",
     "lint": "next lint",
     "start": "next start",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:cov": "jest --coverage",
     "set:local": "run-script-os",
     "set:local:default": "cp -R .env.example .env",
     "set:local:win32": "powershell -Command \"Copy-Item -Path .env.example -Destination .env -Recurse\""
@@ -43,6 +46,7 @@
   },
   "devDependencies": {
     "@types/eslint": "^8.56.10",
+    "@types/jest": "^29.5.13",
     "@types/jsonwebtoken": "^9.0.7",
     "@types/node": "^20.14.10",
     "@types/react": "^18.3.3",
@@ -51,10 +55,12 @@
     "@typescript-eslint/parser": "^8.1.0",
     "eslint": "^8.57.0",
     "eslint-config-next": "^14.2.4",
+    "jest": "^29.7.0",
     "postcss": "^8.4.39",
     "prettier": "^3.3.2",
     "prettier-plugin-tailwindcss": "^0.6.5",
     "tailwindcss": "^3.4.3",
+    "ts-jest": "^29.2.5",
     "typescript": "^5.5.3"
   },
   "ct3aMetadata": {
