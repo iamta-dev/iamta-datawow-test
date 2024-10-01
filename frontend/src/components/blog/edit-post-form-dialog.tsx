@@ -89,7 +89,7 @@ export const EditPostFormDialog = ({
       communityId: `${initialData.communityId}`,
       title: initialData.title,
       detail: initialData.detail,
-    }
+    },
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
@@ -117,10 +117,10 @@ export const EditPostFormDialog = ({
           <Edit className="h-5 w-5 text-gray-600" />
         </button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="w-[calc(100vw-2rem)] rounded-xl">
         <form onSubmit={form.handleSubmit(onSubmit)}>
-          <DialogHeader>
-            <DialogTitle>Edit Post</DialogTitle>
+          <DialogHeader className="flex items-start justify-start">
+            <DialogTitle className="text-2xl">Edit Post</DialogTitle>
             <DialogDescription></DialogDescription>
             <DialogClose asChild>
               <button>
@@ -128,8 +128,8 @@ export const EditPostFormDialog = ({
               </button>
             </DialogClose>
           </DialogHeader>
-          <Form {...form}>
-            <div className="my-4 flex flex-col items-center space-y-4">
+          <div className="flex w-full flex-col gap-[0.7rem]">
+            <Form {...form}>
               <FormField
                 control={form.control}
                 name="communityId"
@@ -143,14 +143,14 @@ export const EditPostFormDialog = ({
                     >
                       <FormControl>
                         <SelectTrigger
-                          className="flex w-[350px] items-center justify-center border-primary text-primary"
+                          className="w-50 flex items-center justify-center justify-self-start border-primary font-semibold text-primary max-md:w-full"
                           onBlur={field.onBlur}
                           ref={field.ref}
                         >
                           <SelectValue placeholder="Choose a community" />
                         </SelectTrigger>
                       </FormControl>
-                      <SelectContent className="w-[350px]">
+                      <SelectContent className="w-60">
                         <SelectGroup>
                           <SelectItem value={`0`}>
                             {"Choose a community"}
@@ -174,7 +174,7 @@ export const EditPostFormDialog = ({
                   <FormItem>
                     <FormControl>
                       <Input
-                        className="w-[350px]"
+                        className="min-w-full"
                         disabled={isSubmitting}
                         placeholder="Title"
                         {...field}
@@ -191,7 +191,7 @@ export const EditPostFormDialog = ({
                   <FormItem>
                     <FormControl>
                       <Textarea
-                        className="w-[350px]"
+                        className="h-[10rem] min-w-full"
                         disabled={isSubmitting}
                         placeholder="What's on your mind..."
                         {...field}
@@ -201,21 +201,29 @@ export const EditPostFormDialog = ({
                   </FormItem>
                 )}
               />
-            </div>
-          </Form>
-          <DialogFooter>
-            <div className="flex w-full flex-row items-end justify-end gap-5">
-              <DialogClose asChild>
-                <Button variant={"outline"} type="button">
-                  Cancel
-                </Button>
-              </DialogClose>
+            </Form>
+            <DialogFooter>
+              <div className="mt-2 flex w-full flex-col gap-2 sm:flex-row sm:items-end sm:justify-end">
+                <DialogClose asChild>
+                  <Button
+                    className="w-full font-semibold sm:w-[6rem]"
+                    variant={"outline"}
+                    type="button"
+                  >
+                    Cancel
+                  </Button>
+                </DialogClose>
 
-              <Button disabled={isSubmitting} type="submit">
-                {isSubmitting ? "Updateting..." : "Update"}
-              </Button>
-            </div>
-          </DialogFooter>
+                <Button
+                  className="w-full font-semibold sm:w-[6rem]"
+                  disabled={isSubmitting}
+                  type="submit"
+                >
+                  {isSubmitting ? "Updateting..." : "Confirm"}
+                </Button>
+              </div>
+            </DialogFooter>
+          </div>
         </form>
       </DialogContent>
     </Dialog>

@@ -67,7 +67,7 @@ export const CreateCommentFormDialog = ({
     }
   }
 
-  const { isSubmitting, isValid } = form.formState;
+  const { isSubmitting } = form.formState;
 
   return (
     <Dialog open={openDialog} onOpenChange={setOpenDialog}>
@@ -76,8 +76,8 @@ export const CreateCommentFormDialog = ({
       </DialogTrigger>
       <DialogContent className="w-[calc(100vw-2rem)] rounded-xl">
         <form onSubmit={form.handleSubmit(onSubmit)}>
-          <DialogHeader className="flex justify-start items-start">
-            <DialogTitle>Add Comment</DialogTitle>
+          <DialogHeader className="flex items-start justify-start">
+            <DialogTitle className="text-2xl">Add Comment</DialogTitle>
             <DialogDescription></DialogDescription>
             <DialogClose asChild>
               <button>
@@ -85,39 +85,48 @@ export const CreateCommentFormDialog = ({
               </button>
             </DialogClose>
           </DialogHeader>
-          <Form {...form}>
-            <FormField
-              control={form.control}
-              name="comment"
-              render={({ field }) => (
-                <FormItem>
-                  <FormControl>
-                    <Textarea
-                      // className="max-sm:w-[calc(100vw-3rem)] md:w-[350px]"
-                      className="h-[8rem] min-w-full"
-                      disabled={isSubmitting}
-                      placeholder="What's on your mind..."
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </Form>
-          <DialogFooter>
-            <div className="mt-8 flex w-full flex-col gap-2 sm:mt-2 sm:flex-row sm:items-end sm:justify-end sm:gap-5">
-              <DialogClose asChild>
-                <Button variant={"outline"} type="button">
-                  Cancel
-                </Button>
-              </DialogClose>
+          <div className="flex w-full flex-col gap-[0.7rem]">
+            <Form {...form}>
+              <FormField
+                control={form.control}
+                name="comment"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormControl>
+                      <Textarea
+                        // className="max-sm:w-[calc(100vw-3rem)] md:w-[350px]"
+                        className="h-[8rem] min-w-full"
+                        disabled={isSubmitting}
+                        placeholder="What's on your mind..."
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </Form>
+            <DialogFooter>
+              <div className="mt-2 flex w-full flex-col gap-2 sm:flex-row sm:items-end sm:justify-end">
+                <DialogClose asChild>
+                  <Button
+                    className="w-full font-semibold sm:w-[6rem]"
+                    variant={"outline"}
+                    type="button"
+                  >
+                    Cancel
+                  </Button>
+                </DialogClose>
 
-              <Button disabled={!isValid || isSubmitting} type="submit">
-                {isSubmitting ? "Posting..." : "Post"}
-              </Button>
-            </div>
-          </DialogFooter>
+                <Button
+                  className="w-full font-semibold sm:w-[6rem]"
+                  type="submit"
+                >
+                  {isSubmitting ? "Posting..." : "Post"}
+                </Button>
+              </div>
+            </DialogFooter>
+          </div>
         </form>
       </DialogContent>
     </Dialog>

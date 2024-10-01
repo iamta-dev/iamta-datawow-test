@@ -52,26 +52,26 @@ export const DeletePostFormDialog = ({
           <Trash className="h-5 w-5 text-red-600" />
         </button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="w-[calc(100vw-2rem)] md:w-[25rem] rounded-xl">
         <form
           onSubmit={(e) => {
             e.preventDefault();
             void onSubmit();
           }}
         >
-          <DialogHeader>
-            <DialogTitle>
-              Please confirm if you wish to delete the post
-            </DialogTitle>
-            <DialogDescription className="text-center">
+          <DialogHeader className="flex flex-col items-center justify-center">
+            <DialogTitle className="text-center md:text-2xl">
+              Please confirm if you wish to <br /> delete the post
+            </DialogTitle >
+            <DialogDescription className="text-center max-md:text-xs">
               Are you sure you want to delete the post? <br /> Once deleted, it
               cannot be recovered.
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>
-            <div className="mt-2 flex w-full flex-col items-center justify-center gap-2">
+            <div className="mt-5 flex w-full flex-col gap-2 sm:flex-row sm:items-center sm:justify-center">
               <Button
-                className="w-[350px]"
+                className="w-full font-semibold sm:w-[10rem]"
                 variant={"destructive"}
                 type="submit"
                 disabled={isSubmitting}
@@ -81,7 +81,7 @@ export const DeletePostFormDialog = ({
 
               <DialogClose asChild>
                 <Button
-                  className="w-[350px]"
+                  className="w-full font-semibold sm:w-[10rem]"
                   variant={"secondary"}
                   type="button"
                 >
