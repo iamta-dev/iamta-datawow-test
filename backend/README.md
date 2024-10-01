@@ -83,7 +83,7 @@ npm run dev
 > backend@0.0.1 dev
 > nest start
 
-[Nest] 32588  - 09/29/2024, 09:00:34 PM  LOG [NestFactory] Starting Nest application...
+[Nest] 32588  - 01/10/2024, 08:30:34 PM  LOG [NestFactory] Starting Nest application...
 Application is running on: http://[::1]:8080
 Swagger is running on: http://[::1]:8080/api-docs
 Allowed origins: [ 'http://localhost:8000', 'http://localhost:8080' ]
@@ -95,6 +95,8 @@ Allowed origins: [ 'http://localhost:8000', 'http://localhost:8080' ]
 
 ```txt
 .
+├── .env                                 # Environment variables for project 
+├── .env.example                         # Example file Environment variables 
 ├── config/*                             # Config Nest.js folder
 │   ├── config.validation.ts             # validation Config .env from Joi on start api
 ├── src/*                                # Main source code Nest.js folder
@@ -110,6 +112,7 @@ Allowed origins: [ 'http://localhost:8000', 'http://localhost:8080' ]
 │   ├── swagger-custom.js                # open api swagger custom js
 │   └── swagger.json                     # open api swagger.json ไฟล์
 ├── docker-compose.yml                   # Docker Compose database configuration
+├── .eslintrc.cjs                        # lint code config
 ├── Dockerfile.backend                   # Docker deployment file
 ├── postgres_data/*                      # docker volumes database data
 
