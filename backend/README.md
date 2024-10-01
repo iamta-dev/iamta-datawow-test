@@ -55,8 +55,8 @@ npm run db:migrate
 npm run db:seed
 ```
 
-### 1.5 View Database Client
-
+### 1.5 Database Client
+#### 1.5.1 prisma studio
 ```sh
 npm run db:studio
 
@@ -69,6 +69,8 @@ Environment variables loaded from .env
 Prisma schema loaded from prisma\schema.prisma
 Prisma Studio is up on http://localhost:5555
 ```
+- #### 1.5.2 dbeaver
+  - [dbeaver install](https://dbeaver.io/download/)
 
 ### 1.6 Run API (Development Mode)
 
@@ -107,6 +109,7 @@ Allowed origins: [ 'http://localhost:8000', 'http://localhost:8080' ]
 │   ├── swagger-custom.js                # open api swagger custom js
 │   └── swagger.json                     # open api swagger.json ไฟล์
 ├── docker-compose.yml                   # Docker Compose database configuration
+├── Dockerfile.backend                   # Docker deployment file
 ├── postgres_data/*                      # docker volumes database data
 
 ```
@@ -138,5 +141,5 @@ Allowed origins: [ 'http://localhost:8000', 'http://localhost:8080' ]
 ## 4. Run Unit Test
 
 ```sh
-npm run test
+npm run test:cov
 ```
