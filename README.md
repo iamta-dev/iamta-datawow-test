@@ -1,17 +1,18 @@
 # DataWow Full-stack Developer Assignment (Next.js + NestJS)
 
 This repository contains two main parts for the assignment:
-- Backend (NestJS)
-- Frontend (Next.js)
+- **Backend** (NestJS)
+- **Frontend** (Next.js)
 
-Please refer to the documentation of each project for more detailed instructions.
+Refer to the documentation of each project for detailed instructions.
 
 ## Backend Assignment
-[Backend Documentation](./backend/README.md)
+- [Backend Documentation](./backend/README.md)
+- [Live Demo Backend](https://iamta-datawowtest.ddns.net)
 
 ## Frontend Assignment
-[Frontend Documentation](./frontend/README.md)
-
+- [Frontend Documentation](./frontend/README.md)
+- [Live Demo Frontend](https://iamta-datawowtestapi.ddns.net/api-docs)
 ---
 
 ### System Requirements
@@ -51,7 +52,8 @@ npm run set:local
 npm run test:cov
 ```
 
-### Vscode Required Extensions Setup
+### Recommended VSCode Extensions Setup
+Install the following VSCode extensions for optimal development experience:
 ```sh
 # tools
 code --install-extension eamodio.gitlens
