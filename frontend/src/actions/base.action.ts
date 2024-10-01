@@ -1,3 +1,4 @@
+import { BaseErrorEnum } from "@/interfaces/errors/base.error";
 import { type ServiceErrorResponse } from "@/interfaces/services/base.service";
 
 export type ActionStatus = "default" | "loading" | "error" | "success";
@@ -19,7 +20,7 @@ export function baseActionHandleResponse<T>(
     ? {
         status: "error",
         message:
-          error?.message ?? "An unexpected error occurred. Please try again.",
+          error?.message ?? BaseErrorEnum.UNEXPECTED,
       }
     : { status: "success", result };
 }
@@ -31,6 +32,6 @@ export function baseActionErrorResponse<T>(
   return {
     status: "error",
     message:
-      error?.message ?? "An unexpected error occurred. Please try again.",
+      error?.message ?? BaseErrorEnum.UNEXPECTED,
   };
 }

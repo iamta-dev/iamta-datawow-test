@@ -10,6 +10,7 @@ import {
 } from "@/interfaces/use-cases/auth.use-case.d";
 import { baseUseCaseAxiosErrorResponse } from "../base/base.use-case";
 import { type UseCaseResponse } from "@/interfaces/use-cases/base.use-case";
+import { BaseErrorEnum } from "@/interfaces/errors/base.error";
 
 export async function loginUseCase(params: {
   context: {
@@ -44,9 +45,7 @@ export async function loginUseCase(params: {
   if (userJwt.error ?? !userJwt.data) {
     return {
       error: {
-        message:
-          userJwt?.error?.message ??
-          "An unexpected error occurred. Please try again.",
+        message: userJwt?.error?.message ?? BaseErrorEnum.UNEXPECTED,
       },
     };
   }

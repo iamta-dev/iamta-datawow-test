@@ -2,6 +2,7 @@
 import { AxiosError } from "axios";
 import backendApi from "@/lib/backend-api";
 import { type ServiceResponse } from "@/interfaces/services/base.service";
+import { BaseErrorEnum } from "@/interfaces/errors/base.error";
 
 export interface CustomAxiosError extends AxiosError {
   errors?: unknown;
@@ -53,7 +54,7 @@ export class BaseService {
       console.error("Unexpected Error:", error);
       return {
         error: {
-          message: "An unexpected error occurred. Please try again.",
+          message: BaseErrorEnum.UNEXPECTED,
         } as AxiosError,
       };
     }

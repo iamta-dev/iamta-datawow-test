@@ -3,3 +3,7 @@ export interface FuncError {
   code?: string;
   errors?: unknown[];
 }
+
+export enum BaseErrorEnum {
+  UNEXPECTED = "An unexpected error occurred. Please try again later.",
+}

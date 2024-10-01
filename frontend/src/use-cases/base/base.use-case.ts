@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
+import { BaseErrorEnum } from "@/interfaces/errors/base.error";
 import { type ServiceErrorResponse } from "@/interfaces/services/base.service";
 import { type UseCaseResponse } from "@/interfaces/use-cases/base.use-case.d";
 import { type AxiosError } from "axios";
@@ -19,7 +20,7 @@ export function baseUseCaseHandleResponse<T>(resp: {
           apiError?.message ??
           resp.error?.response?.statusText ??
           resp.error?.message ??
-          "An unexpected error occurred. Please try again.",
+          BaseErrorEnum.UNEXPECTED,
       },
     };
   }
@@ -39,7 +40,7 @@ export function baseUseCaseAxiosErrorResponse<T>(
         apiError?.message ??
         error?.response?.statusText ??
         error?.message ??
-        "An unexpected error occurred. Please try again.",
+        BaseErrorEnum.UNEXPECTED,
     },
   };
 }
