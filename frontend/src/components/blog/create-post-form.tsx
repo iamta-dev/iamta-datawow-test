@@ -209,7 +209,7 @@ export const CreatePostForm = ({ onFetchPostsData }: ICreatePostFormDialog) => {
               </DialogClose>
 
               <Button type="submit">
-                {isSubmitting ? "Submitting..." : "Post"}
+                {isSubmitting ? "Posting..." : "Post"}
               </Button>
             </div>
           </DialogFooter>

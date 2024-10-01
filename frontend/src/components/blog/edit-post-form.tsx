@@ -212,7 +212,7 @@ export const EditPostForm = ({
               </DialogClose>
 
               <Button disabled={isSubmitting} type="submit">
-                {isSubmitting ? "Submitting..." : "Update"}
+                {isSubmitting ? "Updateting..." : "Update"}
               </Button>
             </div>
           </DialogFooter>
