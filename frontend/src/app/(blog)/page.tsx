@@ -32,29 +32,18 @@ export default function BlogPage() {
     }
   };
 
-  const [searchQuery, setSearchQuery] = useState<string>(""); // For handling search input
   const [isSearchActive, setIsSearchActive] = useState<boolean>(false); // For toggling search bar
   const { isSidebarOpen } = useSidebarState(); // Get the sidebar state (true/false)
 
   useEffect(() => {
-    startTransition(async () => {
-      await fetchData(searchQueryParams);
-    });
-  }, [searchQueryParams]);
-
-  useEffect(() => {
-    if (searchQuery.length > 1) {
-      setSearchQueryParams({
-        ...searchQueryParams,
-        fsearch: searchQuery,
-      });
-    } else {
-      setSearchQueryParams({
-        ...searchQueryParams,
-        fsearch: undefined,
+    const isSearch =
+      !searchQueryParams.fsearch || searchQueryParams.fsearch.length > 1;
+    if (isSearch) {
+      startTransition(async () => {
+        await fetchData(searchQueryParams);
       });
     }
-  }, [searchQuery]);
+  }, [searchQueryParams]);
 
   return (
     <div>
@@ -62,9 +51,9 @@ export default function BlogPage() {
       <Toolbar
         isSidebarOpen={isSidebarOpen}
         isSearchActive={isSearchActive}
-        searchQuery={searchQuery}
-        setSearchQuery={setSearchQuery}
         setIsSearchActive={setIsSearchActive}
+        searchQueryParams={searchQueryParams}
+        setSearchQueryParams={setSearchQueryParams}
       />
 
       {/* Main Content */}
@@ -74,7 +63,11 @@ export default function BlogPage() {
         }`}
       >
         {postList.map((post) => (
-          <PostCard key={post.id} post={post} searchQuery={searchQuery} />
+          <PostCard
+            key={post.id}
+            post={post}
+            searchQuery={searchQueryParams.fsearch ?? ""}
+          />
         ))}
       </section>
     </div>
