@@ -36,6 +36,9 @@ import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import { Edit, X } from "lucide-react";
 import { Textarea } from "@/components/ui/textarea";
+import { startTransition, useEffect, useState } from "react";
+import { type Community } from "@/interfaces/services/community.service.interface";
+import { getCommunitiesAction } from "@/actions/community.action";
 
 const formSchema = z.object({
   title: z.string().min(3, { message: "Title must be at least 3 characters" }),
@@ -48,6 +51,26 @@ const formSchema = z.object({
 });
 
 export const EditPostForm = () => {
+  const [communityList, setCommunityList] = useState<Community[]>([]);
+
+  const fetchData = async () => {
+    const resp = await getCommunitiesAction();
+    if (resp?.result) {
+      setCommunityList(resp.result);
+    }
+
+    if (resp?.status == "error") {
+      toast.error(resp.message);
+    }
+    return resp;
+  };
+
+  useEffect(() => {
+    startTransition(async () => {
+      await fetchData();
+    });
+  }, []);
+
   // 1. Define your form.
   const form = useForm({
     resolver: zodResolver(formSchema),
@@ -110,15 +133,11 @@ export const EditPostForm = () => {
                       </FormControl>
                       <SelectContent className="w-[350px]">
                         <SelectGroup>
-                          <SelectItem value="community1">
-                            Community 1
-                          </SelectItem>
-                          <SelectItem value="community2">
-                            Community 2
-                          </SelectItem>
-                          <SelectItem value="community3">
-                            Community 3
-                          </SelectItem>
+                          {communityList.map((v, index) => (
+                            <SelectItem key={index} value={`${v.id}`}>
+                              {v.name}
+                            </SelectItem>
+                          ))}
                         </SelectGroup>
                       </SelectContent>
                     </Select>
