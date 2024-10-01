@@ -8,7 +8,7 @@ networks:
 services:
   datawowtest_web:
     container_name: datawowtest_web
-    image: iamta/datawowtest-api:latest
+    image: iamta/datawowtest-web:latest
     env_file:
       - .env.web
     ports:
