@@ -51,7 +51,7 @@ export default function Sidebar() {
                 <Link
                   href={item.path}
                   className={twMerge(
-                    "block rounded-md p-2 hover:bg-green-300 text-gray-400",
+                    "block rounded-md p-2 text-gray-400 hover:bg-green-300",
                     pathname === item.path && "font-bold text-white",
                   )}
                 >
@@ -77,7 +77,7 @@ export default function Sidebar() {
                 <Link
                   href={item.path}
                   className={twMerge(
-                    "block rounded-md p-2 hover:bg-green-100 text-green-500",
+                    "block rounded-md p-2 text-green-500 hover:bg-green-100",
                     pathname === item.path && "font-bold",
                   )}
                 >

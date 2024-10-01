@@ -24,7 +24,7 @@ export default function LoginPage() {
 
       {/* Left Side: Sign-in (Desktop) / Bottom (Mobile) */}
       <div className="order-last flex h-3/5 w-full items-center justify-center bg-green-500 md:order-first md:h-auto md:w-3/5">
-        <div className="w-11/12 sm:w-4/5 max-w-sm flex flex-col justify-center">
+        <div className="flex w-11/12 max-w-sm flex-col justify-center sm:w-4/5">
           <h1 className="mb-6 text-3xl font-semibold text-white">Sign in</h1>
           <form className="space-y-4" action={action}>
             <Input

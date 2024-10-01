@@ -57,7 +57,10 @@ export default function Header() {
                   }}
                   className="flex cursor-pointer flex-row items-center justify-center gap-2"
                 >
-                  <label htmlFor="Profile Name" className="text-white font-medium">
+                  <label
+                    htmlFor="Profile Name"
+                    className="font-medium text-white"
+                  >
                     {profile.fullName}
                   </label>
                   <Avatar className={"h-10 w-10"}>
@@ -75,7 +78,12 @@ export default function Header() {
             </Tooltip>
           </TooltipProvider>
         ) : (
-          <Button onClick={() => router.push("/auth/login")} className="font-semibold">Sign In</Button>
+          <Button
+            onClick={() => router.push("/auth/login")}
+            className="font-semibold"
+          >
+            Sign In
+          </Button>
         )}
       </div>
     </header>

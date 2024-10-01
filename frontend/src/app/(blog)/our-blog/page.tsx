@@ -67,24 +67,25 @@ export default function OurBlogPage() {
           isSidebarOpen ? "md:ml-64" : "md:ml-0",
         )}
       >
-        {postList.length >0 && postList.map((post, index) => (
-          <PostCard
-            className={
-              index == 0
-                ? "rounded-t-md"
-                : postList.length - 1 == index
-                  ? "rounded-b-md"
-                  : "border-b border-t border-grey-100"
-            }
-            post={post}
-            searchQuery={searchQueryParams.fsearch ?? ""}
-            onFetchPostsData={() => {
-              startTransition(async () => {
-                await fetchData(searchQueryParams);
-              });
-            }}
-          />
-        ))}
+        {postList.length > 0 &&
+          postList.map((post, index) => (
+            <PostCard
+              className={
+                index == 0
+                  ? "rounded-t-md"
+                  : postList.length - 1 == index
+                    ? "rounded-b-md"
+                    : "border-b border-t border-grey-100"
+              }
+              post={post}
+              searchQuery={searchQueryParams.fsearch ?? ""}
+              onFetchPostsData={() => {
+                startTransition(async () => {
+                  await fetchData(searchQueryParams);
+                });
+              }}
+            />
+          ))}
       </section>
     </div>
   );

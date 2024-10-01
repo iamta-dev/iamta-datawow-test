@@ -89,7 +89,7 @@ export default function Toolbar({
               <button onClick={() => setIsSearchActive(true)}>
                 <Search className="h-6 w-6 text-gray-600" />
               </button>
-              <div className=" flex flex-row">
+              <div className="flex flex-row">
                 <Select
                   name={"communityId"}
                   defaultValue={searchQueryParams?.communityId ?? "ALL"}
@@ -100,7 +100,7 @@ export default function Toolbar({
                     });
                   }}
                 >
-                  <SelectTrigger className="flex min-w-32 font-semibold bg-grey-100 items-center justify-center border-none border-primary text-black">
+                  <SelectTrigger className="flex min-w-32 items-center justify-center border-none border-primary bg-grey-100 font-semibold text-black">
                     <SelectValue placeholder="Community" />
                   </SelectTrigger>
                   <SelectContent>

@@ -14,7 +14,7 @@ export default function Layout({ children }: PropsWithChildren) {
         <Sidebar />
 
         {/* Main Content */}
-        <div className="h-[calc(100vh)] overflow-auto pt-32 transition-all bg-white">
+        <div className="h-[calc(100vh)] overflow-auto bg-white pt-32 transition-all">
           {children}
         </div>
       </div>

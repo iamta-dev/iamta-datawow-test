@@ -13,23 +13,27 @@ import {
 } from "@/components/ui/form";
 import { toast } from "sonner";
 import { Textarea } from "@/components/ui/textarea";
-import { createCommentAction } from "@/actions/comment.action"; 
+import { createCommentAction } from "@/actions/comment.action";
 import { useSidebarState } from "@/hooks/use-sidebar";
 import { BaseErrorEnum } from "@/interfaces/errors/base.error.interface";
 
 const formSchema = z.object({
   comment: z
     .string()
-    .min(3, { message: "Comment must be at least 3 characters" }), 
+    .min(3, { message: "Comment must be at least 3 characters" }),
 });
 
 interface Props {
-  postId: number; 
+  postId: number;
   hideCommentForm: () => void;
   onCommentCreated: () => void;
 }
 
-export const CreateCommentForm = ({ postId, hideCommentForm, onCommentCreated }: Props) => {
+export const CreateCommentForm = ({
+  postId,
+  hideCommentForm,
+  onCommentCreated,
+}: Props) => {
   const { isSidebarOpen } = useSidebarState();
 
   const form = useForm({
@@ -40,7 +44,7 @@ export const CreateCommentForm = ({ postId, hideCommentForm, onCommentCreated }:
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    const resp = await createCommentAction({ postId, ...values }); 
+    const resp = await createCommentAction({ postId, ...values });
     if (resp?.status === "success") {
       form.reset();
       toast.success("Comment has been posted successfully");
@@ -58,7 +62,7 @@ export const CreateCommentForm = ({ postId, hideCommentForm, onCommentCreated }:
         <div className="my-4 flex w-full flex-col items-center space-y-4">
           <FormField
             control={form.control}
-            name="comment" 
+            name="comment"
             render={({ field }) => (
               <FormItem>
                 <FormControl>

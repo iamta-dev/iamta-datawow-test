@@ -52,7 +52,7 @@ export default function PostCard({
               <AvatarImage src={post.user?.pictureUrl} alt="Post Profile" />
               <AvatarFallback>CN</AvatarFallback>
             </Avatar>
-            <div className=" font-semibold text-grey-300">
+            <div className="font-semibold text-grey-300">
               {post.user?.fullName}
             </div>
           </div>

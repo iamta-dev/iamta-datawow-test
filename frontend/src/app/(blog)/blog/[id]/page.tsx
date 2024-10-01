@@ -69,7 +69,7 @@ export default function BlogDetailPage({ params }: { params: { id: string } }) {
 
       {/* Main Content */}
       <section
-        className={`space-y-6 pt-6 pr-6 transition-all bg-white ${
+        className={`space-y-6 bg-white pr-6 pt-6 transition-all ${
           isSidebarOpen ? "md:ml-64" : "md:ml-0"
         }`}
       >
@@ -78,7 +78,7 @@ export default function BlogDetailPage({ params }: { params: { id: string } }) {
           {/* Author Info */}
           <div className="flex flex-col items-start gap-2">
             <div className="flex items-center justify-start gap-3">
-              <Avatar className="w-14 h-14">
+              <Avatar className="h-14 w-14">
                 <AvatarImage src={post?.user?.pictureUrl} alt="Post Profile" />
                 <AvatarFallback>CN</AvatarFallback>
               </Avatar>
@@ -89,11 +89,13 @@ export default function BlogDetailPage({ params }: { params: { id: string } }) {
                 {post?.createdAt ? formatTimeAgo(post.createdAt) : ""}
               </div>
             </div>
-            <Badge className="my-2" variant={"grey"}>{post?.community?.name}</Badge>
+            <Badge className="my-2" variant={"grey"}>
+              {post?.community?.name}
+            </Badge>
           </div>
 
           {/* Post Content */}
-          <h2 className="text-3xl md:text-4xl font-bold">{post?.title}</h2>
+          <h2 className="text-3xl font-bold md:text-4xl">{post?.title}</h2>
           <p className="mt-4 text-gray-700">{post?.detail}</p>
 
           {/* Total Comments Section */}
