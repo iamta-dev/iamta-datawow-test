@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState, useTransition } from "react";
-import Toolbar from "@/components/blog-layout/toolbar"; // Import the Toolbar component
+import Toolbar from "@/components/layout/toolbar"; // Import the Toolbar component
 import { useSidebarState } from "@/hooks/use-sidebar"; // Assuming we store sidebar state globally
 import {
   type PostParamsDto,

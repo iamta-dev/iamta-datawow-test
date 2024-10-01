@@ -1,5 +1,5 @@
-import Header from "@/components/blog-layout/header";
-import Sidebar from "@/components/blog-layout/sidebar";
+import Header from "@/components/layout/header";
+import Sidebar from "@/components/layout/sidebar";
 import React, { type PropsWithChildren } from "react";
 import { SidebarProvider } from "@/hooks/use-sidebar"; // Import SidebarProvider
 
