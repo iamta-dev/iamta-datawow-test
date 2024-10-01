@@ -25,109 +25,85 @@ import {
 export async function getPostByIdAction(
   id: number,
 ): Promise<ActionResultState<Post>> {
-  try {
-    const { result, error } = await getPostIdUseCase({
-      context: {
-        getProfile: getProfileAction,
-        getPostById: (data) => postService.getPostById(data),
-      },
-      id,
-    });
+  const { result, error } = await getPostIdUseCase({
+    context: {
+      getProfile: getProfileAction,
+      getPostById: (data) => postService.getPostById(data),
+    },
+    id,
+  });
 
-    return baseActionHandleResponse(result, error);
-  } catch (err) {
-    return baseActionErrorResponse(err as Error);
-  }
+  return baseActionHandleResponse(result, error);
 }
 
 export async function getPostsAction(
   postParamsDto?: PostParamsDto,
 ): Promise<ActionResultState<Post[]>> {
-  try {
-    const { result, error } = await getPostsUseCase({
-      context: {
-        getProfile: getProfileAction,
-        getPosts: (data) => postService.getPosts(data),
-      },
-      postParamsDto,
-    });
+  const { result, error } = await getPostsUseCase({
+    context: {
+      getProfile: getProfileAction,
+      getPosts: (data) => postService.getPosts(data),
+    },
+    postParamsDto,
+  });
 
-    return baseActionHandleResponse(result, error);
-  } catch (err) {
-    return baseActionErrorResponse(err as Error);
-  }
+  return baseActionHandleResponse(result, error);
 }
 
 export async function getMyPostsAction(
   postParamsDto?: PostParamsDto,
 ): Promise<ActionResultState<Post[]>> {
-  try {
-    const { result, error } = await getMyPostsUseCase({
-      context: {
-        getProfile: getProfileAction,
-        getMyPosts: (data) => postService.getMyPosts(data),
-      },
-      postParamsDto,
-    });
+  const { result, error } = await getMyPostsUseCase({
+    context: {
+      getProfile: getProfileAction,
+      getMyPosts: (data) => postService.getMyPosts(data),
+    },
+    postParamsDto,
+  });
 
-    return baseActionHandleResponse(result, error);
-  } catch (err) {
-    return baseActionErrorResponse(err as Error);
-  }
+  return baseActionHandleResponse(result, error);
 }
 
 export async function createPostAction(
   createPostDto: CreatePostDto,
 ): Promise<ActionResultState<Post>> {
-  try {
-    const { result, error } = await createPostUseCase({
-      context: {
-        getProfile: getProfileAction,
-        createPost: (data) => postService.createPost(data),
-      },
-      data: createPostDto,
-    });
+  const { result, error } = await createPostUseCase({
+    context: {
+      getProfile: getProfileAction,
+      createPost: (data) => postService.createPost(data),
+    },
+    data: createPostDto,
+  });
 
-    return baseActionHandleResponse(result, error);
-  } catch (err) {
-    return baseActionErrorResponse(err as Error);
-  }
+  return baseActionHandleResponse(result, error);
 }
 
 export async function updatePostAction(
   id: number,
   updatePostDto: UpdatePostDto,
 ): Promise<ActionResultState<Post>> {
-  try {
-    const { result, error } = await updatePostUseCase({
-      context: {
-        getProfile: getProfileAction,
-        updatePost: (id, data) => postService.updatePost(id, data),
-      },
-      id,
-      data: updatePostDto,
-    });
+  const { result, error } = await updatePostUseCase({
+    context: {
+      getProfile: getProfileAction,
+      updatePost: (id, data) => postService.updatePost(id, data),
+    },
+    id,
+    data: updatePostDto,
+  });
 
-    return baseActionHandleResponse(result, error);
-  } catch (err) {
-    return baseActionErrorResponse(err as Error);
-  }
+  return baseActionHandleResponse(result, error);
 }
 
 export async function deletePostAction(
   id: number,
 ): Promise<ActionResultState<Post>> {
-  try {
-    const { result, error } = await deletePostUseCase({
-      context: {
-        getProfile: getProfileAction,
-        deletePost: (id) => postService.deletePost(id),
-      },
-      id,
-    });
+  const { result, error } = await deletePostUseCase({
+    context: {
+      getProfile: getProfileAction,
+      deletePost: (id) => postService.deletePost(id),
+    },
+    id,
+  });
 
-    return baseActionHandleResponse(result, error);
-  } catch (err) {
-    return baseActionErrorResponse(err as Error);
-  }
+  return baseActionHandleResponse(result, error);
 }

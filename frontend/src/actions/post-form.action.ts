@@ -51,19 +51,15 @@ export async function createPostAction(
 
   const { ...data } = validatedFields.data;
 
-  try {
-    const { result, error } = await createPostUseCase({
-      context: {
-        getProfile: getProfileAction,
-        createPost: (data) => postService.createPost(data),
-      },
-      data,
-    });
+  const { result, error } = await createPostUseCase({
+    context: {
+      getProfile: getProfileAction,
+      createPost: (data) => postService.createPost(data),
+    },
+    data,
+  });
 
-    return baseActionHandleResponse(result, error);
-  } catch (err) {
-    return baseActionErrorResponse(err as Error);
-  }
+  return baseActionHandleResponse(result, error);
 }
 
 const updatePostFormSchema = z
@@ -86,20 +82,16 @@ export async function updatePostAction(
 
   const { updateId, ...data } = validatedFields.data;
 
-  try {
-    const { result, error } = await updatePostUseCase({
-      context: {
-        getProfile: getProfileAction,
-        updatePost: (id, data) => postService.updatePost(id, data),
-      },
-      id: updateId,
-      data,
-    });
+  const { result, error } = await updatePostUseCase({
+    context: {
+      getProfile: getProfileAction,
+      updatePost: (id, data) => postService.updatePost(id, data),
+    },
+    id: updateId,
+    data,
+  });
 
-    return baseActionHandleResponse(result, error);
-  } catch (err) {
-    return baseActionErrorResponse(err as Error);
-  }
+  return baseActionHandleResponse(result, error);
 }
 
 const deletePostFormSchema = z.object({
@@ -120,17 +112,13 @@ export async function deletePostAction(
 
   const { deleteId } = validatedFields.data;
 
-  try {
-    const { result, error } = await deletePostUseCase({
-      context: {
-        getProfile: getProfileAction,
-        deletePost: (id) => postService.deletePost(id),
-      },
-      id: deleteId,
-    });
+  const { result, error } = await deletePostUseCase({
+    context: {
+      getProfile: getProfileAction,
+      deletePost: (id) => postService.deletePost(id),
+    },
+    id: deleteId,
+  });
 
-    return baseActionHandleResponse(result, error);
-  } catch (err) {
-    return baseActionErrorResponse(err as Error);
-  }
+  return baseActionHandleResponse(result, error);
 }
