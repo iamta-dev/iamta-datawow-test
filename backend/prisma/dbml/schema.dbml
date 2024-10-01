@@ -49,6 +49,6 @@ Ref: Post.userId > User.id
 
 Ref: Post.communityId > Community.id
 
-Ref: Comment.postId > Post.id
+Ref: Comment.postId > Post.id [delete: Cascade]
 
 Ref: Comment.userId > User.id
