@@ -12,7 +12,7 @@ Refer to the documentation of each project for detailed instructions.
 
 ## Frontend Assignment
 - [Frontend Documentation](./frontend/README.md)
-- [Live Demo Frontend](https://iamta-datawowtestapi.ddns.net/api-docs)
+- [Live Demo Frontend](https://iamta-dwtestapi.ddns.net/api-docs)
 ---
 
 ### System Requirements
