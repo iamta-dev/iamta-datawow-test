@@ -8,11 +8,12 @@ Refer to the documentation of each project for detailed instructions.
 
 ## Backend Assignment
 - [Backend Documentation](./backend/README.md)
-- [Live Demo Backend](https://iamta-datawowtest.ddns.net)
+- [Live Demo Backend](https://iamta-dwtestapi.ddns.net/api-docs)
 
 ## Frontend Assignment
 - [Frontend Documentation](./frontend/README.md)
-- [Live Demo Frontend](https://iamta-dwtestapi.ddns.net/api-docs)
+- [Live Demo Frontend](https://iamta-datawowtest.ddns.net)
+- Username for tests `user1`, `user2`, `usertest`
 ---
 
 ### System Requirements
