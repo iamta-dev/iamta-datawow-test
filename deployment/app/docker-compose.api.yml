@@ -1,0 +1,20 @@
+version: '3.8'
+
+networks:
+  app_network:
+    name: app_network 
+    driver: bridge
+
+services:
+  datawowtest_api:
+    container_name: datawowtest_api
+    image: iamta/datawowtest-api:latest
+    env_file:
+      - .env.api
+    ports:
+      - ${INTERNET_API_PORT:-8080}:8080
+    working_dir: /usr/src/app
+    entrypoint: [ 'node', 'dist/src/main.js' ]
+    restart: unless-stopped
+    networks:
+      - app_network

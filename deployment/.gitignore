@@ -1,0 +1,14 @@
+# These are some examples of commonly ignored file patterns.
+# You should customize this list as applicable to your project.
+# Learn more about .gitignore:
+#     https://www.atlassian.com/git/tutorials/saving-changes/gitignore
+
+.docker
+
+# app
+app/.env
+app/.env.*
+app/postgres_data
+
+nginx-proxy-manager/nginx_data
+portainer-manager/portainer_data

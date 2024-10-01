@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  glances_manager:
+    container_name: glances_manager 
+    image: 'nicolargo/glances:ubuntu-latest-full'
+    ports:
+      - "61208-61209:61208-61209"
+    command: glances -w
+    environment:
+      TZ: 'Asia/Bangkok'
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /run/user/1000/podman/podman.sock:/run/user/1000/podman/podman.sock:ro
