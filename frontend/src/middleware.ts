@@ -5,7 +5,7 @@ export function middleware(req: NextRequest) {
 
   // If the session cookie is missing, redirect to the sign-in page
   if (!sessionCookie) {
-    return NextResponse.redirect(new URL("/auth/sign-in", req.url));
+    return NextResponse.redirect(new URL("/auth/login", req.url));
   }
 
   // If session cookie exists, proceed with the request
