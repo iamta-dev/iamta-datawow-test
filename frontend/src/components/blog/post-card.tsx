@@ -4,7 +4,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { MessageCircle } from "lucide-react";
 import { DeletePostForm } from "./delete-post-form";
 import { EditPostForm } from "./edit-post-form";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { type Post } from "@/interfaces/services/post.service.interface";
 import { Badge } from "@/components/ui/badge";
 
@@ -20,6 +20,7 @@ export default function PostCard({
   searchQuery,
 }: PostCardProps) {
   const router = useRouter();
+  const pathname = usePathname();
 
   // Function to handle search and highlight matching text
   const handleSearch = (postTitle: string, searchQuery: string): string => {
@@ -56,21 +57,23 @@ export default function PostCard({
         </div>
 
         {/* Edit and Trash Icons */}
-        <div
-          className="absolute right-2 top-2 space-x-2"
-          onClick={(e) => e.stopPropagation()}
-        >
-          <EditPostForm
-            postId={post.id}
-            initialData={post}
-            onFetchPostsData={onFetchPostsData}
-          />
-          <DeletePostForm
-            postId={post.id}
-            initialData={post}
-            onFetchPostsData={onFetchPostsData}
-          />
-        </div>
+        {pathname === "/our-blog" && (
+          <div
+            className="absolute right-2 top-2 space-x-2"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <EditPostForm
+              postId={post.id}
+              initialData={post}
+              onFetchPostsData={onFetchPostsData}
+            />
+            <DeletePostForm
+              postId={post.id}
+              initialData={post}
+              onFetchPostsData={onFetchPostsData}
+            />
+          </div>
+        )}
       </div>
       {/* Post title with search highlighting */}
       <h2
