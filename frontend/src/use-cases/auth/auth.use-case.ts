@@ -31,7 +31,7 @@ export async function loginUseCase(params: {
     if (apiError?.statusCode == 401) {
       return {
         error: {
-          message: "Invalid email or password.",
+          message: "Invalid Username.",
         },
       };
     }
