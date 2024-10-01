@@ -60,10 +60,10 @@ code --install-extension ms-azuretools.vscode-docker
 code --install-extension dbaeumer.vscode-eslint
 code --install-extension esbenp.prettier-vscode
 code --install-extension yoavbls.pretty-ts-errors
-# fronted
+# frontend
 code --install-extension ms-vscode.vscode-typescript-next
 code --install-extension bradlc.vscode-tailwindcss
 code --install-extension naumovs.color-highlight
-# database
+# backend && database
 code --install-extension prisma.prisma
 ```
