@@ -22,11 +22,11 @@ Host gitlab.com
 
 > How to start all service
 ```sh
-cd prod
+cd app
 
-cp -R ./app/.env.example .env
-cp -R ./app/.env.api.example .env.api
-cp -R ./app/.env.web.example .env.web
+cp -R ./docs/.env.example .env
+cp -R ./docs/.env.api.example .env.api
+cp -R ./docs/.env.web.example .env.web
 
 chmod +x ./scripts/*
 
