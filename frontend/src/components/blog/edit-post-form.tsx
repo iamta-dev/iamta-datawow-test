@@ -43,10 +43,9 @@ import { type Post } from "@/interfaces/services/post.service.interface";
 const formSchema = z.object({
   title: z.string().min(3, { message: "Title must be at least 3 characters" }),
   communityId: z
-    .string()
+    .string({ message: "Choose a community" })
     .regex(/^\d+$/, { message: "Community ID must be a number." })
-    .refine((val) => val !== "0", { message: "Choose a community" })
-    .transform((val) => Number(val)),
+    .refine((val) => val !== "0", { message: "Choose a community" }),
   detail: z
     .string()
     .min(3, { message: "Detail must be at least 3 characters" }),
@@ -86,15 +85,18 @@ export const EditPostForm = ({
 
   const form = useForm({
     resolver: zodResolver(formSchema),
-    defaultValues: {
-      communityId: initialData.communityId,
+    values: {
+      communityId: `${initialData.communityId}`,
       title: initialData.title,
       detail: initialData.detail,
-    },
+    }
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    const resp = await updatePostAction(postId, values);
+    const resp = await updatePostAction(postId, {
+      ...values,
+      communityId: Number(values.communityId),
+    });
 
     if (resp?.status === "success") {
       form.reset();
@@ -106,7 +108,7 @@ export const EditPostForm = ({
     }
   }
 
-  const { isSubmitting, isValid } = form.formState;
+  const { isSubmitting } = form.formState;
 
   return (
     <Dialog open={openDialog} onOpenChange={setOpenDialog}>
@@ -209,7 +211,7 @@ export const EditPostForm = ({
                 </Button>
               </DialogClose>
 
-              <Button disabled={!isValid || isSubmitting} type="submit">
+              <Button disabled={isSubmitting} type="submit">
                 {isSubmitting ? "Submitting..." : "Update"}
               </Button>
             </div>

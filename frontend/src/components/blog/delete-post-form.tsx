@@ -17,6 +17,7 @@ import { Trash } from "lucide-react";
 import { deletePostAction } from "@/actions/post.action"; // เพิ่ม action สำหรับลบโพสต์
 import { type Post } from "@/interfaces/services/post.service.interface";
 import { BaseErrorEnum } from "@/interfaces/errors/base.error.interface";
+import { useState } from "react";
 
 interface IDeletePostForm {
   postId: number;
@@ -28,29 +29,36 @@ export const DeletePostForm = ({
   postId,
   onFetchPostsData,
 }: IDeletePostForm) => {
+  const [openDialog, setOpenDialog] = useState(false);
   const form = useForm();
 
   async function onSubmit() {
     const resp = await deletePostAction(postId);
     if (resp?.status === "success") {
       toast.success(`Post has been deleted successfully`);
+      setOpenDialog(false);
       onFetchPostsData();
     } else {
       toast.error(`${resp?.message ?? BaseErrorEnum.UNEXPECTED}`);
     }
   }
 
-  const { isSubmitting, isValid } = form.formState;
+  const { isSubmitting } = form.formState;
 
   return (
-    <Dialog>
+    <Dialog open={openDialog} onOpenChange={setOpenDialog}>
       <DialogTrigger asChild>
         <button className="rounded-full p-2 hover:bg-gray-200">
           <Trash className="h-5 w-5 text-red-600" />
         </button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
-        <form onSubmit={onSubmit}>
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            void onSubmit();
+          }}
+        >
           <DialogHeader>
             <DialogTitle>
               Please confirm if you wish to delete the post
@@ -66,7 +74,7 @@ export const DeletePostForm = ({
                 className="w-[350px]"
                 variant={"destructive"}
                 type="submit"
-                disabled={!isValid || isSubmitting}
+                disabled={isSubmitting}
               >
                 {isSubmitting ? "Deleting..." : "Delete"}
               </Button>

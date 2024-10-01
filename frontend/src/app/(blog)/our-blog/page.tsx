@@ -70,6 +70,11 @@ export default function OurBlogPage() {
             key={post.id}
             post={post}
             searchQuery={searchQueryParams.fsearch ?? ""}
+            onFetchPostsData={() => {
+              startTransition(async () => {
+                await fetchData(searchQueryParams);
+              });
+            }}
           />
         ))}
       </section>

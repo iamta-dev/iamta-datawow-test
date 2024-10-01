@@ -46,10 +46,9 @@ import { BaseErrorEnum } from "@/interfaces/errors/base.error.interface";
 const formSchema = z.object({
   title: z.string().min(3, { message: "Title must be at least 3 characters" }),
   communityId: z
-    .string()
+    .string({ message: "Choose a community" })
     .regex(/^\d+$/, { message: "Community ID must be a number." })
-    .refine((val) => val !== "0", { message: "Choose a community" })
-    .transform((val) => Number(val)),
+    .refine((val) => val !== "0", { message: "Choose a community" }),
   detail: z
     .string()
     .min(3, { message: "Detail must be at least 3 characters" }),
@@ -84,14 +83,17 @@ export const CreatePostForm = ({ onFetchPostsData }: ICreatePostFormDialog) => {
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      communityId: 0,
+      communityId: "0",
       title: "",
       detail: "",
     },
   });
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    const resp = await createPostAction(values);
+    const resp = await createPostAction({
+      ...values,
+      communityId: Number(values.communityId),
+    });
 
     if (resp?.status === "success") {
       form.reset();
@@ -103,7 +105,7 @@ export const CreatePostForm = ({ onFetchPostsData }: ICreatePostFormDialog) => {
     }
   }
 
-  const { isSubmitting, isValid } = form.formState;
+  const { isSubmitting } = form.formState;
 
   return (
     <Dialog open={openDialog} onOpenChange={setOpenDialog}>
@@ -132,9 +134,9 @@ export const CreatePostForm = ({ onFetchPostsData }: ICreatePostFormDialog) => {
                   <FormItem>
                     <Select
                       disabled={isSubmitting}
-                      value={`${field.value}`}
                       name={field.name}
                       onValueChange={field.onChange}
+                      defaultValue={field.value}
                     >
                       <FormControl>
                         <SelectTrigger
@@ -206,8 +208,6 @@ export const CreatePostForm = ({ onFetchPostsData }: ICreatePostFormDialog) => {
                 </Button>
               </DialogClose>
 
-              {/* Change UX submit form */}
-              {/* disabled={!isValid || isSubmitting} */}
               <Button type="submit">
                 {isSubmitting ? "Submitting..." : "Post"}
               </Button>
