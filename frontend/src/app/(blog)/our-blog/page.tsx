@@ -10,6 +10,7 @@ import {
 import { toast } from "sonner";
 import PostCard from "@/components/blog/post-card";
 import { getMyPostsAction } from "@/actions/post.action";
+import { cn } from "@/lib/utils";
 
 export default function OurBlogPage() {
   const [searchQueryParams, setSearchQueryParams] = useState<PostParamsDto>({
@@ -61,13 +62,20 @@ export default function OurBlogPage() {
 
       {/* Main Content */}
       <section
-        className={`space-y-6 p-6 transition-all ${
-          isSidebarOpen ? "md:ml-64" : "md:ml-0"
-        }`}
+        className={cn(
+          `min-h-screen bg-grey-100 p-6 transition-all`,
+          isSidebarOpen ? "md:ml-64" : "md:ml-0",
+        )}
       >
-        {postList.map((post) => (
+        {postList.length >0 && postList.map((post, index) => (
           <PostCard
-            key={post.id}
+            className={
+              index == 0
+                ? "rounded-t-md"
+                : postList.length - 1 == index
+                  ? "rounded-b-md"
+                  : "border-b border-t border-grey-100"
+            }
             post={post}
             searchQuery={searchQueryParams.fsearch ?? ""}
             onFetchPostsData={() => {

@@ -7,14 +7,17 @@ import { EditPostFormDialog } from "./edit-post-form-dialog";
 import { usePathname, useRouter } from "next/navigation";
 import { type Post } from "@/interfaces/services/post.service.interface";
 import { Badge } from "@/components/ui/badge";
+import { cn } from "@/lib/utils";
 
 interface PostCardProps {
+  className?: string;
   onFetchPostsData: () => void;
   post: Post; // Post object passed to the component
   searchQuery: string;
 }
 
 export default function PostCard({
+  className,
   onFetchPostsData,
   post,
   searchQuery,
@@ -32,14 +35,14 @@ export default function PostCard({
     // Replace matched query with highlighted text
     return postTitle.replace(
       regex,
-      (match) => `<span class="bg-yellow-300">${match}</span>`,
+      (match) => `<span class="bg-golden/50">${match}</span>`,
     );
   };
 
   return (
     <article
       key={post.id}
-      className="relative rounded-md bg-white p-4 shadow-md"
+      className={cn("relative bg-white p-4 shadow-md", className)}
     >
       <div className="mb-2 flex items-center justify-between">
         <div className="flex flex-col items-start gap-2">
@@ -49,7 +52,7 @@ export default function PostCard({
               <AvatarImage src={post.user?.pictureUrl} alt="Post Profile" />
               <AvatarFallback>CN</AvatarFallback>
             </Avatar>
-            <div className="cursor-text font-semibold text-grey-300">
+            <div className=" font-semibold text-grey-300">
               {post.user?.fullName}
             </div>
           </div>

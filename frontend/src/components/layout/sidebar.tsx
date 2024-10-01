@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRight, Home, FileText } from "lucide-react";
+import { ArrowRight, Home, FileText, SquarePen } from "lucide-react";
 import { useSidebarState } from "@/hooks/use-sidebar";
 import React from "react";
 import { usePathname } from "next/navigation";
@@ -17,7 +17,7 @@ const menuItems = [
   {
     path: "/our-blog",
     label: "Our Blog",
-    icon: <FileText className="mr-2 inline-block h-5 w-5" />,
+    icon: <SquarePen className="mr-2 inline-block h-5 w-5" />,
   },
 ];
 
@@ -35,7 +35,7 @@ export default function Sidebar() {
         ></div>
       )}
       <div
-        className={`fixed right-0 top-0 z-50 h-full w-64 transform bg-green-800 text-white transition-transform ${
+        className={`fixed right-0 top-0 z-50 h-full w-64 transform bg-green-500 text-white transition-transform ${
           isSidebarOpen ? "translate-x-0" : "translate-x-full"
         } md:hidden`}
       >
@@ -51,8 +51,8 @@ export default function Sidebar() {
                 <Link
                   href={item.path}
                   className={twMerge(
-                    "block rounded-md p-2 hover:bg-green-400", // Change hover color to bg-green-400
-                    pathname === item.path && "bg-green-400 hover:bg-green-400", // Active menu style
+                    "block rounded-md p-2 hover:bg-green-300 text-gray-400",
+                    pathname === item.path && "font-bold text-white",
                   )}
                 >
                   {item.icon}
@@ -66,7 +66,7 @@ export default function Sidebar() {
 
       {/* Desktop Sidebar */}
       <aside
-        className={`fixed bottom-0 top-16 z-30 w-64 bg-green-800 text-white transition-transform ${
+        className={`fixed bottom-0 top-16 z-30 w-64 bg-grey-100 text-white transition-transform ${
           isSidebarOpen ? "translate-x-0" : "-translate-x-full"
         } hidden md:block`}
       >
@@ -77,8 +77,8 @@ export default function Sidebar() {
                 <Link
                   href={item.path}
                   className={twMerge(
-                    "block rounded-md p-2 hover:bg-green-400", // Change hover color to bg-green-400
-                    pathname === item.path && "bg-green-400 hover:bg-green-400", // Active menu style
+                    "block rounded-md p-2 hover:bg-green-100 text-green-500",
+                    pathname === item.path && "font-bold",
                   )}
                 >
                   {item.icon}

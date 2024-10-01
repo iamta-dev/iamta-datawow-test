@@ -113,7 +113,7 @@ export const CreatePostFormDialog = ({
     <Dialog open={openDialog} onOpenChange={setOpenDialog}>
       <DialogTrigger asChild>
         <Button>
-          <span>Create</span> <Plus className="ml-1 h-4 w-4" />
+          <span className="font-semibold">Create</span> <Plus className="ml-1 h-4 w-4" />
         </Button>
       </DialogTrigger>
       <DialogContent className="w-[calc(100vw-2rem)] rounded-xl">

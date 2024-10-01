@@ -29,13 +29,13 @@ export default function Header() {
   }, []);
 
   return (
-    <header className="fixed left-0 right-0 top-0 z-30 flex h-16 items-center justify-between bg-green-800 p-4 text-white md:px-6">
+    <header className="fixed left-0 right-0 top-0 z-30 flex h-16 items-center justify-between bg-green-500 p-4 text-white md:px-6">
       <div className="flex items-center">
         {/* Desktop Menu Button */}
         <button className="mr-4 hidden md:block" onClick={toggleSidebar}>
           <Menu />
         </button>
-        <div className="text-xl font-bold">a Board</div>
+        <div className="text-xl font-bold italic">a Board</div>
       </div>
 
       {/* Mobile Menu Button */}
@@ -57,8 +57,8 @@ export default function Header() {
                   }}
                   className="flex cursor-pointer flex-row items-center justify-center gap-2"
                 >
-                  <label htmlFor="Profile Name" className="text-white">
-                    {profile.username}
+                  <label htmlFor="Profile Name" className="text-white font-medium">
+                    {profile.fullName}
                   </label>
                   <Avatar className={"h-10 w-10"}>
                     <AvatarImage
@@ -75,7 +75,7 @@ export default function Header() {
             </Tooltip>
           </TooltipProvider>
         ) : (
-          <Button onClick={() => router.push("/auth/login")}>Sign In</Button>
+          <Button onClick={() => router.push("/auth/login")} className="font-semibold">Sign In</Button>
         )}
       </div>
     </header>

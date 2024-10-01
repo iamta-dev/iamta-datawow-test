@@ -6,7 +6,7 @@ import { SidebarProvider } from "@/hooks/use-sidebar"; // Import SidebarProvider
 export default function Layout({ children }: PropsWithChildren) {
   return (
     <SidebarProvider>
-      <div className="relative min-h-screen bg-gray-100">
+      <div className="relative min-h-screen">
         {/* Header Component */}
         <Header />
 
@@ -14,7 +14,7 @@ export default function Layout({ children }: PropsWithChildren) {
         <Sidebar />
 
         {/* Main Content */}
-        <div className="h-[calc(100vh-4rem)] overflow-auto pt-32 transition-all">
+        <div className="h-[calc(100vh)] overflow-auto pt-32 transition-all bg-white">
           {children}
         </div>
       </div>

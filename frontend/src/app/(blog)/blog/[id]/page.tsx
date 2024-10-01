@@ -53,7 +53,7 @@ export default function BlogDetailPage({ params }: { params: { id: string } }) {
     <div>
       {/* Toolbar (Fixed below the Header) */}
       <div
-        className={`fixed top-16 ${isSidebarOpen ? "md:ml-64" : "md:ml-0"} left-0 right-0 z-30 bg-white`}
+        className={`fixed top-16 ${isSidebarOpen ? "md:ml-64" : "md:ml-0"} left-0 right-0 z-30`}
       >
         <div className="flex items-center justify-start p-4">
           {/* Back Button Icon */}
@@ -62,23 +62,23 @@ export default function BlogDetailPage({ params }: { params: { id: string } }) {
             onClick={() => router.back()}
             className="flex h-12 w-12 items-center justify-center rounded-full bg-green-100 hover:bg-green-500"
           >
-            <ArrowLeft className="h-6 w-6 text-gray-600" />
+            <ArrowLeft className="h-6 w-6 text-gray-600 hover:text-white" />
           </button>
         </div>
       </div>
 
       {/* Main Content */}
       <section
-        className={`space-y-6 p-6 transition-all ${
+        className={`space-y-6 pt-6 pr-6 transition-all bg-white ${
           isSidebarOpen ? "md:ml-64" : "md:ml-0"
         }`}
       >
         {/* Post Section */}
-        <article key={post?.id} className="rounded-md bg-white p-6 shadow-md">
+        <article key={post?.id} className="rounded-md bg-white p-6">
           {/* Author Info */}
           <div className="flex flex-col items-start gap-2">
-            <div className="flex items-center justify-start gap-2">
-              <Avatar>
+            <div className="flex items-center justify-start gap-3">
+              <Avatar className="w-14 h-14">
                 <AvatarImage src={post?.user?.pictureUrl} alt="Post Profile" />
                 <AvatarFallback>CN</AvatarFallback>
               </Avatar>
@@ -89,11 +89,11 @@ export default function BlogDetailPage({ params }: { params: { id: string } }) {
                 {post?.createdAt ? formatTimeAgo(post.createdAt) : ""}
               </div>
             </div>
-            <Badge variant={"grey"}>{post?.community?.name}</Badge>
+            <Badge className="my-2" variant={"grey"}>{post?.community?.name}</Badge>
           </div>
 
           {/* Post Content */}
-          <h2 className="text-2xl font-bold">{post?.title}</h2>
+          <h2 className="text-3xl md:text-4xl font-bold">{post?.title}</h2>
           <p className="mt-4 text-gray-700">{post?.detail}</p>
 
           {/* Total Comments Section */}
@@ -146,7 +146,7 @@ export default function BlogDetailPage({ params }: { params: { id: string } }) {
           )}
 
           {/* Comments */}
-          <div className="mt-8 p-6">
+          <div className="p-6">
             {post?.comments?.map((comment, idx) => (
               <div key={idx} className="mb-4 flex items-start">
                 <div className="mr-4">
