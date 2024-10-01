@@ -1,30 +1,32 @@
 "use server";
 
-import { createSession } from "@/lib/session";
+import { createSession } from "@/actions/session.action";
 import { decodeJwt } from "@/lib/user-jwt";
 import { authService } from "@/services/auth.service";
 import { loginUseCase } from "@/use-cases/auth/auth.use-case";
 import { redirect } from "next/navigation";
 import { z } from "zod";
+import { baseActionErrorResponse } from "./base.action";
+import { type ActionStatus } from "@/interfaces/actions/base.action";
 
 const LoginFormSchema = z.object({
   username: z.string().min(1, { message: "Username field must not be empty." }),
 });
 
-type ResultState =
+export type loginFormState =
   | {
       errors?: {
         username?: string[];
       };
       message?: string;
-      status?: "default" | "loading" | "error" | "success";
+      status?: ActionStatus;
     }
   | undefined;
 
 export async function loginAction(
-  state: ResultState,
+  state: loginFormState,
   formData: FormData,
-): Promise<ResultState> {
+): Promise<loginFormState> {
   const validatedFields = LoginFormSchema.safeParse({
     username: formData.get("username"),
   });
@@ -35,38 +37,20 @@ export async function loginAction(
 
   const { username } = validatedFields.data;
 
-  const { data: resp, error } = await loginUseCase({
+  const { result, error } = await loginUseCase({
     context: {
       login: (data) => authService.login(data),
+      decodeJwt: (data) => decodeJwt(data),
+      createSession: (data) => createSession(data),
     },
     data: {
       username,
     },
   });
-  if (error ?? !resp) {
-    return {
-      status: "error",
-      message:
-        error?.message ?? "An unexpected error occurred. Please try again.",
-    };
+  if (error ?? !result) {
+    return baseActionErrorResponse(error);
   }
 
-  const userJwt = decodeJwt(resp.accessToken);
-
-  if (userJwt.error ?? !userJwt.data) {
-    return {
-      status: "error",
-      message:
-        userJwt.error?.message ??
-        "An unexpected error occurred. Please try again.",
-    };
-  }
-
-  await createSession({
-    accessToken: resp.accessToken,
-    user: userJwt.data,
-  });
-
-  // Redirect to the dashboard after successful login
+  // Redirect to the HomePage after successful login
   redirect("/");
 }

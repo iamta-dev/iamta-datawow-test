@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 import { useFormState, useFormStatus } from "react-dom";
-import { loginAction } from "./auth.action";
+import { loginAction } from "../../../actions/auth.action";
 
 export default function LoginPage() {
   const [state, action] = useFormState(loginAction, undefined);

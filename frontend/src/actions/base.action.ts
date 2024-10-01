@@ -1,4 +1,4 @@
-import { type APIErrorResponse } from "@/interfaces/services/base.service";
+import { type ServiceErrorResponse } from "@/interfaces/services/base.service";
 
 export type ActionStatus = "default" | "loading" | "error" | "success";
 
@@ -13,7 +13,7 @@ export type ActionResultState<T> =
 // Base Server Action Handle Response Function
 export function baseActionHandleResponse<T>(
   result: T | undefined,
-  error?: APIErrorResponse | Error,
+  error?: ServiceErrorResponse | Error,
 ): ActionResultState<T> {
   return error || !result
     ? {
@@ -22,4 +22,15 @@ export function baseActionHandleResponse<T>(
           error?.message ?? "An unexpected error occurred. Please try again.",
       }
     : { status: "success", result };
+}
+
+// Base Server Action Error Response Function
+export function baseActionErrorResponse<T>(
+  error?: ServiceErrorResponse | Error,
+): ActionResultState<T> {
+  return {
+    status: "error",
+    message:
+      error?.message ?? "An unexpected error occurred. Please try again.",
+  };
 }

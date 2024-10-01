@@ -3,11 +3,12 @@
 import { communityService } from "@/services/community.service";
 import { type Community } from "@/interfaces/services/community.service";
 import { getCommunitiesUseCase } from "@/use-cases/community/get-community.use-case";
-import { getProfileAction } from "@/actions/profile";
+import { getProfileAction } from "@/actions/profile.action";
+import { type ActionResultState } from "@/interfaces/actions/base.action";
 import {
-  type ActionResultState,
-} from "@/interfaces/actions/base.action";
-import { baseActionHandleResponse } from "./base.action";
+  baseActionErrorResponse,
+  baseActionHandleResponse,
+} from "./base.action";
 
 export async function getCommunitiesAction(): Promise<
   ActionResultState<Community[]>
@@ -22,7 +23,6 @@ export async function getCommunitiesAction(): Promise<
 
     return baseActionHandleResponse(result, error);
   } catch (err) {
-    const error = err as Error;
-    return baseActionHandleResponse(undefined, error);
+    return baseActionErrorResponse(err as Error);
   }
 }

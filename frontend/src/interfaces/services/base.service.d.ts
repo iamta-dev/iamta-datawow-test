@@ -5,7 +5,7 @@ export interface ServiceResponse<T> {
   error?: AxiosError;
 }
 
-export interface APIErrorResponse {
+export interface ServiceErrorResponse {
   message?: string;
   error?: string;
   statusCode?: number;

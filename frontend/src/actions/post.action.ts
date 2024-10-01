@@ -12,14 +12,15 @@ import {
   getPostIdUseCase,
   getOwnerPostsUseCase,
 } from "@/use-cases/post/get-post.use-case";
-import { getProfileAction } from "@/actions/profile";
+import { getProfileAction } from "@/actions/profile.action";
 import { createPostUseCase } from "@/use-cases/post/create-post.use-case";
 import { updatePostUseCase } from "@/use-cases/post/update-post.use-case";
 import { deletePostUseCase } from "@/use-cases/post/delete-post.use-case";
+import { type ActionResultState } from "@/interfaces/actions/base.action";
 import {
-  type ActionResultState,
-} from "@/interfaces/actions/base.action";
-import { baseActionHandleResponse } from "./base.action";
+  baseActionErrorResponse,
+  baseActionHandleResponse,
+} from "./base.action";
 
 export async function getPostByIdAction(
   id: number,
@@ -35,8 +36,7 @@ export async function getPostByIdAction(
 
     return baseActionHandleResponse(result, error);
   } catch (err) {
-    const error = err as Error;
-    return baseActionHandleResponse(undefined, error);
+    return baseActionErrorResponse(err as Error);
   }
 }
 
@@ -54,8 +54,7 @@ export async function getPostsAction(
 
     return baseActionHandleResponse(result, error);
   } catch (err) {
-    const error = err as Error;
-    return baseActionHandleResponse(undefined, error);
+    return baseActionErrorResponse(err as Error);
   }
 }
 
@@ -73,8 +72,7 @@ export async function getOwnerPostsAction(
 
     return baseActionHandleResponse(result, error);
   } catch (err) {
-    const error = err as Error;
-    return baseActionHandleResponse(undefined, error);
+    return baseActionErrorResponse(err as Error);
   }
 }
 
@@ -92,8 +90,7 @@ export async function createPostAction(
 
     return baseActionHandleResponse(result, error);
   } catch (err) {
-    const error = err as Error;
-    return baseActionHandleResponse(undefined, error);
+    return baseActionErrorResponse(err as Error);
   }
 }
 
@@ -113,8 +110,7 @@ export async function updatePostAction(
 
     return baseActionHandleResponse(result, error);
   } catch (err) {
-    const error = err as Error;
-    return baseActionHandleResponse(undefined, error);
+    return baseActionErrorResponse(err as Error);
   }
 }
 
@@ -132,7 +128,6 @@ export async function deletePostAction(
 
     return baseActionHandleResponse(result, error);
   } catch (err) {
-    const error = err as Error;
-    return baseActionHandleResponse(undefined, error);
+    return baseActionErrorResponse(err as Error);
   }
 }

@@ -1,5 +1,5 @@
 import axios, { type AxiosError, type AxiosResponse } from "axios";
-import { getSessionAPIAccessToken } from "./session";
+import { getSessionAPIAccessToken } from "../actions/session.action";
 import { env } from "@/env";
 
 const backendApi = axios.create({

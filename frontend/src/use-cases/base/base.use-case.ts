@@ -1,15 +1,16 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import { type APIErrorResponse } from "@/interfaces/services/base.service";
+import { type ServiceErrorResponse } from "@/interfaces/services/base.service";
 import { type UseCaseResponse } from "@/interfaces/use-cases/base.use-case.d";
+import { type AxiosError } from "axios";
 
 export function baseUseCaseHandleResponse<T>(resp: {
   error?: any;
   data?: T;
 }): UseCaseResponse<T> {
   if (resp.error ?? !resp.data) {
-    const apiError = resp.error?.response?.data as APIErrorResponse;
+    const apiError = resp.error?.response?.data as ServiceErrorResponse;
     return {
       error: {
         statusCode: resp.error?.response?.status ?? 500,
@@ -24,4 +25,21 @@ export function baseUseCaseHandleResponse<T>(resp: {
   }
 
   return { result: resp.data };
+}
+
+export function baseUseCaseAxiosErrorResponse<T>(
+  error?: AxiosError,
+): UseCaseResponse<T> {
+  const apiError = error?.response?.data as ServiceErrorResponse;
+  return {
+    error: {
+      statusCode: error?.response?.status ?? 500,
+      error: error?.response?.statusText,
+      message:
+        apiError?.message ??
+        error?.response?.statusText ??
+        error?.message ??
+        "An unexpected error occurred. Please try again.",
+    },
+  };
 }

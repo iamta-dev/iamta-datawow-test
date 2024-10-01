@@ -3,12 +3,13 @@
 import { commentService } from "@/services/comment.service";
 import { type Comment } from "@/interfaces/services/comment.service";
 import { createCommentUseCase } from "@/use-cases/comment/create-comment.use-case";
-import { getProfileAction } from "@/actions/profile";
+import { getProfileAction } from "@/actions/profile.action";
 import { z } from "zod";
+import { type ActionStatus } from "@/interfaces/actions/base.action";
 import {
-  type ActionStatus,
-} from "@/interfaces/actions/base.action";
-import { baseActionHandleResponse } from "./base.action";
+  baseActionErrorResponse,
+  baseActionHandleResponse,
+} from "./base.action";
 
 export type commentFormState =
   | {
@@ -52,7 +53,6 @@ export async function createCommentAction(
 
     return baseActionHandleResponse(result, error);
   } catch (err) {
-    const error = err as Error;
-    return baseActionHandleResponse(undefined, error);
+    return baseActionErrorResponse(err as Error);
   }
 }

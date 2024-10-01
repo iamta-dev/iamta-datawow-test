@@ -3,14 +3,15 @@
 import { postService } from "@/services/post.service";
 import { type Post } from "@/interfaces/services/post.service";
 
-import { getProfileAction } from "@/actions/profile";
+import { getProfileAction } from "@/actions/profile.action";
 import { createPostUseCase } from "@/use-cases/post/create-post.use-case";
 import { updatePostUseCase } from "@/use-cases/post/update-post.use-case";
 import { deletePostUseCase } from "@/use-cases/post/delete-post.use-case";
+import { type ActionStatus } from "@/interfaces/actions/base.action";
 import {
-  type ActionStatus,
-} from "@/interfaces/actions/base.action";
-import { baseActionHandleResponse } from "./base.action";
+  baseActionErrorResponse,
+  baseActionHandleResponse,
+} from "./base.action";
 import { z } from "zod";
 
 export type postFormState =
@@ -61,8 +62,7 @@ export async function createPostAction(
 
     return baseActionHandleResponse(result, error);
   } catch (err) {
-    const error = err as Error;
-    return baseActionHandleResponse(undefined, error);
+    return baseActionErrorResponse(err as Error);
   }
 }
 
@@ -98,8 +98,7 @@ export async function updatePostAction(
 
     return baseActionHandleResponse(result, error);
   } catch (err) {
-    const error = err as Error;
-    return baseActionHandleResponse(undefined, error);
+    return baseActionErrorResponse(err as Error);
   }
 }
 
@@ -132,7 +131,6 @@ export async function deletePostAction(
 
     return baseActionHandleResponse(result, error);
   } catch (err) {
-    const error = err as Error;
-    return baseActionHandleResponse(undefined, error);
+    return baseActionErrorResponse(err as Error);
   }
 }

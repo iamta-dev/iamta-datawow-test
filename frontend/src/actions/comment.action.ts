@@ -6,11 +6,12 @@ import {
   type CreateCommentDto,
 } from "@/interfaces/services/comment.service";
 import { createCommentUseCase } from "@/use-cases/comment/create-comment.use-case";
-import { getProfileAction } from "@/actions/profile";
+import { getProfileAction } from "@/actions/profile.action";
+import { type ActionResultState } from "@/interfaces/actions/base.action";
 import {
-  type ActionResultState,
-} from "@/interfaces/actions/base.action";
-import { baseActionHandleResponse } from "./base.action";
+  baseActionErrorResponse,
+  baseActionHandleResponse,
+} from "./base.action";
 
 export async function createCommentAction(
   createCommentDto: CreateCommentDto,
@@ -26,7 +27,6 @@ export async function createCommentAction(
 
     return baseActionHandleResponse(result, error);
   } catch (err) {
-    const error = err as Error;
-    return baseActionHandleResponse(undefined, error);
+    return baseActionErrorResponse(err as Error);
   }
 }

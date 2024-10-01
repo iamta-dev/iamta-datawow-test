@@ -4,10 +4,10 @@ import { Menu } from "lucide-react";
 import { useSidebarState } from "@/hooks/use-sidebar";
 import { useEffect, useState } from "react";
 import { type UserJwtPayload } from "@/lib/user-jwt";
-import { getProfileAction } from "@/actions/profile";
+import { getProfileAction } from "@/actions/profile.action";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { deleteSession } from "@/lib/session";
+import { deleteSession } from "@/actions/session.action";
 import { Button } from "../ui/button";
 import { useRouter } from "next/navigation";
 

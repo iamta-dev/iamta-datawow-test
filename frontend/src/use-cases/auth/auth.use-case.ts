@@ -1,15 +1,21 @@
-import { type APIErrorResponse } from "@/interfaces/services/base.service";
+import { type ServiceErrorResponse } from "@/interfaces/services/base.service";
 import {
   type LoginDto,
   type LoginResponse,
 } from "@/interfaces/services/auth.service";
-import { type login } from "@/interfaces/use-cases/auth.use-case.d";
-import { baseUseCaseHandleResponse } from "../base/base.use-case";
+import {
+  type createSession,
+  type decodeJwt,
+  type login,
+} from "@/interfaces/use-cases/auth.use-case.d";
+import { baseUseCaseAxiosErrorResponse } from "../base/base.use-case";
 import { type UseCaseResponse } from "@/interfaces/use-cases/base.use-case";
 
 export async function loginUseCase(params: {
   context: {
     login: login;
+    decodeJwt: decodeJwt;
+    createSession: createSession;
   };
   data: LoginDto;
 }): Promise<UseCaseResponse<LoginResponse>> {
@@ -18,7 +24,7 @@ export async function loginUseCase(params: {
   const resp = await context.login(data);
 
   if (resp.error ?? !resp.data) {
-    const apiError = resp.error?.response?.data as APIErrorResponse;
+    const apiError = resp.error?.response?.data as ServiceErrorResponse;
 
     // custom message api error
     if (apiError?.statusCode == 401) {
@@ -28,7 +34,27 @@ export async function loginUseCase(params: {
         },
       };
     }
+
+    return baseUseCaseAxiosErrorResponse(resp.error);
   }
 
-  return baseUseCaseHandleResponse<LoginResponse>(resp);
+  const { accessToken } = resp.data;
+
+  const userJwt = context.decodeJwt(accessToken);
+  if (userJwt.error ?? !userJwt.data) {
+    return {
+      error: {
+        message:
+          userJwt?.error?.message ??
+          "An unexpected error occurred. Please try again.",
+      },
+    };
+  }
+
+  await context.createSession({
+    accessToken,
+    user: userJwt.data,
+  });
+
+  return { result: resp.data };
 }
