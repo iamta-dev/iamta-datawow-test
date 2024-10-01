@@ -1,4 +1,4 @@
-import { type User } from "./user.service";
+import { type User } from "./user.service.interface";
 
 export interface Comment {
   id: number;

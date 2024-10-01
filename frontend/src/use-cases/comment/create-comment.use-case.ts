@@ -1,13 +1,13 @@
 import {
   type Comment,
   type CreateCommentDto,
-} from "@/interfaces/services/comment.service";
-import { type createComment } from "@/interfaces/use-cases/comment.use-case.d";
+} from "@/interfaces/services/comment.service.interface";
+import { type createComment } from "@/interfaces/use-cases/comment.use-case.interface";
 import { baseUseCaseHandleResponse } from "../base/base.use-case";
 import {
   type UseCaseResponse,
   type getProfile,
-} from "@/interfaces/use-cases/base.use-case";
+} from "@/interfaces/use-cases/base.use-case.interface";
 
 export async function createCommentUseCase(params: {
   context: {

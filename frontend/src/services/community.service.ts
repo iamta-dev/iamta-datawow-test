@@ -1,6 +1,6 @@
-import { type ServiceResponse } from "@/interfaces/services/base.service";
+import { type ServiceResponse } from "@/interfaces/services/base.service.interface";
 import { BaseService } from "./base.service";
-import { type Community } from "@/interfaces/services/community.service";
+import { type Community } from "@/interfaces/services/community.service.interface";
 
 export class CommunityService extends BaseService {
   public async getCommunities(): Promise<ServiceResponse<Community[]>> {

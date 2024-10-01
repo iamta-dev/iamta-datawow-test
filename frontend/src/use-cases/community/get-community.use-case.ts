@@ -1,9 +1,9 @@
 import {
   type UseCaseResponse,
   type getProfile,
-} from "@/interfaces/use-cases/base.use-case.d";
-import { type getCommunities } from "@/interfaces/use-cases/community.use-case.d";
-import { type Community } from "@/interfaces/services/community.service";
+} from "@/interfaces/use-cases/base.use-case.interface";
+import { type getCommunities } from "@/interfaces/use-cases/community.use-case.interface";
+import { type Community } from "@/interfaces/services/community.service.interface";
 import { baseUseCaseHandleResponse } from "../base/base.use-case";
 
 export async function getCommunitiesUseCase(params: {

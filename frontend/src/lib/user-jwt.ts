@@ -1,5 +1,5 @@
 import { env } from "@/env";
-import { type FuncError } from "@/interfaces/errors/base.error";
+import { type FuncError } from "@/interfaces/errors/base.error.interface";
 import jwt, { type JwtPayload } from "jsonwebtoken";
 import { z } from "zod";
 

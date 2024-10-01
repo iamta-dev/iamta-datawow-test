@@ -1,11 +1,11 @@
 "use server";
 
 import { commentService } from "@/services/comment.service";
-import { type Comment } from "@/interfaces/services/comment.service";
+import { type Comment } from "@/interfaces/services/comment.service.interface";
 import { createCommentUseCase } from "@/use-cases/comment/create-comment.use-case";
 import { getProfileAction } from "@/actions/profile.action";
 import { z } from "zod";
-import { type ActionStatus } from "@/interfaces/actions/base.action";
+import { type ActionStatus } from "@/interfaces/actions/base.action.interface";
 import {
   baseActionErrorResponse,
   baseActionHandleResponse,

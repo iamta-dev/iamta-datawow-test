@@ -1,9 +1,9 @@
-import { type ServiceResponse } from "@/interfaces/services/base.service";
-import { type FuncError } from "@/interfaces/errors/base.error";
+import { type ServiceResponse } from "@/interfaces/services/base.service.interface";
+import { type FuncError } from "@/interfaces/errors/base.error.interface";
 import {
   type LoginDto,
   type LoginResponse,
-} from "@/interfaces/services/auth.service";
+} from "@/interfaces/services/auth.service.interface";
 import { type UserJwtPayload } from "@/lib/user-jwt";
 
 export type login = (data: LoginDto) => Promise<ServiceResponse<LoginResponse>>;

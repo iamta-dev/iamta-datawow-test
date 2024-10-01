@@ -7,7 +7,7 @@ import { loginUseCase } from "@/use-cases/auth/auth.use-case";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 import { baseActionErrorResponse } from "./base.action";
-import { type ActionStatus } from "@/interfaces/actions/base.action";
+import { type ActionStatus } from "@/interfaces/actions/base.action.interface";
 
 const LoginFormSchema = z.object({
   username: z.string().min(1, { message: "Username field must not be empty." }),

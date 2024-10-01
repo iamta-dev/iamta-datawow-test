@@ -1,5 +1,5 @@
-import { type Post } from "./post.service";
-import { type Comment } from "./comment.service";
+import { type Post } from "./post.service.interface";
+import { type Comment } from "./comment.service.interface";
 
 export interface User {
   id: number;

@@ -1,9 +1,9 @@
 import {
   type UseCaseResponse,
   type getProfile,
-} from "@/interfaces/use-cases/base.use-case.d";
-import { type deletePost } from "@/interfaces/use-cases/post.use-case.d";
-import { type Post } from "@/interfaces/services/post.service";
+} from "@/interfaces/use-cases/base.use-case.interface";
+import { type deletePost } from "@/interfaces/use-cases/post.use-case.interface";
+import { type Post } from "@/interfaces/services/post.service.interface";
 import { baseUseCaseHandleResponse } from "../base/base.use-case";
 
 export async function deletePostUseCase(params: {

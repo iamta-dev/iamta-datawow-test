@@ -1,13 +1,13 @@
 import {
   type Post,
   type CreatePostDto,
-} from "@/interfaces/services/post.service";
-import { type createPost } from "@/interfaces/use-cases/post.use-case.d";
+} from "@/interfaces/services/post.service.interface";
+import { type createPost } from "@/interfaces/use-cases/post.use-case.interface";
 import { baseUseCaseHandleResponse } from "../base/base.use-case";
 import {
   type UseCaseResponse,
   type getProfile,
-} from "@/interfaces/use-cases/base.use-case";
+} from "@/interfaces/use-cases/base.use-case.interface";
 
 export async function createPostUseCase(params: {
   context: {

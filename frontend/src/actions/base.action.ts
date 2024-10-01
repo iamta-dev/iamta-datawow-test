@@ -1,5 +1,5 @@
-import { BaseErrorEnum } from "@/interfaces/errors/base.error";
-import { type ServiceErrorResponse } from "@/interfaces/services/base.service";
+import { BaseErrorEnum } from "@/interfaces/errors/base.error.interface";
+import { type ServiceErrorResponse } from "@/interfaces/services/base.service.interface";
 
 export type ActionStatus = "default" | "loading" | "error" | "success";
 

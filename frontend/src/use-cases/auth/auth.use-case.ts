@@ -1,16 +1,16 @@
-import { type ServiceErrorResponse } from "@/interfaces/services/base.service";
+import { type ServiceErrorResponse } from "@/interfaces/services/base.service.interface";
 import {
   type LoginDto,
   type LoginResponse,
-} from "@/interfaces/services/auth.service";
+} from "@/interfaces/services/auth.service.interface";
 import {
   type createSession,
   type decodeJwt,
   type login,
-} from "@/interfaces/use-cases/auth.use-case.d";
+} from "@/interfaces/use-cases/auth.use-case.interface";
 import { baseUseCaseAxiosErrorResponse } from "../base/base.use-case";
-import { type UseCaseResponse } from "@/interfaces/use-cases/base.use-case";
-import { BaseErrorEnum } from "@/interfaces/errors/base.error";
+import { type UseCaseResponse } from "@/interfaces/use-cases/base.use-case.interface";
+import { BaseErrorEnum } from "@/interfaces/errors/base.error.interface";
 
 export async function loginUseCase(params: {
   context: {

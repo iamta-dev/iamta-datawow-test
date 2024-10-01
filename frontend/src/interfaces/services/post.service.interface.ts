@@ -1,6 +1,6 @@
-import { type User } from "./user.service";
-import { type Community } from "./community.service";
-import { type Comment } from "./comment.service";
+import { type User } from "./user.service.interface";
+import { type Community } from "./community.service.interface";
+import { type Comment } from "./comment.service.interface";
 
 export interface Post {
   id: number;

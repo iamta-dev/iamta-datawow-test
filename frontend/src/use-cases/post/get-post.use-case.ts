@@ -1,16 +1,16 @@
 import {
   type UseCaseResponse,
   type getProfile,
-} from "@/interfaces/use-cases/base.use-case.d";
+} from "@/interfaces/use-cases/base.use-case.interface";
 import {
   type getOwnerPosts,
   type getPostById,
   type getPosts,
-} from "@/interfaces/use-cases/post.use-case.d";
+} from "@/interfaces/use-cases/post.use-case.interface";
 import {
   type PostParamsDto,
   type Post,
-} from "@/interfaces/services/post.service";
+} from "@/interfaces/services/post.service.interface";
 import { baseUseCaseHandleResponse } from "../base/base.use-case";
 
 export async function getPostIdUseCase(params: {

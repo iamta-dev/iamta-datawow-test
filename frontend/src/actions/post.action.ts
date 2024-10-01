@@ -6,7 +6,7 @@ import {
   type PostParamsDto,
   type CreatePostDto,
   type UpdatePostDto,
-} from "@/interfaces/services/post.service";
+} from "@/interfaces/services/post.service.interface";
 import {
   getPostsUseCase,
   getPostIdUseCase,
@@ -16,7 +16,7 @@ import { getProfileAction } from "@/actions/profile.action";
 import { createPostUseCase } from "@/use-cases/post/create-post.use-case";
 import { updatePostUseCase } from "@/use-cases/post/update-post.use-case";
 import { deletePostUseCase } from "@/use-cases/post/delete-post.use-case";
-import { type ActionResultState } from "@/interfaces/actions/base.action";
+import { type ActionResultState } from "@/interfaces/actions/base.action.interface";
 import {
   baseActionErrorResponse,
   baseActionHandleResponse,

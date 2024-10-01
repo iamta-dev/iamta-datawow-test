@@ -6,7 +6,7 @@ import { useSidebarState } from "@/hooks/use-sidebar"; // Assuming we store side
 import {
   type PostParamsDto,
   type Post,
-} from "@/interfaces/services/post.service";
+} from "@/interfaces/services/post.service.interface";
 import { toast } from "sonner";
 import PostCard from "@/components/blog/post-card";
 import { getOwnerPostsAction } from "@/actions/post.action";

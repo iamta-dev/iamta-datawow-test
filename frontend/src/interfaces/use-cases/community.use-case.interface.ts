@@ -1,9 +1,9 @@
-import { type ServiceResponse } from "@/interfaces/services/base.service";
+import { type ServiceResponse } from "@/interfaces/services/base.service.interface";
 import {
   type Community,
   type CreateCommunityDto,
   type UpdateCommunityDto,
-} from "@/interfaces/services/community.service";
+} from "@/interfaces/services/community.service.interface";
 
 export type getCommunityById = (
   id: number,

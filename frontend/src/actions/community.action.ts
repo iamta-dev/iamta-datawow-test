@@ -1,10 +1,10 @@
 "use server";
 
 import { communityService } from "@/services/community.service";
-import { type Community } from "@/interfaces/services/community.service";
+import { type Community } from "@/interfaces/services/community.service.interface";
 import { getCommunitiesUseCase } from "@/use-cases/community/get-community.use-case";
 import { getProfileAction } from "@/actions/profile.action";
-import { type ActionResultState } from "@/interfaces/actions/base.action";
+import { type ActionResultState } from "@/interfaces/actions/base.action.interface";
 import {
   baseActionErrorResponse,
   baseActionHandleResponse,

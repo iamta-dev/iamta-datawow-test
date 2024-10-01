@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import { BaseErrorEnum } from "@/interfaces/errors/base.error";
-import { type ServiceErrorResponse } from "@/interfaces/services/base.service";
-import { type UseCaseResponse } from "@/interfaces/use-cases/base.use-case.d";
+import { BaseErrorEnum } from "@/interfaces/errors/base.error.interface";
+import { type ServiceErrorResponse } from "@/interfaces/services/base.service.interface";
+import { type UseCaseResponse } from "@/interfaces/use-cases/base.use-case.interface";
 import { type AxiosError } from "axios";
 
 export function baseUseCaseHandleResponse<T>(resp: {

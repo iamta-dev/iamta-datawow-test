@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { AxiosError } from "axios";
 import backendApi from "@/lib/backend-api";
-import { type ServiceResponse } from "@/interfaces/services/base.service";
-import { BaseErrorEnum } from "@/interfaces/errors/base.error";
+import { type ServiceResponse } from "@/interfaces/services/base.service.interface";
+import { BaseErrorEnum } from "@/interfaces/errors/base.error.interface";
 
 export interface CustomAxiosError extends AxiosError {
   errors?: unknown;

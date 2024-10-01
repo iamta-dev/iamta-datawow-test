@@ -1,9 +1,9 @@
-import { type ServiceResponse } from "@/interfaces/services/base.service";
+import { type ServiceResponse } from "@/interfaces/services/base.service.interface";
 import {
   type User,
   type CreateUserDto,
   type UpdateUserDto,
-} from "@/interfaces/services/user.service";
+} from "@/interfaces/services/user.service.interface";
 
 export type getUserById = (id: number) => Promise<ServiceResponse<User>>;
 

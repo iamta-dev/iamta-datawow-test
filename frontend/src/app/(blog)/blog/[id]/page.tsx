@@ -7,7 +7,7 @@ import { useEffect, useState, useTransition } from "react";
 import { CreateCommentFormDialog } from "../../../../components/blog/blog-detail/create-comment-form-dialog";
 import { CreateCommentForm } from "../../../../components/blog/blog-detail/create-comment-form";
 import { Button } from "@/components/ui/button";
-import { type Post } from "@/interfaces/services/post.service";
+import { type Post } from "@/interfaces/services/post.service.interface";
 import { getPostByIdAction } from "../../../../actions/post.action";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
