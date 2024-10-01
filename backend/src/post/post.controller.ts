@@ -101,7 +101,7 @@ export class PostController {
   @ApiResponse(PostSwagger.getOwerPosts[200])
   @ApiResponse(SwaggerBaseResponse[401])
   @ApiResponse(SwaggerBaseResponse[500])
-  async getOwnerPosts(
+  async getMyPosts(
     @Req() req: RequestWithUser,
     @Query() postQueryDto: PostQueryDto,
   ): Promise<PostModel[]> {

@@ -3,7 +3,7 @@ import {
   type getProfile,
 } from "@/interfaces/use-cases/base.use-case.interface";
 import {
-  type getOwnerPosts,
+  type getMyPosts,
   type getPostById,
   type getPosts,
 } from "@/interfaces/use-cases/post.use-case.interface";
@@ -39,15 +39,15 @@ export async function getPostsUseCase(params: {
   return baseUseCaseHandleResponse<Post[]>(resp);
 }
 
-export async function getOwnerPostsUseCase(params: {
+export async function getMyPostsUseCase(params: {
   context: {
     getProfile: getProfile;
-    getOwnerPosts: getOwnerPosts;
+    getMyPosts: getMyPosts;
   };
   postParamsDto?: PostParamsDto;
 }): Promise<UseCaseResponse<Post[]>> {
   const { context, postParamsDto } = params;
 
-  const resp = await context.getOwnerPosts(postParamsDto);
+  const resp = await context.getMyPosts(postParamsDto);
   return baseUseCaseHandleResponse<Post[]>(resp);
 }

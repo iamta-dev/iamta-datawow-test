@@ -10,7 +10,7 @@ import {
 import {
   getPostsUseCase,
   getPostIdUseCase,
-  getOwnerPostsUseCase,
+  getMyPostsUseCase,
 } from "@/use-cases/post/get-post.use-case";
 import { getProfileAction } from "@/actions/profile.action";
 import { createPostUseCase } from "@/use-cases/post/create-post.use-case";
@@ -58,14 +58,14 @@ export async function getPostsAction(
   }
 }
 
-export async function getOwnerPostsAction(
+export async function getMyPostsAction(
   postParamsDto?: PostParamsDto,
 ): Promise<ActionResultState<Post[]>> {
   try {
-    const { result, error } = await getOwnerPostsUseCase({
+    const { result, error } = await getMyPostsUseCase({
       context: {
         getProfile: getProfileAction,
-        getOwnerPosts: (data) => postService.getOwnerPosts(data),
+        getMyPosts: (data) => postService.getMyPosts(data),
       },
       postParamsDto,
     });

@@ -9,7 +9,7 @@ import {
 } from "@/interfaces/services/post.service.interface";
 import { toast } from "sonner";
 import PostCard from "@/components/blog/post-card";
-import { getOwnerPostsAction } from "@/actions/post.action";
+import { getMyPostsAction } from "@/actions/post.action";
 
 export default function OurBlogPage() {
   const [isPending, startTransition] = useTransition();
@@ -22,7 +22,7 @@ export default function OurBlogPage() {
   const [postList, setPostList] = useState<Post[]>([]);
 
   const fetchData = async (p: PostParamsDto) => {
-    const resp = await getOwnerPostsAction(p);
+    const resp = await getMyPostsAction(p);
     if (resp?.result) {
       setPostList(resp.result);
     }

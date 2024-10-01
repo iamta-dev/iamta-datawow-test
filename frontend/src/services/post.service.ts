@@ -24,11 +24,11 @@ export class PostService extends BaseService {
     );
   }
 
-  public async getOwnerPosts(
+  public async getMyPosts(
     postParams: PostParamsDto = {},
   ): Promise<ServiceResponse<Post[]>> {
     return this.handleRequest(() =>
-      this.backendApi.get<Post[]>(`/api/v1/posts/owner`, {
+      this.backendApi.get<Post[]>(`/api/v1/my/posts`, {
         params: postParams,
       }),
     );
