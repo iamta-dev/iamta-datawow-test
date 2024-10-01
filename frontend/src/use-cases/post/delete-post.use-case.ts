@@ -5,6 +5,7 @@ import {
 import { type deletePost } from "@/interfaces/use-cases/post.use-case.interface";
 import { type Post } from "@/interfaces/services/post.service.interface";
 import { baseUseCaseHandleResponse } from "../base/base.use-case";
+import { BaseErrorEnum } from "@/interfaces/errors/base.error.interface";
 
 export async function deletePostUseCase(params: {
   context: {
@@ -19,9 +20,8 @@ export async function deletePostUseCase(params: {
   if (!user) {
     return {
       error: {
-        statusCode: 401,
         error: "Unauthorized",
-        message: "User not authenticated. Please try again.",
+        message: BaseErrorEnum.USER_NOT_AUTHENTICATED,
       },
     };
   }

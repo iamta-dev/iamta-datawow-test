@@ -8,6 +8,7 @@ import {
   type Post,
 } from "@/interfaces/services/post.service.interface";
 import { baseUseCaseHandleResponse } from "../base/base.use-case";
+import { BaseErrorEnum } from "@/interfaces/errors/base.error.interface";
 
 export async function updatePostUseCase(params: {
   context: {
@@ -23,9 +24,8 @@ export async function updatePostUseCase(params: {
   if (!user) {
     return {
       error: {
-        statusCode: 401,
         error: "Unauthorized",
-        message: "User not authenticated. Please try again.",
+        message: BaseErrorEnum.USER_NOT_AUTHENTICATED,
       },
     };
   }
