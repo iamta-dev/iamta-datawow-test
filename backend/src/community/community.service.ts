@@ -53,7 +53,7 @@ export class CommunityService {
         take: params.take,
         cursor: params.cursor,
         where: params.where,
-        orderBy: params.orderBy ?? { createdAt: 'desc' },
+        orderBy: params.orderBy ?? { createdAt: 'asc' },
       });
     } catch (error) {
       this.handleException('fetch communities', error);
