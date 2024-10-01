@@ -98,7 +98,9 @@ describe("deleteCommentUseCase", () => {
     mockDeleteComment.mockResolvedValueOnce({
       data: undefined,
       error: {
+        error: undefined,
         message: "Error deleting comment",
+        statusCode: 500,
       } as any,
     });
 
@@ -111,7 +113,11 @@ describe("deleteCommentUseCase", () => {
     });
 
     expect(result).toEqual({
-      error: { message: "Error deleting comment" },
+      error: {
+        error: undefined,
+        message: "Error deleting comment",
+        statusCode: 500,
+      },
     });
     expect(mockGetProfile).toHaveBeenCalled();
     expect(mockDeleteComment).toHaveBeenCalledWith(1);
