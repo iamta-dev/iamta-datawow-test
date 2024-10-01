@@ -6,9 +6,9 @@ import { createCommentUseCase } from "@/use-cases/comment/create-comment.use-cas
 import { getProfileAction } from "@/actions/profile";
 import { z } from "zod";
 import {
-  baseActionHandleResponse,
   type ActionStatus,
 } from "@/interfaces/actions/base.action";
+import { baseActionHandleResponse } from "./base.action";
 
 export type commentFormState =
   | {

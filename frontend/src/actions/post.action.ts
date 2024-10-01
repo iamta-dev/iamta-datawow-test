@@ -17,9 +17,9 @@ import { createPostUseCase } from "@/use-cases/post/create-post.use-case";
 import { updatePostUseCase } from "@/use-cases/post/update-post.use-case";
 import { deletePostUseCase } from "@/use-cases/post/delete-post.use-case";
 import {
-  baseActionHandleResponse,
   type ActionResultState,
 } from "@/interfaces/actions/base.action";
+import { baseActionHandleResponse } from "./base.action";
 
 export async function getPostByIdAction(
   id: number,

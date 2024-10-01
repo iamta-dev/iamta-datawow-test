@@ -5,9 +5,9 @@ import { type Community } from "@/interfaces/services/community.service";
 import { getCommunitiesUseCase } from "@/use-cases/community/get-community.use-case";
 import { getProfileAction } from "@/actions/profile";
 import {
-  baseActionHandleResponse,
   type ActionResultState,
 } from "@/interfaces/actions/base.action";
+import { baseActionHandleResponse } from "./base.action";
 
 export async function getCommunitiesAction(): Promise<
   ActionResultState<Community[]>

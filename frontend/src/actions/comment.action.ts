@@ -8,9 +8,9 @@ import {
 import { createCommentUseCase } from "@/use-cases/comment/create-comment.use-case";
 import { getProfileAction } from "@/actions/profile";
 import {
-  baseActionHandleResponse,
   type ActionResultState,
 } from "@/interfaces/actions/base.action";
+import { baseActionHandleResponse } from "./base.action";
 
 export async function createCommentAction(
   createCommentDto: CreateCommentDto,
