@@ -9,11 +9,16 @@ import { type Post } from "@/interfaces/services/post.service.interface";
 import { Badge } from "@/components/ui/badge";
 
 interface PostCardProps {
+  onFetchPostsData: () => void;
   post: Post; // Post object passed to the component
   searchQuery: string;
 }
 
-export default function PostCard({ post, searchQuery }: PostCardProps) {
+export default function PostCard({
+  onFetchPostsData,
+  post,
+  searchQuery,
+}: PostCardProps) {
   const router = useRouter();
 
   // Function to handle search and highlight matching text
@@ -55,8 +60,16 @@ export default function PostCard({ post, searchQuery }: PostCardProps) {
           className="absolute right-2 top-2 space-x-2"
           onClick={(e) => e.stopPropagation()}
         >
-          <EditPostForm />
-          <DeletePostForm />
+          <EditPostForm
+            postId={post.id}
+            initialData={post}
+            onFetchPostsData={onFetchPostsData}
+          />
+          <DeletePostForm
+            postId={post.id}
+            initialData={post}
+            onFetchPostsData={onFetchPostsData}
+          />
         </div>
       </div>
       {/* Post title with search highlighting */}

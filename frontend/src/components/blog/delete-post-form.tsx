@@ -1,18 +1,6 @@
 "use client";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
-
 import { Button } from "@/components/ui/button";
-
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormMessage,
-} from "@/components/ui/form";
-
 import {
   Dialog,
   DialogClose,
@@ -24,32 +12,34 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 
-import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import { Trash } from "lucide-react";
+import { deletePostAction } from "@/actions/post.action"; // เพิ่ม action สำหรับลบโพสต์
+import { type Post } from "@/interfaces/services/post.service.interface";
+import { BaseErrorEnum } from "@/interfaces/errors/base.error.interface";
 
-const formSchema = z.object({
-  postId: z
-    .string()
-    .min(3, { message: "Post ID must be at least 3 characters" }),
-});
+interface IDeletePostForm {
+  postId: number;
+  initialData: Post;
+  onFetchPostsData: () => void;
+}
 
-export const DeletePostForm = () => {
-  // 1. Define your form.
-  const form = useForm({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      postId: "",
-    },
-  });
+export const DeletePostForm = ({
+  postId,
+  onFetchPostsData,
+}: IDeletePostForm) => {
+  const form = useForm();
 
-  // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
-    toast.success(`${values.postId} has been posted successfully`);
+  async function onSubmit() {
+    const resp = await deletePostAction(postId);
+    if (resp?.status === "success") {
+      toast.success(`Post has been deleted successfully`);
+      onFetchPostsData();
+    } else {
+      toast.error(`${resp?.message ?? BaseErrorEnum.UNEXPECTED}`);
+    }
   }
 
-  // 3. Get the status
   const { isSubmitting, isValid } = form.formState;
 
   return (
@@ -60,7 +50,7 @@ export const DeletePostForm = () => {
         </button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
-        <form onSubmit={form.handleSubmit(onSubmit)}>
+        <form onSubmit={onSubmit}>
           <DialogHeader>
             <DialogTitle>
               Please confirm if you wish to delete the post
@@ -70,35 +60,15 @@ export const DeletePostForm = () => {
               cannot be recovered.
             </DialogDescription>
           </DialogHeader>
-          <Form {...form}>
-            <div className="sr-only">
-              <FormField
-                control={form.control}
-                name="postId"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormControl>
-                      <Input
-                        className="w-[350px]"
-                        disabled={isSubmitting}
-                        placeholder="postId"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
-          </Form>
           <DialogFooter>
             <div className="mt-2 flex w-full flex-col items-center justify-center gap-2">
               <Button
                 className="w-[350px]"
                 variant={"destructive"}
                 type="submit"
+                disabled={!isValid || isSubmitting}
               >
-                Delete
+                {isSubmitting ? "Deleting..." : "Delete"}
               </Button>
 
               <DialogClose asChild>

@@ -61,7 +61,6 @@ interface ICreatePostFormDialog {
 
 export const CreatePostForm = ({ onFetchPostsData }: ICreatePostFormDialog) => {
   const [openDialog, setOpenDialog] = useState(false);
-
   const [communityList, setCommunityList] = useState<Community[]>([]);
 
   const fetchData = async () => {
@@ -82,7 +81,6 @@ export const CreatePostForm = ({ onFetchPostsData }: ICreatePostFormDialog) => {
     });
   }, []);
 
-  // 1. Define your form.
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -92,23 +90,19 @@ export const CreatePostForm = ({ onFetchPostsData }: ICreatePostFormDialog) => {
     },
   });
 
-  // 2. Define a submit handler.
   async function onSubmit(values: z.infer<typeof formSchema>) {
     const resp = await createPostAction(values);
 
-    if (resp?.status == "error") {
-      toast.error(`${resp?.message}`);
-    } else if (resp?.status == "success" && !!resp.result) {
+    if (resp?.status === "success") {
       form.reset();
-      toast.success(`${resp.result.title} has been posted successfully`);
+      toast.success(`Post has been posted successfully`);
       setOpenDialog(false);
       onFetchPostsData();
     } else {
-      toast.error(`${BaseErrorEnum.UNEXPECTED}`);
+      toast.error(`${resp?.message ?? BaseErrorEnum.UNEXPECTED}`);
     }
   }
 
-  // 3. Get the status
   const { isSubmitting, isValid } = form.formState;
 
   return (
