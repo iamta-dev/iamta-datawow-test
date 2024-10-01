@@ -2,8 +2,8 @@
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { MessageCircle } from "lucide-react";
-import { DeletePostForm } from "./delete-post-form";
-import { EditPostForm } from "./edit-post-form";
+import { DeletePostFormDialog } from "./delete-post-form-dialog";
+import { EditPostFormDialog } from "./edit-post-form-dialog";
 import { usePathname, useRouter } from "next/navigation";
 import { type Post } from "@/interfaces/services/post.service.interface";
 import { Badge } from "@/components/ui/badge";
@@ -62,12 +62,12 @@ export default function PostCard({
             className="absolute right-2 top-2 space-x-2"
             onClick={(e) => e.stopPropagation()}
           >
-            <EditPostForm
+            <EditPostFormDialog
               postId={post.id}
               initialData={post}
               onFetchPostsData={onFetchPostsData}
             />
-            <DeletePostForm
+            <DeletePostFormDialog
               postId={post.id}
               initialData={post}
               onFetchPostsData={onFetchPostsData}

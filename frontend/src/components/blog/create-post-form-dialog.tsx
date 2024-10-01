@@ -58,7 +58,7 @@ interface ICreatePostFormDialog {
   onFetchPostsData: () => void;
 }
 
-export const CreatePostForm = ({ onFetchPostsData }: ICreatePostFormDialog) => {
+export const CreatePostFormDialog = ({ onFetchPostsData }: ICreatePostFormDialog) => {
   const [openDialog, setOpenDialog] = useState(false);
   const [communityList, setCommunityList] = useState<Community[]>([]);
 

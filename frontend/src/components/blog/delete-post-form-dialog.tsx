@@ -25,7 +25,7 @@ interface IDeletePostForm {
   onFetchPostsData: () => void;
 }
 
-export const DeletePostForm = ({
+export const DeletePostFormDialog = ({
   postId,
   onFetchPostsData,
 }: IDeletePostForm) => {

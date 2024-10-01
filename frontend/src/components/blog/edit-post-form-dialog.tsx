@@ -57,7 +57,7 @@ interface IEditPostForm {
   onFetchPostsData: () => void;
 }
 
-export const EditPostForm = ({
+export const EditPostFormDialog = ({
   postId,
   initialData,
   onFetchPostsData,

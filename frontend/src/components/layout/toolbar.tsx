@@ -14,7 +14,7 @@ import {
 
 import { type Community } from "@/interfaces/services/community.service.interface";
 import { startTransition, useEffect, useState } from "react";
-import { CreatePostForm } from "../blog/create-post-form";
+import { CreatePostFormDialog } from "../blog/create-post-form-dialog";
 import { getCommunitiesAction } from "@/actions/community.action";
 import { toast } from "sonner";
 import { type PostParamsDto } from "@/interfaces/services/post.service.interface";
@@ -116,7 +116,7 @@ export default function Toolbar({
                 </SelectContent>
               </Select>
 
-              <CreatePostForm onFetchPostsData={onFetchPostsData} />
+              <CreatePostFormDialog onFetchPostsData={onFetchPostsData} />
             </div>
           )}
         </div>
@@ -164,7 +164,7 @@ export default function Toolbar({
               </SelectContent>
             </Select>
 
-            <CreatePostForm onFetchPostsData={onFetchPostsData} />
+            <CreatePostFormDialog onFetchPostsData={onFetchPostsData} />
           </div>
         </div>
       </div>
