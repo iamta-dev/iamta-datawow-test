@@ -106,7 +106,6 @@ describe("createCommentUseCase", () => {
     mockCreateComment.mockResolvedValueOnce({
       data: undefined,
       error: {
-        error: undefined,
         message: "Error creating comment",
         statusCode: 500,
       } as any,
@@ -122,7 +121,6 @@ describe("createCommentUseCase", () => {
 
     expect(result).toEqual({
       error: {
-        error: undefined,
         message: "Error creating comment",
         statusCode: 500,
       },
