@@ -78,8 +78,8 @@ export const DeleteCommentFormDialog = ({
               Please confirm if you wish to <br /> delete the comment
             </DialogTitle>
             <DialogDescription className="text-center max-md:text-xs">
-              Are you sure you want to delete the comment? <br /> Once deleted, it
-              cannot be recovered.
+              Are you sure you want to delete the comment? <br /> Once deleted,
+              it cannot be recovered.
             </DialogDescription>
           </DialogHeader>
           <DialogFooter>

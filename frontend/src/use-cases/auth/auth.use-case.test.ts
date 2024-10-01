@@ -5,9 +5,7 @@ import {
   type decodeJwt,
   type login,
 } from "@/interfaces/use-cases/auth.use-case.interface";
-import {
-  type LoginResponse,
-} from "@/interfaces/services/auth.service.interface";
+import { type LoginResponse } from "@/interfaces/services/auth.service.interface";
 
 // Mock data and functions
 const mockLoginResponse: LoginResponse = {
