@@ -67,7 +67,7 @@ npm run dev
 ├── .env                                 # Environment variables for project 
 ├── .env.example                         # Example file Environment variables 
 ├── src/*                                # Main source code Next.js folder
-├── src/env.js                           # Config Next.js file setup by @t3-oss/env-nextjs
+├── src/env.js                           # Validation Config .env from zod on start web
 ├── src/styles/globals.css               # Css themes project
 ├── tailwind.config.ts                   # Tailwind css config base on globals.css
 ├── components.json                      # shadcn/ui config file
