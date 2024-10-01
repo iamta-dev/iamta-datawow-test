@@ -19,14 +19,6 @@ export class CreatePostDto {
   @IsNotEmpty()
   detail: string;
 
-  // @ApiProperty({
-  //   example: 1,
-  //   description: 'ID of the user who created the post',
-  // })
-  // @IsInt()
-  // @IsNotEmpty()
-  // userId: number;
-
   @ApiProperty({
     example: 1,
     description: 'ID of the community this post belongs to',
@@ -49,7 +41,7 @@ export class PostQueryDto {
   fsearch?: string;
 
   @ApiProperty({
-    example: '2',
+    example: '',
     required: false,
     description: 'ID of the community this post belongs to',
   })

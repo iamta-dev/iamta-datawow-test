@@ -32,13 +32,13 @@ import { RequestWithUser } from 'interface/request.interface';
 import { createPostSearchCondition } from './dto/post.search';
 
 @ApiTags('Posts')
-@Controller('posts')
+@Controller('')
 export class PostController {
   private readonly logger = new Logger(PostController.name);
 
   constructor(private readonly postService: PostService) {}
 
-  @Get(':id')
+  @Get('posts:id')
   @ApiOperation({
     summary: PostSwagger.getPostById.summary,
   })
@@ -56,7 +56,7 @@ export class PostController {
     }
   }
 
-  @Get()
+  @Get('posts')
   @ApiOperation({
     summary: PostSwagger.getPosts.summary,
   })
@@ -94,7 +94,7 @@ export class PostController {
 
   @ApiBearerAuth()
   @UseGuards(AuthGuard('jwt'))
-  @Get('owner')
+  @Get('my/posts')
   @ApiOperation({
     summary: PostSwagger.getOwerPosts.summary,
   })
@@ -137,7 +137,7 @@ export class PostController {
 
   @ApiBearerAuth()
   @UseGuards(AuthGuard('jwt'))
-  @Post()
+  @Post('posts')
   @ApiOperation({
     summary: PostSwagger.createPost.summary,
   })
@@ -165,7 +165,7 @@ export class PostController {
 
   @ApiBearerAuth()
   @UseGuards(AuthGuard('jwt'))
-  @Put(':id')
+  @Put('posts:id')
   @ApiOperation({
     summary: PostSwagger.updatePost.summary,
   })
@@ -206,7 +206,7 @@ export class PostController {
 
   @ApiBearerAuth()
   @UseGuards(AuthGuard('jwt'))
-  @Delete(':id')
+  @Delete('posts:id')
   @ApiOperation({
     summary: PostSwagger.deletePost.summary,
   })
