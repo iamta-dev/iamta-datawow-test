@@ -56,6 +56,7 @@ npm run db:seed
 ```
 
 ### 1.5 Database Client
+- [dbdiagram prisma/dbml/schema.dbml](https://dbdiagram.io/d/66fc5cedfb079c7ebd02f8e8)
 #### 1.5.1 prisma studio
 ```sh
 npm run db:studio
