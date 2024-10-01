@@ -59,7 +59,7 @@ body {
     --input: 163 5% 75%; /* hsl(163, 5%, 75%) */
     --ring: 163 5% 75%; /* hsl(163, 5%, 75%) */
 
-    --radius: 0.5rem; /* default radius */
+    --radius: 0.6rem; /* default radius */
   }
 
   /* TODO: Feature Dark mode */

@@ -74,9 +74,9 @@ export const CreateCommentFormDialog = ({
       <DialogTrigger asChild>
         <Button variant={"outline"}>Add Comment</Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="w-[calc(100vw-2rem)] rounded-xl">
         <form onSubmit={form.handleSubmit(onSubmit)}>
-          <DialogHeader>
+          <DialogHeader className="flex justify-start items-start">
             <DialogTitle>Add Comment</DialogTitle>
             <DialogDescription></DialogDescription>
             <DialogClose asChild>
@@ -86,28 +86,27 @@ export const CreateCommentFormDialog = ({
             </DialogClose>
           </DialogHeader>
           <Form {...form}>
-            <div className="my-4 flex flex-col items-center space-y-4">
-              <FormField
-                control={form.control}
-                name="comment"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormControl>
-                      <Textarea
-                        className="max-sm:w-[calc(100vw-3rem)] md:w-[350px]"
-                        disabled={isSubmitting}
-                        placeholder="What's on your mind..."
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
+            <FormField
+              control={form.control}
+              name="comment"
+              render={({ field }) => (
+                <FormItem>
+                  <FormControl>
+                    <Textarea
+                      // className="max-sm:w-[calc(100vw-3rem)] md:w-[350px]"
+                      className="h-[8rem] min-w-full"
+                      disabled={isSubmitting}
+                      placeholder="What's on your mind..."
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
           </Form>
           <DialogFooter>
-            <div className="flex w-full flex-row items-end justify-end gap-5">
+            <div className="mt-8 flex w-full flex-col gap-2 sm:mt-2 sm:flex-row sm:items-end sm:justify-end sm:gap-5">
               <DialogClose asChild>
                 <Button variant={"outline"} type="button">
                   Cancel
