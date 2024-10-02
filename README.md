@@ -35,7 +35,7 @@ Install Node.js 22 LTS by NVM
 Install Docker Desktop
 - [docker-desktop install](https://www.docker.com/products/docker-desktop/)
 
-### Quick Start Run Unit Tets
+### Quick Start Run Unit Tests
 Clone this repository:
 ```bash
 git clone https://github.com/iamta-dev/iamta-datawow-test.git
