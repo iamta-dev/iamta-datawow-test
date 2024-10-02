@@ -64,8 +64,8 @@ npm run dev
 
 ```txt
 .
-├── .env                                 # Environment variables for project 
-├── .env.example                         # Example file Environment variables 
+├── .env                                 # Environment variables for project
+├── .env.example                         # Example file Environment variables
 ├── src/*                                # Main source code Next.js folder
 ├── src/env.js                           # Validation Config .env from zod on start web
 ├── src/styles/globals.css               # Css themes project
@@ -121,32 +121,32 @@ npm run test:cov
 
  PASS  src/use-cases/community/get-community.use-case.test.ts (6.996 s)
  PASS  src/use-cases/comment/delete-comment.use-case.test.ts (6.999 s)
- PASS  src/use-cases/comment/create-comment.use-case.test.ts (7 s)                                 
- PASS  src/use-cases/post/get-post.use-case.test.ts (7.037 s)                                      
+ PASS  src/use-cases/comment/create-comment.use-case.test.ts (7 s)
+ PASS  src/use-cases/post/get-post.use-case.test.ts (7.037 s)
  PASS  src/use-cases/post/create-post.use-case.test.ts (7 s)
- PASS  src/use-cases/auth/auth.use-case.test.ts (7.053 s)                                          
- PASS  src/use-cases/post/update-post.use-case.test.ts (7.055 s)                                   
- PASS  src/use-cases/post/delete-post.use-case.test.ts (7.065 s)                                   
+ PASS  src/use-cases/auth/auth.use-case.test.ts (7.053 s)
+ PASS  src/use-cases/post/update-post.use-case.test.ts (7.055 s)
+ PASS  src/use-cases/post/delete-post.use-case.test.ts (7.065 s)
 -----------------------------|---------|----------|---------|---------|-------------------
-File                         | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s 
+File                         | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s
 -----------------------------|---------|----------|---------|---------|-------------------
-All files                    |    96.7 |    77.41 |    92.3 |    96.7 |                   
- interfaces/errors           |     100 |      100 |     100 |     100 |                   
-  base.error.interface.ts    |     100 |      100 |     100 |     100 |                   
- use-cases/auth              |   93.75 |      100 |     100 |   93.75 |                   
-  auth.use-case.ts           |   93.75 |      100 |     100 |   93.75 | 39                
- use-cases/base              |   77.77 |    53.33 |      50 |   77.77 |                   
-  base.use-case.ts           |   77.77 |    53.33 |      50 |   77.77 | 34-35             
- use-cases/comment           |     100 |      100 |     100 |     100 |                   
-  create-comment.use-case.ts |     100 |      100 |     100 |     100 |                   
-  delete-comment.use-case.ts |     100 |      100 |     100 |     100 |                   
- use-cases/community         |     100 |      100 |     100 |     100 |                   
-  get-community.use-case.ts  |     100 |      100 |     100 |     100 |                   
- use-cases/post              |     100 |      100 |     100 |     100 | 
-  create-post.use-case.ts    |     100 |      100 |     100 |     100 | 
-  delete-post.use-case.ts    |     100 |      100 |     100 |     100 | 
-  get-post.use-case.ts       |     100 |      100 |     100 |     100 | 
-  update-post.use-case.ts    |     100 |      100 |     100 |     100 | 
+All files                    |    96.7 |    77.41 |    92.3 |    96.7 |
+ interfaces/errors           |     100 |      100 |     100 |     100 |
+  base.error.interface.ts    |     100 |      100 |     100 |     100 |
+ use-cases/auth              |   93.75 |      100 |     100 |   93.75 |
+  auth.use-case.ts           |   93.75 |      100 |     100 |   93.75 | 39
+ use-cases/base              |   77.77 |    53.33 |      50 |   77.77 |
+  base.use-case.ts           |   77.77 |    53.33 |      50 |   77.77 | 34-35
+ use-cases/comment           |     100 |      100 |     100 |     100 |
+  create-comment.use-case.ts |     100 |      100 |     100 |     100 |
+  delete-comment.use-case.ts |     100 |      100 |     100 |     100 |
+ use-cases/community         |     100 |      100 |     100 |     100 |
+  get-community.use-case.ts  |     100 |      100 |     100 |     100 |
+ use-cases/post              |     100 |      100 |     100 |     100 |
+  create-post.use-case.ts    |     100 |      100 |     100 |     100 |
+  delete-post.use-case.ts    |     100 |      100 |     100 |     100 |
+  get-post.use-case.ts       |     100 |      100 |     100 |     100 |
+  update-post.use-case.ts    |     100 |      100 |     100 |     100 |
 -----------------------------|---------|----------|---------|---------|-------------------
 
 Test Suites: 8 passed, 8 total
