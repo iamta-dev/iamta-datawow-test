@@ -1,11 +1,23 @@
 "use client";
 
-import { ArrowRight, Home, FileText, SquarePen } from "lucide-react";
+import { ArrowRight, Home, SquarePen } from "lucide-react";
 import { useSidebarState } from "@/hooks/use-sidebar";
-import React from "react";
-import { usePathname } from "next/navigation";
+import React, { useEffect, useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
 import { twMerge } from "tailwind-merge";
 import Link from "next/link"; // Import Link from Next.js
+import { type UserJwtPayload } from "@/lib/user-jwt";
+import { getProfileAction } from "@/actions/profile.action";
+import { cn } from "@/lib/utils";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@radix-ui/react-tooltip";
+import { deleteSession } from "@/actions/session.action";
+import { Button } from "../ui/button";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 // Define the menu as an object with path, label, and icon
 const menuItems = [
@@ -22,8 +34,17 @@ const menuItems = [
 ];
 
 export default function Sidebar() {
-  const { isSidebarOpen, toggleSidebar } = useSidebarState(); // Access sidebar state and toggle function
+  const router = useRouter();
   const pathname = usePathname();
+
+  const { isSidebarOpen, toggleSidebar } = useSidebarState(); // Access sidebar state and toggle function
+
+  const [profile, setProfile] = useState<UserJwtPayload | null>(null);
+  useEffect(() => {
+    void getProfileAction().then((res) => {
+      setProfile(res);
+    });
+  }, []);
 
   return (
     <>
@@ -35,14 +56,57 @@ export default function Sidebar() {
         ></div>
       )}
       <div
-        className={`fixed right-0 top-0 z-50 h-full w-64 transform bg-green-500 text-white transition-transform ${
-          isSidebarOpen ? "translate-x-0" : "translate-x-full"
-        } md:hidden`}
+        className={cn(
+          `fixed right-0 top-0 z-50 h-full w-64 transform bg-green-500 text-white transition-transform md:hidden`,
+          isSidebarOpen ? "translate-x-0" : "translate-x-full",
+        )}
       >
-        <div className="flex items-start justify-start p-6 text-xl font-bold">
+        <div className="flex items-center justify-between p-6 text-xl font-bold">
           <button className="text-white" onClick={toggleSidebar}>
             <ArrowRight />
           </button>
+
+          <div>
+            {/* Mobile Sign In Button */}
+            {profile ? (
+              <TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <div
+                      onClick={() => {
+                        void deleteSession();
+                      }}
+                      className="flex cursor-pointer flex-row items-center justify-center gap-2"
+                    >
+                      <label
+                        htmlFor="Profile Name"
+                        className="font-medium text-white"
+                      >
+                        {profile.fullName}
+                      </label>
+                      <Avatar className={"h-10 w-10"}>
+                        <AvatarImage
+                          src={profile.pictureUrl}
+                          alt={profile.fullName}
+                        />
+                        <AvatarFallback>CN</AvatarFallback>
+                      </Avatar>
+                    </div>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>click logout</p>
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
+            ) : (
+              <Button
+                onClick={() => router.push("/auth/login")}
+                className="font-semibold"
+              >
+                Sign In
+              </Button>
+            )}
+          </div>
         </div>
         <nav className="flex-grow">
           <ul className="space-y-4 p-4">
